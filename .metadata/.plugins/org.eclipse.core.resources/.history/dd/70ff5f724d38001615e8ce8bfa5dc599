@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/corner_light_gray_5"
+    android:padding="@dimen/layout_padding" >
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_color"
+        android:textSize="@dimen/title_size"
+        android:text="收支比例图"
+        android:gravity="center_horizontal"
+        />
+    
+    <com.johan.xnote.app.view.AccountStatisticsView
+        android:id="@+id/show_account_bar_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+    
+    <Button 
+        android:id="@+id/show_account_bar_but"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/but_height"
+        android:textColor="@color/theme_background_color"
+        android:textSize="@dimen/title_size"
+        android:text="关  闭"
+        android:background="@drawable/corner_theme_5"
+        />
+
+</LinearLayout>

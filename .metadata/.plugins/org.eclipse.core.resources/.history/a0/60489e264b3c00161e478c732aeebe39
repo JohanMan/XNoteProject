@@ -1,0 +1,91 @@
+package com.johan.xnote.app.view;
+
+import com.johan.xnote.R;
+
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class FoldingTextView extends LinearLayout {
+
+	private int initLines = 2;
+	private boolean PICK_UP = true;
+	private boolean SEE_ALL = false;
+	private boolean flag = SEE_ALL;
+	
+	private TextView contentTextView;
+	private TextView tipTextView;
+	
+	private int lineNum;
+	
+	public FoldingTextView(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public FoldingTextView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.FoldingTextView);
+		initLines = typedArray.getInteger(R.styleable.FoldingTextView_init_lines, 1);
+		typedArray.recycle();
+		View view = LayoutInflater.from(context).inflate(R.layout.textview_folding, this);
+		contentTextView = (TextView) view.findViewById(R.id.folding_content);
+		tipTextView = (TextView) view.findViewById(R.id.folding_tip);
+		tipTextView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				tipTextViewOnClick();
+			}
+		});
+	}
+
+	public void setText(String content) {
+		contentTextView.setText(content);
+		init();
+	}
+	
+	private void init() {
+		contentTextView.post(new Runnable() {
+			@Override
+			public void run() {
+				lineNum = contentTextView.getLineCount();
+				if (lineNum > initLines) {
+					if (tipTextView.getVisibility() != VISIBLE) {
+						tipTextView.setVisibility(VISIBLE);
+					}
+					contentTextView.setMaxLines(initLines);
+					flag = PICK_UP;
+					tipTextView.setText("全文");
+				} else if (lineNum <= initLines) {
+					if (tipTextView.getVisibility() != GONE) {
+						tipTextView.setVisibility(GONE);
+					}
+					flag = SEE_ALL;
+				}
+			}
+		});
+	}
+	
+	private void tipTextViewOnClick() {
+		if (lineNum <= initLines) {
+			return;
+		}
+		if (PICK_UP == flag) {
+			tipTextView.setText("收起");
+			flag = SEE_ALL;
+			// 点击全文
+			contentTextView.setMaxLines(lineNum);
+		} else if (SEE_ALL == flag) {
+			tipTextView.setText("全文");
+			flag = PICK_UP;
+			// 点击收起
+			contentTextView.setMaxLines(initLines);
+		}
+	}
+
+}

@@ -1,0 +1,61 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class HomeActivity$$ViewInjector<T extends com.johan.xnote.app.activity.HomeActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131362054, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362054, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361891, "method 'selectMe'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectMe(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361890, "method 'selectSticky'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectSticky(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361888, "method 'selectNote'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectNote(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361889, "method 'selectAccount'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectAccount(p0);
+        }
+      });
+    target.tabList = Finder.listOf(
+        finder.<android.widget.LinearLayout>findRequiredView(source, 2131361888, "field 'tabList'"),
+        finder.<android.widget.LinearLayout>findRequiredView(source, 2131361889, "field 'tabList'"),
+        finder.<android.widget.LinearLayout>findRequiredView(source, 2131361890, "field 'tabList'"),
+        finder.<android.widget.LinearLayout>findRequiredView(source, 2131361891, "field 'tabList'")
+    );
+  }
+
+  @Override public void reset(T target) {
+    target.toolbar = null;
+    target.tabList = null;
+  }
+}

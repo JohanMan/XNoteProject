@@ -1,0 +1,21 @@
+package com.johan.xnote.app.api;
+
+public interface IWriteSticky {
+	
+	public void setContent(String content);
+	
+	public void setRemind(boolean isRemind);
+	
+	public void setRemindDate(String remindDate);
+	
+	public void setRemindTime(String remindTime);
+
+	public void toast(String msg);
+	
+	public void saveStickySuccess();
+	
+	public void saveStickyFail();
+	
+	public void setRemindAlarm(long id, long remindTime);
+	
+}

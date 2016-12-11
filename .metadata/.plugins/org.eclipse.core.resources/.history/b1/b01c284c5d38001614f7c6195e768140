@@ -1,0 +1,74 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.Date;
+
+import com.johan.xnote.api.model.Sticky;
+import com.johan.xnote.api.model.StickyDao;
+import com.johan.xnote.app.api.IWriteSticky;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.util.CoreUtil;
+
+public class WriteStickyPresenter extends BasePresenter {
+	
+	private IWriteSticky writeSticky;
+	
+	public WriteStickyPresenter(IWriteSticky writeSticky) {
+		this.writeSticky = writeSticky;
+	}
+
+	public String getCurrentTime() {
+		// TODO Auto-generated method stub
+		return CoreUtil.getNowTime("yyyy-MM-dd HH:mm");
+	}
+	
+	public void save(String editTime, String thing, String remindDate, String remindTime, boolean isRemind) {
+		if(isRemind) {
+			if(CoreUtil.hasEmpty(editTime, thing, remindDate, remindTime)) {
+				writeSticky.error("内容、提醒时间不能为空~");
+				return;
+			}
+		} else {
+			if(CoreUtil.hasEmpty(editTime, thing)) {
+				writeSticky.error("内容不能为空~");
+				return;
+			}
+		}
+		// 编辑时间，只拿时间
+		editTime = editTime.substring(5);
+		// 提醒
+		int remind = isRemind ? 1 : 0;
+		int[] dates = parseDate(remindDate);
+		int[] times = parseTime(remindTime);
+		Date date = new Date(dates[0], dates[1], dates[2], times[0], times[1]);
+		long remindMillion = date.getTime();
+		//保存
+		StickyDao stickyDao = XNoteApplication.getInstance().getDaoSession().getStickyDao();
+		Sticky sticky = new Sticky(null, editTime, thing, isRemind, remindTime, "#00000000");
+	}
+	
+	private int[] parseDate(String date) {
+		int[] dates = new int[3];
+		if(date.indexOf("-") != -1) {
+			String[] dateArr = date.split("-");
+			if(null != dateArr && dateArr.length == 3) {
+				dates[0] = Integer.parseInt(dateArr[0]);
+				dates[1] = Integer.parseInt(dateArr[1]);
+				dates[2] = Integer.parseInt(dateArr[2]);
+			}
+		}
+		return dates;
+	}
+	
+	private int[] parseTime(String time) {
+		int[] times = new int[2];
+		if(time.indexOf(":") != -1) {
+			String[] timeArr = time.split(":");
+			if(null != timeArr && timeArr.length == 2) {
+				times[0] = Integer.parseInt(timeArr[0]);
+				times[1] = Integer.parseInt(timeArr[1]);
+			}
+		}
+		return times;
+	}
+
+}

@@ -1,0 +1,48 @@
+package com.johan.xnote.app.application;
+
+import com.johan.xnote.api.model.DaoMaster;
+import com.johan.xnote.api.model.DaoMaster.OpenHelper;
+import com.johan.xnote.api.model.DaoSession;
+import com.tencent.bugly.crashreport.CrashReport;
+
+import android.app.Application;
+import android.content.Context;
+
+public class XNoteApplication extends Application {
+	
+	private static XNoteApplication INSTANCE;
+	
+	private static final String DB_NAME = "xnote.db";
+	
+	 private static DaoMaster daoMaster;  
+	 private static DaoSession daoSession;
+
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+		// ²âÊÔ½×¶Î true
+		CrashReport.initCrashReport(getApplicationContext(), "900036123", true);
+		INSTANCE = this;
+	}
+	
+	public static XNoteApplication getInstance() {
+		return INSTANCE;
+	}
+	
+	public Context getContext() {
+		return getApplicationContext();
+	}
+	
+	public DaoSession getDaoSession() {
+		if(daoSession == null) {
+			if(daoMaster == null) {
+				OpenHelper helper = new DaoMaster.DevOpenHelper(this, DB_NAME, null); 
+				daoMaster = new DaoMaster(helper.getWritableDatabase()); 
+			}
+			daoSession = daoMaster.newSession();
+		}
+		return daoSession;
+	}
+	
+}

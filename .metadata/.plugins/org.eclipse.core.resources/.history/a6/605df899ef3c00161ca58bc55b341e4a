@@ -1,0 +1,94 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.api.IRegister;
+import com.johan.xnote.app.dialog.TipDialog;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.presenter.RegisterPresenter;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.telephony.TelephonyManager;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class RegisterActivity extends BaseActivity<RegisterPresenter> implements IRegister {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectView(R.id.register_phone)
+	public EditText phoneView;
+	
+	@InjectView(R.id.register_nick_name)
+	public EditText nickNameView;
+	
+	@InjectView(R.id.register_password)
+	public EditText passwordView;
+	
+	@InjectView(R.id.register_email)
+	public EditText emailView;
+	
+	@InjectView(R.id.register_but)
+	public Button register;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "注册新用户", true);
+		// 自动获取电话号码，貌似移动的电话号码不能获取
+		TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		phoneView.setText(telephonyManager.getLine1Number());
+		// 提示
+		boolean isHadTip = (Boolean) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_REGISTER_TIP, false);
+		if(!isHadTip) {
+			final TipDialog dialog = new TipDialog(this);
+			dialog.setTitle("系统提示").setContent("用户信息只会保存到本地数据库，不用网络也可以创建哦！")
+			.setOkButtonListener("知道了", new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_REGISTER_TIP, true);
+					dialog.dismiss();
+				}
+			}).show();
+		}
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_register;
+	}
+
+	@Override
+	protected RegisterPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new RegisterPresenter(this);
+	}
+	
+	@OnClick(R.id.register_but)
+	public void register(View view) {
+		presenter.register(phoneView.getText().toString(), nickNameView.getText().toString(), passwordView.getText().toString(), emailView.getText().toString());
+	}
+
+	@Override
+	public void registerFail(String msg) {
+		// TODO Auto-generated method stub
+		AppUtil.toast(this, msg);
+	}
+
+	@Override
+	public void registerSuccess() {
+		// TODO Auto-generated method stub
+		AppUtil.toast(this, "注册成功");
+		finish();
+	}
+	
+}

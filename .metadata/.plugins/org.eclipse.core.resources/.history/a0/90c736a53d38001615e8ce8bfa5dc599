@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="theme_color">#14A9F3</color>
+    <color name="theme_bar_color">#14A9F3</color>
+    <color name="theme_background_color">#FDFDFD</color>
+    <color name="theme_text_color">#3C3C3C</color>
+    <color name="theme_hint_color">#9C9C9C</color>
+    <color name="theme_driver_color">#9C9C9C</color>
+    <color name="light_gray_color">#EEEEEE</color>
+    <color name="drak_gray_color">#9C9C9C</color>
+    
+    <color name="writenote_action_button_yes_background">#6c6c6c</color>
+    <color name="writenote_action_button_no_background">#00000000</color>
+    
+    <color name="account_good_background">#00E19E</color>
+    <color name="account_normal_background">#14A9F3</color>
+    <color name="account_bad_background">#F7B73B</color>
+    
+    <color name="account_item_select_background">#9014A9F3</color>
+    
+</resources>

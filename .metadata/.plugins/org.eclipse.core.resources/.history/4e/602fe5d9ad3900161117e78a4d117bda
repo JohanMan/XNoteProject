@@ -1,0 +1,5 @@
+package com.johan.xnote.app.api;
+
+public interface ILockScreen {
+
+}

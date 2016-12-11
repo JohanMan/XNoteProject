@@ -1,0 +1,64 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.api.IPersonalInfo;
+import com.johan.xnote.core.presenter.PersonalInfoPresenter;
+
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
+import butterknife.InjectView;
+
+public class PersonalInfoActivity extends BaseActivity<PersonalInfoPresenter> implements IPersonalInfo {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectView(R.id.personal_info_phone)
+	public TextView phoneView;
+	
+	@InjectView(R.id.personal_info_nick_name)
+	public TextView nickNameView;
+	
+	@InjectView(R.id.personal_info_email)
+	public TextView emailView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "个人信息", true);
+		presenter.init();
+		toolbar.requestFocus();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_personal_info;
+	}
+
+	@Override
+	protected PersonalInfoPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new PersonalInfoPresenter(this);
+	}
+
+	@Override
+	public void setPhone(String phone) {
+		// TODO Auto-generated method stub
+		phoneView.setText(phone);
+	}
+
+	@Override
+	public void setNickName(String nickName) {
+		// TODO Auto-generated method stub
+		nickNameView.setText(nickName);
+	}
+
+	@Override
+	public void setEmail(String email) {
+		// TODO Auto-generated method stub
+		emailView.setText(email);
+	}
+
+}

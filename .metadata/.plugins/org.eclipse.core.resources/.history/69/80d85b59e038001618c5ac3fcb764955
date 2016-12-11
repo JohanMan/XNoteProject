@@ -1,0 +1,76 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.johan.xnote.api.model.Sticky;
+import com.johan.xnote.api.model.StickyDao;
+import com.johan.xnote.app.api.ISticky;
+import com.johan.xnote.app.application.XNoteApplication;
+
+public class StickyPresenter extends BasePresenter {
+
+	private ISticky sticky;
+	
+	private List<Sticky> stickieList = new ArrayList<Sticky>();
+	
+	private StickyDao stickyDao;
+	
+	private String[] colors = {
+			"#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#00FFFF", "#0000FF", "#8B00FF", "#000000", "#FFFFFF"
+	};
+	
+	public StickyPresenter(ISticky sticky) {
+		this.sticky = sticky;
+		stickyDao = XNoteApplication.getInstance().getDaoSession().getStickyDao();
+	}
+	
+	public void loadData() {
+		stickieList.clear();
+		List<Sticky> findResult = stickyDao.queryBuilder().orderDesc(StickyDao.Properties.EditTime).list();
+		stickieList.addAll(findResult);
+		sticky.refreshListView();
+	}
+	
+	public List<Sticky> getData() {
+		return stickieList;
+	}
+
+	public void delete() {
+		Iterator<Sticky> iterator = stickieList.iterator();
+		while(iterator.hasNext()) {
+			Sticky sticky = iterator.next();
+			if(sticky.isSelected()) {
+				stickyDao.delete(sticky);
+				iterator.remove();
+			}
+		}
+		sticky.refreshListView();
+	}
+	
+	public void cancel() {
+		for(Sticky sticky : stickieList) {
+			sticky.setSelected(false);
+		}
+		sticky.refreshListView();
+	}
+
+	public String[] getColors() {
+		// TODO Auto-generated method stub
+		return colors;
+	}
+	
+	public void color(String color) {
+		System.out.println("color----->" + color);
+		for(Sticky sticky : stickieList) {
+			if(sticky.isSelected()) {
+				sticky.setSelected(false);
+				sticky.setColor(color);
+				stickyDao.update(sticky);
+			}
+		}
+		sticky.refreshListView();
+	}
+	
+}

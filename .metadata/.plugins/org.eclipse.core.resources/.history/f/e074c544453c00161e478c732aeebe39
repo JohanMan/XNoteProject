@@ -1,0 +1,44 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class WriteNoteActivity$$ViewInjector<T extends com.johan.xnote.app.activity.WriteNoteActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361941, "field 'contentView'");
+    target.contentView = finder.castView(view, 2131361941, "field 'contentView'");
+    view = finder.findRequiredView(source, 2131361938, "field 'titleView'");
+    target.titleView = finder.castView(view, 2131361938, "field 'titleView'");
+    view = finder.findRequiredView(source, 2131361940, "field 'editorLayout'");
+    target.editorLayout = finder.castView(view, 2131361940, "field 'editorLayout'");
+    view = finder.findRequiredView(source, 2131362054, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362054, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361965, "field 'showView'");
+    target.showView = finder.castView(view, 2131361965, "field 'showView'");
+    view = finder.findRequiredView(source, 2131361942, "field 'actionLayout'");
+    target.actionLayout = finder.castView(view, 2131361942, "field 'actionLayout'");
+    view = finder.findRequiredView(source, 2131361939, "field 'button' and method 'operation'");
+    target.button = finder.castView(view, 2131361939, "field 'button'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.operation(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.contentView = null;
+    target.titleView = null;
+    target.editorLayout = null;
+    target.toolbar = null;
+    target.showView = null;
+    target.actionLayout = null;
+    target.button = null;
+  }
+}

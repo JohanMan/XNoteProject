@@ -1,0 +1,29 @@
+package com.johan.xnote.app.adapter;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.NoteBook;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class SelectNoteBookAdapter extends AbstractBaseAdapter<NoteBook> {
+
+	public SelectNoteBookAdapter(Context context, List<NoteBook> dataList) {
+		super(context, dataList);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder holder = ViewHolder.get(context, convertView, parent, R.layout.item_select_note_book);
+		TextView nameView = holder.getView(R.id.item_select_note_book_name);
+		nameView.setText(dataList.get(position).getName());
+		return holder.getConvertView();
+	}
+	
+}

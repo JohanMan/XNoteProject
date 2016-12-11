@@ -1,0 +1,13 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.app.api.IRecordAccount;
+
+public class RecordAccountPresenter extends BasePresenter {
+
+	private IRecordAccount recordAccount;
+	
+	public RecordAccountPresenter(IRecordAccount recordAccount) {
+		this.recordAccount = recordAccount;
+	}
+	
+}

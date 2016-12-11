@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/layout_padding"
+    android:background="@color/theme_background_color"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/title_size"
+        android:textColor="@color/theme_text_color"
+        android:text="新建笔记本"
+        android:layout_gravity="center_horizontal"
+        />
+    
+    <EditText 
+        android:id="@+id/new_note_book_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/forgetpd_info_padding"
+        android:hint="请输入笔记本名称"
+        android:textColor="@color/theme_text_color"
+        android:textColorHint="@color/theme_hint_color"
+        android:textSize="@dimen/text_size"
+        android:inputType="text"
+        android:background="@drawable/corner_drak_gray_transparent_5"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+     	android:orientation="horizontal"
+        >
+        
+        <Button 
+            android:id="@+id/new_note_book_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/theme_text_color"
+        	android:textColorHint="@color/theme_hint_color"
+        	android:textSize="@dimen/text_size"
+        	android:text="取消"
+        	android:background="@drawable/corner_drak_gray_transparent_5"
+            />
+        
+        <Button 
+            android:id="@+id/new_note_book_ok"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/theme_text_color"
+        	android:textColorHint="@color/theme_hint_color"
+        	android:textSize="@dimen/text_size"
+        	android:text="新建"
+        	android:background="@drawable/corner_drak_gray_transparent_5"
+            />
+        
+    </LinearLayout>
+
+</LinearLayout>

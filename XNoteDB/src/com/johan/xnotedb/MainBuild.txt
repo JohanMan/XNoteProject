@@ -1,0 +1,91 @@
+package com.johan.xnotedb;
+
+import java.io.IOException;
+
+import de.greenrobot.daogenerator.DaoGenerator;
+import de.greenrobot.daogenerator.Entity;
+import de.greenrobot.daogenerator.Property;
+import de.greenrobot.daogenerator.Schema;
+
+public class MainBuild {
+
+	public static void main(String[] args) throws IOException, Exception {
+		 Schema schema = new Schema(3, "com.johan.xnote.api.model");
+		 addNote(schema);
+		 addAccount(schema);
+		 addSticky(schema);
+		 new DaoGenerator().generateAll(schema, "src-gen");
+	}
+	
+	/**
+	 * 添加NoteBook表和Note表
+	 * @param schema
+	 */
+	private static void addNote(Schema schema) {
+		// 新建NoteBook表
+		Entity notebook = schema.addEntity("NoteBook");
+		notebook.addLongProperty("bookId").primaryKey().autoincrement();
+		notebook.addStringProperty("name").notNull();
+		// 新建Note表
+		Entity note = schema.addEntity("Note");
+		note.addLongProperty("noteId").primaryKey().autoincrement();
+		note.addStringProperty("time").notNull();
+		note.addStringProperty("title").notNull();
+		note.addStringProperty("body").notNull();
+		// 建立note和notebook的关系，（多对一）
+		Property property = note.addLongProperty("bookId").getProperty();
+		// note可以根据bookId找到对应的notebook
+		note.addToOne(notebook, property); 
+		// notebook可以根据bookId找到很多note
+		notebook.addToMany(note, property).setName("notes");
+	}
+	
+	/**
+	 * 添加Account表和AccountType表
+	 * @param schema
+	 */
+	private static void addAccount(Schema schema) {
+		// 新建AccountType表
+		Entity accountType = schema.addEntity("AccountType");
+		accountType.addLongProperty("typeId").primaryKey().autoincrement();
+		accountType.addBooleanProperty("isOut").notNull();
+		accountType.addStringProperty("name").notNull();
+		// 不覆盖自定义
+		accountType.setHasKeepSections(true);
+		// 新建Account表
+		Entity account = schema.addEntity("Account");
+		account.addLongProperty("accountId").primaryKey().autoincrement();
+		account.addIntProperty("year").notNull();
+		account.addIntProperty("month").notNull();
+		account.addIntProperty("day").notNull();
+		account.addStringProperty("time").notNull();
+		account.addStringProperty("shop");
+		account.addFloatProperty("money").notNull();
+		account.addStringProperty("remark");
+		// 不覆盖自定义
+		account.setHasKeepSections(true);
+		// 建立account和accountType的关系，（多对一）
+		Property property = account.addLongProperty("typeId").getProperty();
+		// account可以根据typeId找到对应的accountType
+		account.addToOne(accountType, property); 
+		// accountType可以根据typeId找到很多account
+		accountType.addToMany(account, property).setName("accounts");
+	}
+	
+	/**
+	 * 添加Sticky表
+	 * @param schema
+	 */
+	private static void addSticky(Schema schema) {
+		Entity sticky = schema.addEntity("Sticky");
+		sticky.addIdProperty().autoincrement();
+		sticky.addStringProperty("editTime").notNull();
+		sticky.addStringProperty("content").notNull();
+		sticky.addBooleanProperty("isRemind").notNull();
+		sticky.addLongProperty("remindTime");
+		sticky.addStringProperty("color").notNull();
+		// 不覆盖自定义
+		sticky.setHasKeepSections(true);
+	}
+	
+}

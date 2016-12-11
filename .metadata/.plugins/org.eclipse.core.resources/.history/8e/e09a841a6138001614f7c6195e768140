@@ -1,0 +1,52 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.WriteStickyActivity;
+import com.johan.xnote.app.adapter.StickyAdapter;
+import com.johan.xnote.app.api.ISticky;
+import com.johan.xnote.core.presenter.StickyPresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class StickyFragment extends BaseFragment<StickyPresenter> implements ISticky {
+	
+	@InjectView(R.id.sticky_list_view)
+	public ListView listView;
+	
+	private StickyAdapter adapter;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		adapter = new StickyAdapter(getActivity(), presenter.getData());
+		listView.setAdapter(adapter);
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_sitcky;
+	}
+
+	@Override
+	protected StickyPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new StickyPresenter(this);
+	}
+	
+	@OnClick(R.id.sticky_write)
+	public void write(View view) {
+		goActivity(WriteStickyActivity.class);
+	}
+
+	@Override
+	public void refreshListView() {
+		// TODO Auto-generated method stub
+		adapter.notifyDataSetChanged();
+	}
+
+}

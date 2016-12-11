@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="#000000" >
+    
+    <com.edmodo.cropper.CropImageView
+	    xmlns:custom="http://schemas.android.com/apk/res-auto"
+	    android:id="@+id/crop_view"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/layout_padding"
+        android:background="@drawable/corner_drak_gray_transparent_30"
+        >
+        
+        <TextView 
+            android:id="@+id/crop_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:textColor="#DDDDDD"
+            android:textSize="@dimen/text_size"
+            android:text="取消"
+            android:background="#00000000"
+            />
+        
+        <View 
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#DDDDDD"
+            />
+        
+        <TextView 
+            android:id="@+id/crop_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center_horizontal"
+            android:textColor="#DDDDDD"
+            android:textSize="@dimen/text_size"
+            android:text="确定"
+            android:background="#00000000"
+            />
+        
+    </LinearLayout>
+
+</LinearLayout>

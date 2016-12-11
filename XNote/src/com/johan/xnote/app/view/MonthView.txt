@@ -1,0 +1,99 @@
+package com.johan.xnote.app.view;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class MonthView extends LinearLayout {
+	
+	private Context context;
+
+	public MonthView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+		this.context = context;
+		init();
+	}
+
+	public MonthView(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+		this.context = context;
+		init();
+	}
+
+	private void init() {
+		setOrientation(LinearLayout.HORIZONTAL);
+		removeAllViews();
+		for(int i = 0; i < 23; i++) {
+			if((i % 2) == 0) {
+				TextView view = new TextView(context);
+				view.setText(String.valueOf(i/2 + 1));
+				view.setTextSize(16);
+				view.setGravity(Gravity.CENTER);
+				final int position = i;
+				view.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						select(position);
+						if(null != listener) {
+							listener.onSelect(position / 2 + 1);
+						}
+					}
+				});
+				LinearLayout.LayoutParams params = new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+				params.weight = 1;
+				if(i == 0) {
+					view.setTextColor(Color.parseColor("#FDFDFD"));
+					view.setBackgroundColor(Color.parseColor("#9C9C9C"));
+				} else {
+					view.setTextColor(Color.parseColor("#9C9C9C"));
+					view.setBackgroundColor(Color.parseColor("#FDFDFD"));
+				}
+				addView(view, params);
+			} else {
+				View view = new View(context);
+				view.setBackgroundColor(Color.parseColor("#9C9C9C"));
+				LinearLayout.LayoutParams params = new LayoutParams(1, LinearLayout.LayoutParams.MATCH_PARENT);
+				addView(view, params);
+			}
+		}
+	}
+	
+	public void setMonth(int month) {
+		int position = (month - 1) * 2;
+		select(position);
+	}
+	
+	private void select(int position) {
+		int childCount = getChildCount();
+		for(int i = 0; i < childCount; i++) {
+			if((i % 2) == 0) {
+				TextView view = (TextView) getChildAt(i);
+				if(i == position) {
+					view.setTextColor(Color.parseColor("#FDFDFD"));
+					view.setBackgroundColor(Color.parseColor("#9C9C9C"));
+				} else {
+					view.setTextColor(Color.parseColor("#9C9C9C"));
+					view.setBackgroundColor(Color.parseColor("#FDFDFD"));
+				}
+			}
+		}
+	}
+	
+	private OnSelectListener listener;
+	
+	public void setOnSelectListener(OnSelectListener listener) {
+		this.listener = listener;
+	}
+	
+	public interface OnSelectListener {
+		public void onSelect(int month);
+	}
+	
+}

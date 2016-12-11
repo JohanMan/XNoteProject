@@ -1,0 +1,22 @@
+package com.johan.xnote.core.presenter;
+
+/**
+ * 让Presenter与Activity同生命周期
+ * @author fengyihuan
+ *
+ */
+public abstract class BasePresenter {
+
+	public void onCreate() {
+		
+	}
+	
+	public void onResume() {
+		
+	}
+	
+	public void onDestroy() {
+		
+	}
+	
+}

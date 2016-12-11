@@ -1,0 +1,12 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.core.util.CoreUtil;
+
+public class WriteStickyPresenter extends BasePresenter {
+
+	public String getCurrentTime() {
+		// TODO Auto-generated method stub
+		return CoreUtil.getNowTime("yyyy-MM-dd HH:mm");
+	}
+
+}

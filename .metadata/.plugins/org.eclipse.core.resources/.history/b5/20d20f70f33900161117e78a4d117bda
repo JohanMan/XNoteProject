@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <include layout="@layout/layout_title_center"/>
+    
+    <EditText 
+        android:id="@+id/modify_password_old"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_text_color"
+        android:textSize="@dimen/text_size"
+        android:textColorHint="@color/theme_hint_color"
+        android:hint="请输入原密码"
+        android:inputType="textPassword"
+        android:paddingTop="@dimen/register_info_padding"
+        android:paddingBottom="@dimen/register_info_padding"
+        android:paddingLeft="@dimen/register_info_padding"
+        android:layout_margin="@dimen/layout_padding"
+        android:background="@drawable/corner_drak_gray_transparent_5"
+        />
+    
+    <TextView 
+        android:id="@+id/modify_password_check_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/layout_padding"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:textColor="@color/theme_color"
+        android:textSize="@dimen/text_size"
+        android:text="请输入原密码"
+        />
+    
+    <EditText 
+        android:id="@+id/modify_password_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_text_color"
+        android:textSize="@dimen/text_size"
+        android:textColorHint="@color/theme_hint_color"
+        android:hint="请输入新密码"
+        android:inputType="textPassword"
+        android:paddingTop="@dimen/register_info_padding"
+        android:paddingBottom="@dimen/register_info_padding"
+        android:paddingLeft="@dimen/register_info_padding"
+        android:layout_margin="@dimen/layout_padding"
+        android:background="@drawable/corner_drak_gray_transparent_5"
+        android:enabled="false"
+        />
+    
+    <Button 
+        android:id="@+id/modify_password_but"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/but_height"
+        android:textColor="@color/theme_text_color"
+        android:textSize="@dimen/title_size"
+        android:text="修  改"
+        android:background="@drawable/corner_light_gray_5"
+        android:layout_marginLeft="@dimen/layout_padding"
+        android:layout_marginRight="@dimen/layout_padding"
+        />
+
+</LinearLayout>

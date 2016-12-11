@@ -1,0 +1,100 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.fragment;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class AccountFragment$$ViewInjector<T extends com.johan.xnote.app.fragment.AccountFragment> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131362002, "field 'yearView'");
+    target.yearView = finder.castView(view, 2131362002, "field 'yearView'");
+    view = finder.findRequiredView(source, 2131362003, "field 'monthView'");
+    target.monthView = finder.castView(view, 2131362003, "field 'monthView'");
+    view = finder.findRequiredView(source, 2131362010, "field 'listView'");
+    target.listView = finder.castView(view, 2131362010, "field 'listView'");
+    view = finder.findRequiredView(source, 2131362007, "field 'inMoneyView'");
+    target.inMoneyView = finder.castView(view, 2131362007, "field 'inMoneyView'");
+    view = finder.findRequiredView(source, 2131362014, "field 'deleteView' and method 'delete'");
+    target.deleteView = finder.castView(view, 2131362014, "field 'deleteView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.delete(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362009, "field 'resumeMoneyView'");
+    target.resumeMoneyView = finder.castView(view, 2131362009, "field 'resumeMoneyView'");
+    view = finder.findRequiredView(source, 2131362005, "field 'outMoneyView'");
+    target.outMoneyView = finder.castView(view, 2131362005, "field 'outMoneyView'");
+    view = finder.findRequiredView(source, 2131362015, "field 'cancelView' and method 'cancel'");
+    target.cancelView = finder.castView(view, 2131362015, "field 'cancelView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.cancel(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362013, "method 'export'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.export(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362001, "method 'nextYear'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.nextYear(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362012, "method 'showBar'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.showBar(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362000, "method 'lastYear'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.lastYear(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362011, "method 'recordAccount'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.recordAccount(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.yearView = null;
+    target.monthView = null;
+    target.listView = null;
+    target.inMoneyView = null;
+    target.deleteView = null;
+    target.resumeMoneyView = null;
+    target.outMoneyView = null;
+    target.cancelView = null;
+  }
+}

@@ -1,0 +1,27 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.core.presenter.CheckLockScreenPresenter;
+
+import android.os.Bundle;
+
+public class CheckLockScreenActivity extends BaseActivity<CheckLockScreenPresenter> {
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected CheckLockScreenPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new CheckLockScreenPresenter();
+	}
+
+}

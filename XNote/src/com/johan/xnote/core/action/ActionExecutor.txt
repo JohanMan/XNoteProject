@@ -1,0 +1,67 @@
+package com.johan.xnote.core.action;
+
+import android.os.Handler;
+
+public class ActionExecutor<T> {
+	
+	private BackgroundAction<T> backgroundAction;
+	
+	private UIAction<T> uiAction;
+	
+	private Handler handler;
+	
+	private boolean isCancel = false;
+	
+	private Object lock = new Object();
+	
+	public ActionExecutor() {
+		handler = new Handler();
+	}
+	
+	public void setBackgroundAction(BackgroundAction<T> backgroundAction) {
+		this.backgroundAction = backgroundAction;
+	}
+
+	public void setUiAction(UIAction<T> uiAction) {
+		this.uiAction = uiAction;
+	}
+	
+	public void execute() {
+		ActionService.action(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if(null == backgroundAction || null == uiAction) return;
+				// IO线程
+				final T backgroundResult = backgroundAction.action();
+				if(isCancel) return;
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						synchronized (lock) {
+							if(isCancel) return;
+							// UI线程
+							uiAction.action(backgroundResult);
+						}
+					}
+				});
+			}
+		});
+	}
+	
+	public void cancel() {
+		synchronized (lock) {
+			this.isCancel = false;
+		}
+	}
+
+	public interface BackgroundAction<T> {
+		public T action();
+	}
+	
+	public interface UIAction<T> {
+		public void action(T data);
+	}
+	
+}

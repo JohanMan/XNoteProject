@@ -1,0 +1,7 @@
+package com.johan.xnote.core.presenter;
+
+public class AccountPresenter extends BasePresenter {
+
+	
+	
+}

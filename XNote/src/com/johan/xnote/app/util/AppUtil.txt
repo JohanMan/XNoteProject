@@ -1,0 +1,97 @@
+package com.johan.xnote.app.util;
+
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
+
+public class AppUtil {
+
+	/**
+	 * 获取屏幕的高宽
+	 * @param context
+	 * @return
+	 */
+	public static ScreenSize getScreenSize(Context context) {
+		ScreenSize screenSize = new ScreenSize();
+		WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		screenSize.width = windowManager.getDefaultDisplay().getWidth();
+		screenSize.height = windowManager.getDefaultDisplay().getHeight();
+		return screenSize;
+	}
+	
+	public static class ScreenSize {
+		public int width;
+		public int height;
+	}
+	
+	/**
+	 * 得到状态栏的高度
+	 * @param context
+	 * @return
+	 */
+	public static int getStatusBarHeight(Context context) {
+		int result = 0;
+		int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = context.getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
+	}
+	
+	/**
+	 * 强制隐藏输入法
+	 * @param v
+	 */
+	public static void hideKeyboard(View v) {
+		InputMethodManager imm = ( InputMethodManager) v.getContext().getSystemService( Context.INPUT_METHOD_SERVICE );     
+		if(imm.isActive()) {     
+			imm.hideSoftInputFromWindow(v.getApplicationWindowToken( ) , 0 );   
+		}    
+    }
+	
+	/**
+	 * dp to px
+	 * @param context
+	 * @param dpValue
+	 * @return
+	 */
+	public static int dip2px(Context context, int dpValue) {
+        float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+	
+	/**
+	 * px to dp
+	 * @param context
+	 * @param pxValue
+	 * @return
+	 */
+	public static int px2dip(Context context, float pxValue) {  
+        final float scale = context.getResources().getDisplayMetrics().density;  
+        return (int) (pxValue / scale + 0.5f);  
+    }  
+	
+	public static PictureSize getPictureSize(String picturePath) {
+		PictureSize pictureSize = new PictureSize();
+		BitmapFactory.Options opts = new BitmapFactory.Options();  
+        opts.inJustDecodeBounds = true;  
+        BitmapFactory.decodeFile(picturePath, opts);
+        opts.inSampleSize = 1;    
+        pictureSize.width = opts.outWidth;  
+        pictureSize.height = opts.outHeight;
+        return pictureSize;
+	}
+	
+	public static class PictureSize {
+		public int width;
+		public int height;
+	}
+	
+	public static void toast(Context context, String msg) {
+		Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+	}
+	
+}

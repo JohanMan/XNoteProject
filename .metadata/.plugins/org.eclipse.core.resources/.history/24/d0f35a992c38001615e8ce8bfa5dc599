@@ -1,0 +1,15 @@
+package com.johan.xnote.app.api;
+
+public interface IAccount {
+
+	public void setYear(int year);
+	
+	public void setMonth(int month);
+	
+	public void setInMoney(String inMoney);
+	
+	public void setOutMoney(String outMoney);
+	
+	public void refreshListView();
+	
+}

@@ -1,0 +1,80 @@
+package com.johan.xnote.app.dialog;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.NoteBook;
+import com.johan.xnote.api.model.NoteBookDao;
+import com.johan.xnote.app.adapter.SelectNoteBookAdapter;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.util.AppUtil.ScreenSize;
+import com.johan.xnote.core.event.EventBus;
+import com.johan.xnote.core.presenter.WriteNotePresenter;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+public class SelectNoteBookDialog extends PopupWindow {
+	
+	private ScreenSize screenSize;
+	
+	@InjectView(R.id.select_note_book_listview)
+	public ListView listview;
+	
+	private int windowWidth;
+	
+	private List<NoteBook> noteBookList;
+
+	public SelectNoteBookDialog(Context context) {
+		setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+		setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+		View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_select_note_book, null);
+		ButterKnife.inject(this, contentView);
+		noteBookList = getList();
+		SelectNoteBookAdapter adapter = new SelectNoteBookAdapter(context, noteBookList);
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				select(position);
+				dismiss();
+			}
+		});
+		setContentView(contentView);
+		setOutsideTouchable(true);
+		setFocusable(true);
+		setAnimationStyle(R.style.SlideDownDialogAnimStyle);
+		screenSize = AppUtil.getScreenSize(context);
+		windowWidth = context.getResources().getDimensionPixelSize(R.dimen.select_note_book_width);
+	}
+	
+	public List<NoteBook> getList() {
+		NoteBookDao noteBookDao = XNoteApplication.getInstance().getDaoSession().getNoteBookDao();
+		return noteBookDao.queryBuilder().list();
+	}
+	
+	public void show(View parent) {
+		showAsDropDown(parent, screenSize.width / 2 - windowWidth / 2, 0);
+	}
+	
+	private void select(int position) {
+		long id = noteBookList.get(position).getBookId();
+		String name = noteBookList.get(position).getName();
+		Bundle data = new Bundle();
+		data.putLong("id", id);
+		data.putString("name", name);
+		EventBus.getInstance().update(WriteNotePresenter.class, WriteNotePresenter.EVENT_SELECT_NOTE_BOOK, data);
+	}
+	
+}

@@ -1,0 +1,52 @@
+package com.johan.xnote.app.receiver;
+
+import java.util.Iterator;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.MyStickyNoteActivity;
+import com.johan.xnote.model.StickyNote;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
+
+public class RemindReceiver extends BroadcastReceiver {
+	
+	public static final String REMIND_ACTION = "com.johan.xnote.receiver.remind_broadcasr";
+
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		// TODO Auto-generated method stub
+		if(REMIND_ACTION.equals(intent.getAction())) {
+			String thing = intent.getStringExtra("thing");
+			Iterator<StickyNote> iterator = StickyNote.findAsIterator(StickyNote.class, "thing = ?", new String[]{thing});
+			if(iterator.hasNext()) {
+				StickyNote note = iterator.next();
+				if(note.isRemind == 1) {
+					note.isRemind = 0;
+					note.save();
+					sendNotification(context, note.getId(), thing);
+					// 发送广播， 通知UI更新
+					Intent sendIntent = new Intent();
+					sendIntent.setAction(MyStickyNoteActivity.NOTIFY_REMIND_ACTION);
+					context.sendBroadcast(sendIntent);
+				}
+			}
+		}
+	}
+	
+	private void sendNotification(Context context, long id, String thing) {
+		NotificationManager manager = (NotificationManager)context.getSystemService(android.content.Context.NOTIFICATION_SERVICE);
+		Intent intent = new Intent(context, MyStickyNoteActivity.class);
+		intent.putExtra("id", id);
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+		builder.setContentTitle("XNote提醒您").setContentText(thing).setSmallIcon(R.drawable.app_icon).setDefaults(Notification.DEFAULT_ALL).setContentIntent(pendingIntent).setAutoCancel(true);
+		manager.notify(1, builder.build());
+	}
+
+}

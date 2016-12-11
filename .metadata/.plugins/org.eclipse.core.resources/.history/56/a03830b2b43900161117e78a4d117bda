@@ -1,0 +1,42 @@
+package com.johan.xnote.app.activity;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.view.LockView;
+import com.johan.xnote.app.view.LockView.OnDrawFinishedListener;
+import com.johan.xnote.core.presenter.CheckLockScreenPresenter;
+
+import android.os.Bundle;
+import butterknife.InjectView;
+
+public class CheckLockScreenActivity extends BaseActivity<CheckLockScreenPresenter> {
+	
+	@InjectView(R.id.check_lockscreen_view)
+	public LockView lockView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		lockView.setOnDrawFinishedListener(new OnDrawFinishedListener() {
+			@Override
+			public boolean OnDrawFinished(List<Integer> passList) {
+				// TODO Auto-generated method stub
+				return presenter.checkLockPassword(passList);
+			}
+		});
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_check_lockscreen;
+	}
+
+	@Override
+	protected CheckLockScreenPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new CheckLockScreenPresenter();
+	}
+
+}

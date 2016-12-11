@@ -1,0 +1,33 @@
+package com.johan.xnote.app.dialog;
+
+import com.johan.xnote.R;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+public class LoadingDialog extends Dialog {
+	
+	public LoadingDialog(Context context) {
+		super(context, R.style.CustomDialog);
+		// TODO Auto-generated constructor stub
+		setOwnerActivity((Activity)context);
+		RelativeLayout loadingLayout = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+		ImageView loadingView = (ImageView) loadingLayout.findViewById(R.id.loading_img); 
+		RotateAnimation animation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);  
+		animation.setInterpolator(new LinearInterpolator()); 
+		animation.setRepeatCount(-1); 
+		animation.setFillAfter(true);
+		animation.setDuration(1500); 
+		loadingView.startAnimation(animation);
+        setContentView(loadingLayout);
+        setCanceledOnTouchOutside(false);
+	}
+
+}

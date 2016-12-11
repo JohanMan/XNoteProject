@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.johan.xnote.app.activity.HomeActivity" >
+
+    <include layout="@layout/layout_title_center"/>
+    
+    <FrameLayout 
+        android:id="@+id/home_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </FrameLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DDDDDD"
+        />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="3dp"
+        >
+        
+        <LinearLayout
+            android:id="@+id/home_tab_note" 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/tab_note"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/tab_text_color"
+                android:textSize="12sp"
+                android:text="笔记本"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/home_tab_account" 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/tab_account"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/tab_text_color"
+                android:textSize="12sp"
+                android:text="账本"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/home_tab_sticky" 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/tab_sticky"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/tab_text_color"
+                android:textSize="12sp"
+                android:text="便利贴"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/home_tab_me" 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <ImageView 
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/tab_me"
+                android:scaleType="centerInside"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@drawable/tab_text_color"
+                android:textSize="12sp"
+                android:text="我"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                />
+        </LinearLayout>
+        
+     </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.ModifyPasswordActivity;
+import com.johan.xnote.app.activity.PersonalInfoActivity;
+import com.johan.xnote.core.presenter.MePresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class MeFragment extends BaseFragment<MePresenter> {
+	
+	@InjectView(R.id.me_version_info)
+	public TextView versionInfoView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		versionInfoView.setText(presenter.getVersionInfo(getActivity()));
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_me;
+	}
+
+	@Override
+	protected MePresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new MePresenter();
+	}
+	
+	@OnClick(R.id.me_personal_info)
+	public void goPersonalInfo(View view) {
+		goActivity(PersonalInfoActivity.class);
+	}
+	
+	@OnClick(R.id.me_modify_passwrod)
+	public void goModifyPassword(View view) {
+		goActivity(ModifyPasswordActivity.class);
+	}
+	
+	@OnClick(R.id.me_lockscreen)
+	public void goLockscreen(View view) {
+		
+	}
+
+}

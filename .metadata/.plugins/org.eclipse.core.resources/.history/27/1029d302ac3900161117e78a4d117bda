@@ -1,0 +1,11 @@
+package com.johan.xnote.core.presenter;
+
+public class LockScreenPresenter extends BasePresenter {
+
+	private String lockPassword;
+	
+	public void setLockPassword(String lockPassword) {
+		this.lockPassword = lockPassword;
+	}
+	
+}

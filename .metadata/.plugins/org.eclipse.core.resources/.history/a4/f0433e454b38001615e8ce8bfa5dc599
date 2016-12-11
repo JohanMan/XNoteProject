@@ -1,0 +1,32 @@
+package com.johan.xnote.app.dialog;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.view.AccountStatisticsView;
+
+import android.app.Dialog;
+import android.content.Context;
+
+public class ShowAccountBarDialog {
+
+	private Context context;
+	
+	private Dialog showDialog;
+	
+	private AccountStatisticsView statisticsView;
+	
+	public ShowAccountBarDialog(Context context, int year, int month) {
+		this.context = context;
+		showDialog = new Dialog(context, R.style.CustomDialog);
+		showDialog.setContentView(R.layout.dialog_show_account_bar);
+		statisticsView = (AccountStatisticsView) showDialog.findViewById(R.id.show_account_bar_view);
+	}
+
+	public void show() {
+		showDialog.show();
+	}
+	
+	public void dismiss() {
+		showDialog.dismiss();
+	}
+	
+}

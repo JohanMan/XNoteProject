@@ -1,0 +1,171 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Sticky;
+import com.johan.xnote.app.activity.WriteStickyActivity;
+import com.johan.xnote.app.adapter.StickyAdapter;
+import com.johan.xnote.app.api.ISticky;
+import com.johan.xnote.app.dialog.SelectColorDialog;
+import com.johan.xnote.app.dialog.SelectColorDialog.OnColorSelectedListener;
+import com.johan.xnote.core.presenter.StickyPresenter;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class StickyFragment extends BaseFragment<StickyPresenter> implements ISticky {
+	
+	public static final String RECEIVER_REMIND_ACTION = "receiver_update_listview"; 
+	
+	@InjectView(R.id.sticky_list_view)
+	public ListView listView;
+	
+	@InjectView(R.id.sticky_delete)
+	public ImageView deleteView;
+	
+	@InjectView(R.id.sticky_cancel)
+	public ImageView cancelView;
+	
+	@InjectView(R.id.sticky_color)
+	public ImageView colorView;
+	
+	private StickyAdapter adapter;
+	
+	private SelectColorDialog dialog;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		adapter = new StickyAdapter(getActivity(), presenter.getData());
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if(!adapter.isEditable()) {
+					presenter.getData().get(position).setSelected(true);
+					adapter.notifyDataSetChanged();
+					showMode(true);
+					return true;
+				}
+				return false;
+			}
+		});
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if(adapter.isEditable()) {
+					Sticky sticky = presenter.getData().get(position);
+					sticky.setSelected(!sticky.isSelected());
+					adapter.notifyDataSetChanged();
+					showMode(adapter.isEditable());
+				}
+			}
+		});
+		listView.setAdapter(adapter);
+		registerUpdateListViewReceiver();
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		presenter.loadData();
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		unregisterUpdateListViewReceiver();
+		dialog.dismiss();
+		super.onDestroy();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_sitcky;
+	}
+
+	@Override
+	protected StickyPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new StickyPresenter(this);
+	}
+	
+	@OnClick(R.id.sticky_write)
+	public void write(View view) {
+		goActivity(WriteStickyActivity.class);
+	}
+	
+	@OnClick(R.id.sticky_delete)
+	public void delete(View view) {
+		presenter.delete();
+		showMode(false);
+	}
+	
+	@OnClick(R.id.sticky_cancel)
+	public void cancel(View view) {
+		presenter.cancel();
+		showMode(false);
+	}
+	
+	@OnClick(R.id.sticky_color)
+	public void color(View view) {
+		if(null == dialog) {
+			dialog = new SelectColorDialog(getActivity());
+			dialog.setOnColorSelectedListener(new OnColorSelectedListener() {
+				@Override
+				public void onColorSelected(String color) {
+					// TODO Auto-generated method stub
+					presenter.color(color);
+				}
+			});
+		}
+		dialog.show();
+		showMode(false);
+	}
+
+	@Override
+	public void refreshListView() {
+		// TODO Auto-generated method stub
+		adapter.notifyDataSetChanged();
+	}
+	
+	private void showMode(boolean isShow) {
+		int showMode = isShow ? View.VISIBLE : View.GONE;
+		deleteView.setVisibility(showMode);
+		colorView.setVisibility(showMode);
+		cancelView.setVisibility(showMode);
+	}
+	
+	public void registerUpdateListViewReceiver() {
+		IntentFilter filter = new IntentFilter(RECEIVER_REMIND_ACTION);
+		getActivity().registerReceiver(updateListViewReceiver, filter);
+	}
+	
+	public void unregisterUpdateListViewReceiver() {
+		getActivity().unregisterReceiver(updateListViewReceiver);
+	}
+	
+	private BroadcastReceiver updateListViewReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			// TODO Auto-generated method stub
+			long id = intent.getLongExtra("id", -1);
+			if(id == -1) return;
+			presenter.receiverRemind(id);
+		}
+	};
+
+}

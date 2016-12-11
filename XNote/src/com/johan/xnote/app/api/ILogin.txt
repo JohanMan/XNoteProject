@@ -1,0 +1,9 @@
+package com.johan.xnote.app.api;
+
+public interface ILogin {
+
+	public void loginFail(String msg);
+	
+	public void loginSuccess();
+	
+}

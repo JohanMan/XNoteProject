@@ -1,0 +1,33 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.List;
+
+import com.johan.xnote.app.api.IHome;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.util.CoreUtil;
+
+public class HomePresenter extends BasePresenter {
+
+	private IHome home;
+	
+	public HomePresenter(IHome home) {
+		this.home = home;
+	}
+	
+	public void initToolbar() {
+		String loginPhone = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+		if(CoreUtil.hasEmpty(loginPhone)) {
+			home.setToolbar("X");
+			return;
+		}
+		UserDao userDao = XNoteApplication.getInstance().getDaoSession().getUserDao();
+		List<User> findResult = userDao.queryBuilder().where(UserDao.Properties.Phone.eq(loginPhone)).list();
+		if(findResult.size() == 0) {
+			home.setToolbar("X");
+			return;
+		}
+		home.setToolbar(findResult.get(0).getNickName());
+	}
+	
+}

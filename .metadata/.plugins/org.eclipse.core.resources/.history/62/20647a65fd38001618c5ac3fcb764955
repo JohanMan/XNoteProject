@@ -1,0 +1,115 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.johan.xnote.api.model.Sticky;
+import com.johan.xnote.api.model.StickyDao;
+import com.johan.xnote.app.api.ISticky;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.event.Event;
+import com.johan.xnote.core.event.EventBus;
+import com.johan.xnote.core.event.EventSubjecter;
+
+import android.os.Bundle;
+
+public class StickyPresenter extends BasePresenter {
+	
+	public static final int EVENT_RECEIVER_REMIND = 1; 
+
+	private ISticky sticky;
+	
+	private List<Sticky> stickyList = new ArrayList<Sticky>();
+	
+	private StickyDao stickyDao;
+	
+	private EventSubjecter subjecter;
+	
+	private String[] colors = {
+			"#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#00FFFF", "#0000FF", "#8B00FF", "#000000", "#FFFFFF"
+	};
+	
+	public StickyPresenter(ISticky sticky) {
+		this.sticky = sticky;
+		stickyDao = XNoteApplication.getInstance().getDaoSession().getStickyDao();
+	}
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		subjecter = new EventSubjecter();
+		subjecter.addEvent(EVENT_RECEIVER_REMIND, receiverRemindEvent);
+		EventBus.getInstance().register(getClass(), subjecter);
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		EventBus.getInstance().unregister(getClass());
+	}
+	
+	public void loadData() {
+		stickyList.clear();
+		List<Sticky> findResult = stickyDao.queryBuilder().orderDesc(StickyDao.Properties.EditTime).list();
+		stickyList.addAll(findResult);
+		sticky.refreshListView();
+	}
+	
+	public List<Sticky> getData() {
+		return stickyList;
+	}
+
+	public void delete() {
+		Iterator<Sticky> iterator = stickyList.iterator();
+		while(iterator.hasNext()) {
+			Sticky sticky = iterator.next();
+			if(sticky.isSelected()) {
+				stickyDao.delete(sticky);
+				iterator.remove();
+			}
+		}
+		sticky.refreshListView();
+	}
+	
+	public void cancel() {
+		for(Sticky sticky : stickyList) {
+			sticky.setSelected(false);
+		}
+		sticky.refreshListView();
+	}
+
+	public String[] getColors() {
+		// TODO Auto-generated method stub
+		return colors;
+	}
+	
+	public void color(String color) {
+		for(Sticky sticky : stickyList) {
+			if(sticky.isSelected()) {
+				sticky.setSelected(false);
+				sticky.setColor(color);
+				stickyDao.update(sticky);
+			}
+		}
+		sticky.refreshListView();
+	}
+	
+	Event receiverRemindEvent = new Event() {
+		@Override
+		public void action(Bundle data) {
+			// TODO Auto-generated method stub
+			long id = data.getLong("id");
+			System.out.println("id----->>>>" + id);
+			for(Sticky sticky : stickyList) {
+				if(sticky.getId() == id) {
+					sticky.setIsRemind(false);
+					stickyDao.update(sticky);
+					break;
+				}
+			}
+			sticky.refreshListView();
+		}
+	};
+	
+}

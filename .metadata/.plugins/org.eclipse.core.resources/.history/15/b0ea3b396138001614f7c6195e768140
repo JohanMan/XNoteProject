@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.johan.xnote"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp" >
+    
+    <com.johan.xnote.app.view.DotView
+        android:id="@+id/item_sticky_dot"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="6dp"
+        />
+    
+    <TextView 
+        android:id="@+id/item_sticky_edittime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_hint_color"
+        android:textSize="@dimen/text_size"
+        android:layout_toRightOf="@+id/item_sticky_dot"
+        android:layout_marginLeft="5dp"
+        />
+    
+    <com.johan.xnote.app.view.FoldingTextView 
+        android:id="@+id/item_sticky_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        custom:init_lines="2"
+ 		android:layout_below="@+id/item_sticky_edittime"
+ 		android:layout_alignLeft="@+id/item_sticky_edittime"
+        >
+    </com.johan.xnote.app.view.FoldingTextView>
+    
+    
+    <TextView 
+        android:id="@+id/item_sticky_remind_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_hint_color"
+    	android:textSize="@dimen/text_size"
+    	android:drawableLeft="@drawable/clock"
+    	android:drawablePadding="5dp"
+    	android:layout_below="@+id/item_sticky_thing"
+    	android:layout_alignLeft="@+id/item_sticky_thing"
+        />
+
+</RelativeLayout>

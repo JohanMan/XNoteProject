@@ -1,0 +1,60 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class ModifyPasswordActivity$$ViewInjector<T extends com.johan.xnote.app.activity.ModifyPasswordActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361896, "field 'checkResultView'");
+    target.checkResultView = finder.castView(view, 2131361896, "field 'checkResultView'");
+    view = finder.findRequiredView(source, 2131361897, "field 'newView'");
+    target.newView = finder.castView(view, 2131361897, "field 'newView'");
+    view = finder.findRequiredView(source, 2131361895, "field 'oldView' and method 'changeOld'");
+    target.oldView = finder.castView(view, 2131361895, "field 'oldView'");
+    ((android.widget.TextView) view).addTextChangedListener(
+      new android.text.TextWatcher() {
+        @Override public void onTextChanged(
+          java.lang.CharSequence p0,
+          int p1,
+          int p2,
+          int p3
+        ) {
+          target.changeOld(p0);
+        }
+        @Override public void beforeTextChanged(
+          java.lang.CharSequence p0,
+          int p1,
+          int p2,
+          int p3
+        ) {
+          
+        }
+        @Override public void afterTextChanged(
+          android.text.Editable p0
+        ) {
+          
+        }
+      });
+    view = finder.findRequiredView(source, 2131362049, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362049, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361898, "method 'modify'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.modify();
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.checkResultView = null;
+    target.newView = null;
+    target.oldView = null;
+    target.toolbar = null;
+  }
+}

@@ -1,0 +1,21 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.List;
+
+import com.johan.xnote.app.util.SharePreferencesUtil;
+
+public class CheckLockScreenPresenter extends BasePresenter {
+
+	public boolean checkLockPassword(List<Integer> passList) {
+		String lockPassword = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_LOCK_PASSWORD, "");
+		StringBuffer buffer = new StringBuffer();
+		for(Integer number : passList) {
+			buffer.append(String.valueOf(number));
+		}
+		if(lockPassword.equals(buffer.toString())) {
+			return true;
+		}
+		return false;
+	}
+	
+}

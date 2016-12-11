@@ -1,0 +1,35 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.List;
+
+import com.johan.xnote.app.api.ILockScreen;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+
+public class LockScreenPresenter extends BasePresenter {
+
+	private StringBuffer lockPassword;
+	
+	private ILockScreen lockScreen;
+	
+	public LockScreenPresenter(ILockScreen lockScreen) {
+		this.lockScreen = lockScreen;
+		this.lockPassword = new StringBuffer();
+	}
+	
+	public void setLockPassword(List<Integer> lockPasswordList) {
+		lockPassword.delete(0, lockPassword.length());
+		for(Integer number : lockPasswordList) {
+			this.lockPassword.append(String.valueOf(number));
+		}
+	}
+	
+	public void save() {
+		if(lockPassword.length() < 3) {
+			lockScreen.saveFail("至少连接3个点~");
+			return;
+		}
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_LOCK_PASSWORD, lockPassword.toString());
+		lockScreen.saveSuccess();
+	}
+	
+}

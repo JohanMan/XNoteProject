@@ -1,0 +1,61 @@
+package com.johan.xnote.app.adapter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Sticky;
+import com.johan.xnote.app.view.DotView;
+import com.johan.xnote.app.view.FoldingTextView;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class StickyAdapter extends AbstractBaseAdapter<Sticky>{
+	
+	private boolean canSelected = false;
+
+	public StickyAdapter(Context context, List<Sticky> dataList) {
+		super(context, dataList);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder holder = ViewHolder.get(context, convertView, parent, R.layout.item_sticky);
+		RelativeLayout layout = (RelativeLayout) holder.getConvertView();
+		DotView dotView = holder.getView(R.id.item_sticky_dot);
+		TextView editTimeView = holder.getView(R.id.item_sticky_edittime);
+		FoldingTextView thingView = holder.getView(R.id.item_sticky_content);
+		TextView remindTimeView = holder.getView(R.id.item_sticky_remind_time);
+		// Êý¾Ý
+		final Sticky sticky = dataList.get(position);
+		if(sticky.isSelected()) {
+			layout.setBackgroundColor(context.getResources().getColor(R.color.sticky_item_select_background));
+		} else {
+			layout.setBackgroundColor(context.getResources().getColor(R.color.theme_background_color));
+		}
+		// dotView
+		dotView.setColor(sticky.getColor());
+		// editTimeView
+		editTimeView.setText(sticky.getEditTime());
+		// thingView
+		thingView.setText(sticky.getContent());
+		// remindTimeView
+		if(sticky.getIsRemind()) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date date = new Date(sticky.getRemindTime());
+			remindTimeView.setText(format.format(date));
+			remindTimeView.setVisibility(View.VISIBLE);
+		} else {
+			remindTimeView.setVisibility(View.GONE);
+		}
+		return holder.getConvertView();
+	}
+
+}

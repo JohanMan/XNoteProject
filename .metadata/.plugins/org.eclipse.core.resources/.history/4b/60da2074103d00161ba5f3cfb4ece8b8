@@ -1,0 +1,147 @@
+package com.johan.xnote.core.presenter;
+
+import org.json.JSONObject;
+
+import com.johan.xnote.app.api.IForgetPD;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.util.CoreUtil;
+import com.johan.xnote.core.util.DataUtil;
+
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+
+public class ForgetPDPresenter extends BasePresenter {
+
+	private IForgetPD forgetPD;
+	
+	private static final String COUNRTY_OF_CHINA = "86";
+	
+	private String phone, password;
+	
+	private Handler mainHandler = new Handler(Looper.getMainLooper());
+	
+	public ForgetPDPresenter(IForgetPD forgetPD) {
+		this.forgetPD = forgetPD;
+	}
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		SMSSDK.registerEventHandler(eventHandler);
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		SMSSDK.unregisterEventHandler(eventHandler);
+	}
+	
+	public String getPhone() {
+		return (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+	}
+	
+	public void getCode(String phone) {
+		if(CoreUtil.hasEmpty(phone)) {
+			forgetPD.operateFail("手机不能为空~");
+			return;
+		}
+		if(!CoreUtil.isMobileNumber(phone)) {
+			forgetPD.operateFail("手机格式不对~");
+			return;
+		}
+		if(!CoreUtil.isNetworkConnected(XNoteApplication.getInstance().getApplicationContext())) {
+			forgetPD.operateFail("请链接网络~");
+			return;
+		}
+		SMSSDK.getVerificationCode(COUNRTY_OF_CHINA, phone);
+		//开始倒计时
+		countDownTimer.start();
+	}
+	
+	public void updatePassword(String phone, String code, String password) {
+		if(CoreUtil.hasEmpty(phone, code, password)) {
+			forgetPD.operateFail("手机、验证码、新密码都不能为空~");
+			return;
+		}
+		if(!CoreUtil.isMobileNumber(phone)) {
+			forgetPD.operateFail("手机格式不对~");
+			return;
+		}
+		if(!CoreUtil.isNetworkConnected(XNoteApplication.getInstance().getApplicationContext())) {
+			forgetPD.operateFail("请链接网络~");
+			return;
+		}
+		this.phone = phone;
+		this.password = password;
+		SMSSDK.submitVerificationCode(COUNRTY_OF_CHINA, phone, code);
+	}
+	
+	/**
+	 * 短信验证回调
+	 */
+	EventHandler eventHandler = new EventHandler() {
+		@Override
+		public void afterEvent(int event, int result, Object data) {
+			if (result == SMSSDK.RESULT_COMPLETE) {
+				// 回调完成
+				if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+					// 提交验证码成功
+					String phone = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+					if(ForgetPDPresenter.this.phone.equals(phone)) {
+						forgetPD.operateFail(ForgetPDPresenter.this.phone + "用户不存在， 请创建");
+						return;
+					}
+					SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_PASSWORD, DataUtil.md5(password));
+					mainHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							forgetPD.updatePasswordSuccess();
+						}
+					});
+				} else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+					// 获取验证码成功
+					mainHandler.post(new Runnable() {
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							forgetPD.getCodeSuccess();
+						}
+					});
+				}
+			} else {
+				// 回调失败
+				try {
+				     Throwable throwable = (Throwable) data;
+				     throwable.printStackTrace();
+				     JSONObject object = new JSONObject(throwable.getMessage());
+				     String des = object.optString("detail");//错误描述
+				     int status = object.optInt("status");//错误代码
+				     System.err.println("短信验证回调错误：" + des);
+				     if(status > 0 && !CoreUtil.hasEmpty(des)) {
+				    	 forgetPD.operateFail(des);
+					 }
+				} catch (Exception e) {}
+			}
+		}
+	};
+	
+	/**
+	 * 倒计时
+	 */
+	private CountDownTimer countDownTimer = new CountDownTimer(60000, 1000) {
+		@Override
+		public void onTick(long millisUntilFinished) {
+			forgetPD.refreshGetCodeButton(String.valueOf(millisUntilFinished / 1000), false);
+		}
+		@Override
+		public void onFinish() {
+			forgetPD.refreshGetCodeButton("获取", true);
+		}
+	};
+	
+}

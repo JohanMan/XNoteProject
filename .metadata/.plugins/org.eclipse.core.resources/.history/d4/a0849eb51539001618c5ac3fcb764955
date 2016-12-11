@@ -1,0 +1,9 @@
+package com.johan.xnote.core.presenter;
+
+public class PersonalInfoPresenter extends BasePresenter {
+
+	public void init() {
+		
+	}
+	
+}

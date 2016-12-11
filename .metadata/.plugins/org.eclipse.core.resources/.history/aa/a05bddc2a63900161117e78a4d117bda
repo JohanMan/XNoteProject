@@ -1,0 +1,95 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.api.model.AccountDao;
+import com.johan.xnote.api.model.AccountType;
+import com.johan.xnote.api.model.AccountTypeDao;
+import com.johan.xnote.api.model.DaoSession;
+import com.johan.xnote.api.model.NoteBookDao;
+import com.johan.xnote.api.model.NoteDao;
+import com.johan.xnote.api.model.StickyDao;
+import com.johan.xnote.api.model.UserDao;
+import com.johan.xnote.app.api.IFlash;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.action.ActionExecutor;
+import com.johan.xnote.core.action.ActionExecutor.BackgroundAction;
+import com.johan.xnote.core.action.ActionExecutor.UIAction;
+import com.johan.xnote.core.action.ActionFactory;
+
+public class FlashPresenter extends BasePresenter {
+
+	private IFlash flash;
+	
+	private ActionExecutor<Integer> executor;
+	
+	public FlashPresenter(IFlash flash) {
+		this.flash = flash;
+	}
+	
+	public void shouldGo() {
+		executor = new ActionFactory<Integer>()
+				.doInBackground(new BackgroundAction<Integer>() {
+					@Override
+					public Integer action() {
+						// TODO Auto-generated method stub
+						// 创建所有数据表
+						DaoSession daoSession = XNoteApplication.getInstance().getDaoSession();
+						UserDao.createTable(daoSession.getDatabase(), true);
+						NoteBookDao.createTable(daoSession.getDatabase(), true);
+						NoteDao.createTable(daoSession.getDatabase(), true);
+						AccountDao.createTable(daoSession.getDatabase(), true);
+						AccountTypeDao.createTable(daoSession.getDatabase(), true);
+						StickyDao.createTable(daoSession.getDatabase(), true);
+						// 添加默认数据
+						AccountTypeDao accountTypeDao = daoSession.getAccountTypeDao();
+						if(accountTypeDao.count() == 0) {
+							String[] outAccountType = {
+								"餐饮", "住宿", "交通", "购物", "娱乐", "居家", "医教", "投资", "其他" 	
+							};
+							String[] inAccountType = {
+								"工资", "兼职", "津贴", "报销", "补助", "其他"
+							};
+							for(String outAccount : outAccountType) {
+								AccountType accountType = new AccountType(null, true, outAccount);
+								accountTypeDao.insert(accountType);
+							}
+							for(String inAccount : inAccountType) {
+								AccountType accountType = new AccountType(null, false, inAccount);
+								accountTypeDao.insert(accountType);
+							}
+						}
+						// 判断是否登陆过
+						String loginPhone = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+						String loginPassword = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PASSWORD, "");
+						if (!"".equals(loginPhone) && !"".equals(loginPassword)) {
+							// 判断是否有密码
+							String lockPassword = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_LOCK, "");
+							if ("".equals(lockPassword)) {
+								// 没有密码，跳转主页
+								return IFlash.HOME;
+							} else {
+								// 有密码，跳转到解锁界面
+								return IFlash.LOCK;
+							}
+						} else {
+							// 没有登陆过，跳转登录页面
+							return IFlash.LOGIN;
+						}
+					}
+				}).doInUI(new UIAction<Integer>() {
+					@Override
+					public void action(Integer data) {
+						// TODO Auto-generated method stub
+						flash.go(data);
+					}
+				}).build();
+		executor.execute();
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		executor.cancel();
+	}
+	
+}

@@ -1,0 +1,162 @@
+package com.johan.xnote.app.fragment;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Note;
+import com.johan.xnote.app.activity.HomeActivity;
+import com.johan.xnote.app.activity.WriteNoteActivity;
+import com.johan.xnote.app.adapter.PinnedHeaderExpandableAdapter;
+import com.johan.xnote.app.api.INote;
+import com.johan.xnote.app.dialog.NewNoteBookDialog;
+import com.johan.xnote.app.dialog.NoteBookOperationDialog;
+import com.johan.xnote.app.dialog.NoteOperationDialog;
+import com.johan.xnote.app.dialog.RenameNoteBookDialog;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.view.PinnedHeaderExpandableListView;
+import com.johan.xnote.core.presenter.NotePresenter;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class NoteFragment extends BaseFragment<NotePresenter> implements INote {
+	
+	@InjectView(R.id.note_listview)
+	public PinnedHeaderExpandableListView noteListView;
+	
+	private PinnedHeaderExpandableAdapter adapter;
+	
+	@InjectView(R.id.note_search)
+	public EditText searchView;
+	
+	private NewNoteBookDialog newNoteBookDialog;
+	
+	private RenameNoteBookDialog renameNoteBookDialog;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		noteListView.setHeaderView(LayoutInflater.from(getActivity()).inflate(R.layout.header_note_group, noteListView, false));
+		adapter = new PinnedHeaderExpandableAdapter(presenter.getNoteBookList(), presenter.getNoteList(), getActivity(), noteListView);
+		noteListView.setAdapter(adapter);
+		noteListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if(id == 0) {
+					NoteBookOperationDialog dialog = new NoteBookOperationDialog(getActivity(), position);
+					dialog.show(view);
+				} else {
+					int noteId = view.getId();
+					for(int i = 0; i < presenter.getNoteList().size(); i++) {
+						List<Note> notelist = presenter.getNoteList().get(i);
+						for(int j = 0; j < notelist.size(); j++) {
+							Note note = notelist.get(j);
+							if(noteId == note.getNoteId()) {
+								NoteOperationDialog dialog = new NoteOperationDialog(getActivity(), i, j);
+								dialog.show(view);
+								break;
+							}
+						}
+					}
+				}
+				return true;
+			}
+		});
+		noteListView.setOnChildClickListener(new OnChildClickListener() {
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(getActivity(), WriteNoteActivity.class);
+				intent.putExtra("note_id", presenter.getNoteList().get(groupPosition).get(childPosition).getNoteId());
+				intent.putExtra("note_book_id", presenter.getNoteBookList().get(groupPosition).getBookId());
+				getActivity().startActivity(intent);
+				return true;
+			}
+		});
+		searchView.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				presenter.filter(s.toString());
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		presenter.refreshListView();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_note;
+	}
+
+	@Override
+	protected NotePresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new NotePresenter(this);
+	}
+
+	@Override
+	public void refreshData() {
+		// TODO Auto-generated method stub
+		adapter.notifyDataSetChanged();
+	}
+	
+	@OnClick(R.id.note_add)
+	public void addNoteBook(View view) {
+		if(null == newNoteBookDialog) {
+			newNoteBookDialog = new NewNoteBookDialog(getActivity());
+		}
+		HomeActivity activity = (HomeActivity) getActivity();
+		newNoteBookDialog.show(activity.getLayout());
+	}
+	
+	@OnClick(R.id.note_write)
+	public void writeNote(View view) {
+		if(presenter.getNoteBookList().size() == 0) {
+			AppUtil.toast(getActivity(), "请新建笔记本，再写笔记~");
+			return;
+		}
+		goActivity(WriteNoteActivity.class);
+	}
+
+	@Override
+	public void showRenameDialog(String name, int position) {
+		// TODO Auto-generated method stub
+		if(null == renameNoteBookDialog) {
+			renameNoteBookDialog = new RenameNoteBookDialog(getActivity(), name, position);
+		}
+		HomeActivity activity = (HomeActivity) getActivity();
+		renameNoteBookDialog.show(activity.getLayout());
+	}
+	
+	
+
+}

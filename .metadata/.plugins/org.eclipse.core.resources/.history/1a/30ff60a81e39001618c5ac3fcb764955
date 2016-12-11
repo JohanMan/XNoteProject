@@ -1,0 +1,33 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.Iterator;
+
+import com.johan.xnote.api.model.User;
+import com.johan.xnote.api.model.UserDao;
+import com.johan.xnote.app.api.IModifyPassword;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.util.DataUtil;
+
+public class ModifyPasswordPresenter extends BasePresenter {
+
+	private IModifyPassword modifyPassword;
+	
+	private UserDao userDao;
+	
+	private User user;
+	
+	public ModifyPasswordPresenter(IModifyPassword modifyPassword) {
+		this.modifyPassword = modifyPassword;
+		userDao = XNoteApplication.getInstance().getDaoSession().getUserDao();
+		Iterator<User> iterator = userDao.queryBuilder().list().iterator();
+		if(iterator.hasNext()) {
+			user = iterator.next();
+		}
+	}
+	
+	public void checkOldPassword(String text) {
+		String md5Text = DataUtil.md5(text);
+		modifyPassword.checkResult(user.getPassword().equals(md5Text));
+	}
+	
+}

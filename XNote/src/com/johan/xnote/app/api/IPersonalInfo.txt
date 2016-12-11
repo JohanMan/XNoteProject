@@ -1,0 +1,15 @@
+package com.johan.xnote.app.api;
+
+public interface IPersonalInfo {
+
+	public void setPhone(String phone);
+	
+	public void setNickName(String nickName);
+	
+	public void setEmail(String email);
+	
+	public void updateSuccess();
+	
+	public void updateFail(String msg);
+	
+}

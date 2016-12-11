@@ -1,0 +1,382 @@
+package com.johan.xnote.app.activity;
+
+import java.io.File;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.api.IWriteNote;
+import com.johan.xnote.app.dialog.SelectColorDialog;
+import com.johan.xnote.app.dialog.SelectColorDialog.OnColorSelectedListener;
+import com.johan.xnote.app.dialog.SelectNoteBookDialog;
+import com.johan.xnote.app.dialog.SelectPictureWayDialog;
+import com.johan.xnote.app.dialog.SelectPictureWayDialog.OnSelectPictureWayListener;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.view.RichEditor;
+import com.johan.xnote.app.view.RichShowor;
+import com.johan.xnote.core.presenter.WriteNotePresenter;
+import com.johan.xnote.core.util.FileUtil;
+import com.johan.xnote.core.util.FileUtil.SaveImage;
+
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class WriteNoteActivity extends BaseActivity<WriteNotePresenter> implements IWriteNote {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectView(R.id.write_note_editor)
+	public RichEditor contentView;
+	
+	@InjectView(R.id.write_note_title)
+	public EditText titleView;
+	
+	@InjectView(R.id.write_note_but)
+	public Button button;
+	
+	@InjectView(R.id.write_note_editor_layout)
+	public LinearLayout editorLayout;
+	
+	@InjectView(R.id.write_note_showor)
+	public RichShowor showView;
+	
+	@InjectView(R.id.write_note_action_layout)
+	public HorizontalScrollView actionLayout;
+	
+	private boolean editable;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "点击选择笔记本", true);
+		contentView.setEditorFontSize(18);
+		contentView.setEditorFontColor(getResources().getColor(R.color.theme_text_color));
+		contentView.setPadding(10, 10, 10, 10);
+		contentView.setPlaceholder("内容...");
+		contentView.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				int actionVisibility = hasFocus ? View.VISIBLE : View.GONE;
+				actionLayout.setVisibility(actionVisibility);
+			}
+		});
+		showView.setFontColor(getResources().getColor(R.color.theme_text_color));
+		showView.setFontSize(18);
+		showView.setPadding(10, 10, 10, 10);
+		// 初始化
+		if(null != getIntent()) {
+			long noteId = getIntent().getLongExtra("note_id", -1);
+			long noteBookId = getIntent().getLongExtra("note_book_id", -1);
+			editable = noteId == -1 || noteBookId == -1;
+			notifyModifyState();
+			presenter.init(noteId, noteBookId);
+		} else {
+			finish();
+		}
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_write_note;
+	}
+	
+	@Override
+	protected boolean isShowTitleIcon() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	protected WriteNotePresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new WriteNotePresenter(this);
+	}
+
+	@Override
+	protected void onClickTitle() {
+		// TODO Auto-generated method stub
+		SelectNoteBookDialog dialog = new SelectNoteBookDialog(this);
+		dialog.show(toolbar);
+	}
+
+	@Override
+	public void setActionBar(String title) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, title, true);
+	}
+	
+	@OnClick(R.id.write_note_but)
+	public void operation(View view) {
+		if(editable) {
+			presenter.saveNote(titleView.getText().toString(), contentView.getHtml());
+		} else {
+			editable = true;
+			notifyModifyState();
+		}
+	}
+	
+	private void notifyModifyState() {
+		if(editable) {
+			showView.setVisibility(View.GONE);
+			titleView.setEnabled(true);
+			editorLayout.setVisibility(View.VISIBLE);
+			button.setText("保存");
+		} else {
+			String content = contentView.getHtml();
+			showView.setHtml(content);
+			showView.setVisibility(View.VISIBLE);
+			titleView.setEnabled(false);
+			editorLayout.setVisibility(View.GONE);
+			button.setText("编辑");
+		}
+	}
+	
+	public void undo(View v) {
+		contentView.undo();
+	}
+	
+	public void redo(View v) {
+		contentView.redo();
+	}
+	
+	public void bold(View v) {
+		contentView.setBold();
+	}
+	
+	public void italic(View v) {
+		contentView.setItalic();
+	}
+	
+	public void subscript(View v) {
+		contentView.setSubscript();
+	}
+	
+	public void superscript(View v) {
+		contentView.setSuperscript();
+	}
+	
+	public void strikethrough(View v) {
+		contentView.setStrikeThrough();
+	}
+	
+	public void underline(View v) {
+		contentView.setUnderline();
+	}
+	
+	public void heading1(View v) {
+		contentView.setHeading(1);
+	}
+	
+	public void heading2(View v) {
+		contentView.setHeading(2);
+	}
+	
+	public void heading3(View v) {
+		contentView.setHeading(3);
+	}
+	
+	public void heading4(View v) {
+		contentView.setHeading(4);
+	}
+	
+	public void heading5(View v) {
+		contentView.setHeading(5);
+	}
+	
+	public void heading6(View v) {
+		contentView.setHeading(6);
+	}
+	
+	public void txtColor(View v) {
+		SelectColorDialog dialog = new SelectColorDialog(this);
+		dialog.setOnColorSelectedListener(new OnColorSelectedListener() {
+			@Override
+			public void onColorSelected(String color) {
+				contentView.setTextColor(Color.parseColor(color));
+			}
+		});
+		dialog.show();
+	}
+	
+	public void bgColor(View v) {
+		SelectColorDialog dialog = new SelectColorDialog(this);
+		dialog.setOnColorSelectedListener(new OnColorSelectedListener() {
+			@Override
+			public void onColorSelected(String color) {
+				contentView.setTextBackgroundColor(Color.parseColor(color));
+			}
+		});
+		dialog.show();
+	}
+	
+	public void indent(View v) {
+		contentView.setIndent();
+	}
+	
+	public void outdent(View v) {
+		contentView.setOutdent();
+	}
+	
+	public void alignLeft(View v) {
+		contentView.setAlignLeft();
+	}
+	
+	public void alignCenter(View v) {
+		contentView.setAlignCenter();
+	}
+	
+	public void alignRight(View v) {
+		contentView.setAlignRight();
+	}
+	
+	public void insertImage(View v) {
+		SelectPictureWayDialog dialog = new SelectPictureWayDialog(this);
+		dialog.setOnSelectPictureWayListener(new OnSelectPictureWayListener() {
+			@Override
+			public void onSelectedPictureWay(int way) {
+				// TODO Auto-generated method stub
+				if(way == SelectPictureWayDialog.SELECT_CAMERA) {
+					camera();
+				} else if(way == SelectPictureWayDialog.SELECT_GALLERY) {
+					gallery();
+				}
+			}
+		});
+		dialog.show();
+	}
+	
+	@Override
+	public void setTitle(String title) {
+		// TODO Auto-generated method stub
+		titleView.setText(title);
+	}
+
+	@Override
+	public void setBody(String body) {
+		// TODO Auto-generated method stub
+		contentView.setHtml(body);
+		showView.setHtml(body);
+	}
+	
+	@Override
+	public void saveNoteSuccess() {
+		// TODO Auto-generated method stub
+		editable = false;
+		notifyModifyState();
+	}
+	
+	/**
+	 * 选择图片 ==================================================================
+	 */
+	
+	private static final int PHOTO_REQUEST_GALLERY = 1;
+	private static final int PHOTO_REQUEST_CAREMA = 2;
+	private static final int PHOTO_REQUEST_CUT = 3;
+	
+	// 临时文件
+	private File tempFile;
+	
+	/*
+     * 从相册获取
+     */
+    public void gallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+    }
+ 
+    /*
+     * 从相机获取
+     */
+    public void camera() {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        if (!FileUtil.hasSDCard()) {
+        	AppUtil.toast(this, "找不到SD卡");
+        	return;
+        }
+        FileUtil.createDir(FileUtil.getSDPath() + FileUtil.TEMP_IMG_PATH);
+        tempFile = new File(FileUtil.getSDPath() + FileUtil.TEMP_IMG_PATH + "select_img.jpg");
+        Uri uri = Uri.fromFile(tempFile);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        startActivityForResult(intent, PHOTO_REQUEST_CAREMA);
+    }
+    
+    /*
+     * 剪切图片
+     */
+    private void crop(Uri uri) {
+    	Intent intent = new Intent(this, CropActivity.class);
+    	intent.setDataAndType(uri, "image/*");
+    	startActivityForResult(intent, PHOTO_REQUEST_CUT);
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	if(resultCode == RESULT_OK) {
+	        if (requestCode == PHOTO_REQUEST_GALLERY) {
+	            if (data != null) {
+	                Uri uri = data.getData();
+	                crop(uri);
+	            }
+	        } else if (requestCode == PHOTO_REQUEST_CAREMA) {
+	            if (FileUtil.hasSDCard()) {
+	                crop(Uri.fromFile(tempFile));
+	            } else {
+	                AppUtil.toast(this, "未找到存储卡，无法存储照片~");
+	            }
+	        } else if (requestCode == PHOTO_REQUEST_CUT) {
+	            if (data != null) {
+	                SaveImage image = (SaveImage) data.getExtras().getSerializable("image");
+	                if(null != image) {
+	                	contentView.insertImage(image.path, "", AppUtil.px2dip(this, image.width), AppUtil.px2dip(this, image.height));
+	                } else {
+	                	 AppUtil.toast(this, "添加图片失败~");
+	                }
+	            }
+	            try {
+	                tempFile.delete();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        } 
+    	} else {
+        	try {
+                tempFile.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	super.onConfigurationChanged(newConfig);
+    }
+
+    /**
+	 * 选择图片 ==================================================================
+	 */
+    
+    @Override
+	public void error(String msg) {
+		// TODO Auto-generated method stub
+		AppUtil.toast(this, msg);
+	}
+	
+}

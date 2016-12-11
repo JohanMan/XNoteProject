@@ -1,0 +1,91 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.fragment;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class AccountFragment$$ViewInjector<T extends com.johan.xnote.app.fragment.AccountFragment> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131362005, "field 'inMoneyView'");
+    target.inMoneyView = finder.castView(view, 2131362005, "field 'inMoneyView'");
+    view = finder.findRequiredView(source, 2131362011, "field 'deleteView' and method 'delete'");
+    target.deleteView = finder.castView(view, 2131362011, "field 'deleteView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.delete(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362003, "field 'outMoneyView'");
+    target.outMoneyView = finder.castView(view, 2131362003, "field 'outMoneyView'");
+    view = finder.findRequiredView(source, 2131362000, "field 'yearView'");
+    target.yearView = finder.castView(view, 2131362000, "field 'yearView'");
+    view = finder.findRequiredView(source, 2131362001, "field 'monthView'");
+    target.monthView = finder.castView(view, 2131362001, "field 'monthView'");
+    view = finder.findRequiredView(source, 2131362007, "field 'resumeMoneyView'");
+    target.resumeMoneyView = finder.castView(view, 2131362007, "field 'resumeMoneyView'");
+    view = finder.findRequiredView(source, 2131362008, "field 'listView'");
+    target.listView = finder.castView(view, 2131362008, "field 'listView'");
+    view = finder.findRequiredView(source, 2131362012, "field 'cancelView' and method 'cancel'");
+    target.cancelView = finder.castView(view, 2131362012, "field 'cancelView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.cancel(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362010, "method 'showBar'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.showBar(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362009, "method 'recordAccount'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.recordAccount(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361999, "method 'nextYear'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.nextYear(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361998, "method 'lastYear'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.lastYear(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.inMoneyView = null;
+    target.deleteView = null;
+    target.outMoneyView = null;
+    target.yearView = null;
+    target.monthView = null;
+    target.resumeMoneyView = null;
+    target.listView = null;
+    target.cancelView = null;
+  }
+}

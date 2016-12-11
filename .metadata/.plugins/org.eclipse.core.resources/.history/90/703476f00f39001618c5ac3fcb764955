@@ -1,0 +1,41 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class RegisterActivity$$ViewInjector<T extends com.johan.xnote.app.activity.RegisterActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361918, "field 'passwordView'");
+    target.passwordView = finder.castView(view, 2131361918, "field 'passwordView'");
+    view = finder.findRequiredView(source, 2131361920, "field 'emailView'");
+    target.emailView = finder.castView(view, 2131361920, "field 'emailView'");
+    view = finder.findRequiredView(source, 2131362035, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362035, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361912, "field 'phoneView'");
+    target.phoneView = finder.castView(view, 2131361912, "field 'phoneView'");
+    view = finder.findRequiredView(source, 2131361915, "field 'nickNameView'");
+    target.nickNameView = finder.castView(view, 2131361915, "field 'nickNameView'");
+    view = finder.findRequiredView(source, 2131361921, "field 'register' and method 'register'");
+    target.register = finder.castView(view, 2131361921, "field 'register'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.register(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.passwordView = null;
+    target.emailView = null;
+    target.toolbar = null;
+    target.phoneView = null;
+    target.nickNameView = null;
+    target.register = null;
+  }
+}

@@ -1,0 +1,38 @@
+package com.johan.xnote.app.adapter;
+
+import java.util.List;
+
+import android.content.Context;
+import android.widget.BaseAdapter;
+
+public abstract class AbstractBaseAdapter<T> extends BaseAdapter {
+	
+	protected Context context;
+	protected List<T> dataList;
+	
+	public AbstractBaseAdapter(Context context, List<T> dataList) {
+		// TODO Auto-generated constructor stub
+		this.context = context;
+		this.dataList = dataList;
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		System.out.println("size:" + dataList.size());
+		return dataList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+		return dataList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+		return position;
+	}
+
+}

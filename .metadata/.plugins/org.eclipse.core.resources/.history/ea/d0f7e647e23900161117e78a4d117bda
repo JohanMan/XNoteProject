@@ -1,0 +1,106 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.AboutActivity;
+import com.johan.xnote.app.activity.LockScreenActivity;
+import com.johan.xnote.app.activity.LoginActivity;
+import com.johan.xnote.app.activity.ModifyPasswordActivity;
+import com.johan.xnote.app.activity.PersonalInfoActivity;
+import com.johan.xnote.app.api.IMe;
+import com.johan.xnote.app.dialog.TipDialog;
+import com.johan.xnote.core.presenter.MePresenter;
+import com.umeng.update.UmengUpdateAgent;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class MeFragment extends BaseFragment<MePresenter> implements IMe {
+	
+	@InjectView(R.id.me_lockscreen_state)
+	public TextView lockscreenStateView;
+	
+	@InjectView(R.id.me_version_info)
+	public TextView versionInfoView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		versionInfoView.setText(presenter.getVersionInfo(getActivity()));
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		presenter.refreshLockScreenState();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_me;
+	}
+
+	@Override
+	protected MePresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new MePresenter(this);
+	}
+	
+	@OnClick(R.id.me_personal_info)
+	public void clickPersonalInfo(View view) {
+		goActivity(PersonalInfoActivity.class);
+	}
+	
+	@OnClick(R.id.me_modify_passwrod)
+	public void clickModifyPassword(View view) {
+		goActivity(ModifyPasswordActivity.class);
+	}
+	
+	@OnClick(R.id.me_lockscreen)
+	public void clickLockscreen(View view) {
+		presenter.clickLockScreen();
+	}
+	
+	@OnClick(R.id.me_update_version)
+	public void clickupdateVersion(View view) {
+		UmengUpdateAgent.forceUpdate(getActivity());
+	}
+	
+	@OnClick(R.id.me_about)
+	public void clickAbout(View view) {
+		goActivity(AboutActivity.class);
+	}
+	
+	@OnClick(R.id.me_exit)
+	public void clickExit(View view) {
+		TipDialog dialog = new TipDialog(getActivity());
+		dialog.setOkButtonListener("确定", new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				presenter.logout();
+				goActivity(LoginActivity.class);
+				getActivity().finish();
+			}
+		}).show();
+	}
+
+	@Override
+	public void updateLockScreenState(boolean hasLockPassword) {
+		// TODO Auto-generated method stub
+		String lockScreenStateTip = hasLockPassword ? "开" : "关";
+		lockscreenStateView.setText(lockScreenStateTip);
+	}
+
+	@Override
+	public void goSetLockscreen() {
+		// TODO Auto-generated method stub
+		goActivity(LockScreenActivity.class);
+	}
+
+}

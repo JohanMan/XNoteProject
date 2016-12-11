@@ -1,0 +1,13 @@
+package com.johan.xnote.app.api;
+
+public interface IForgetPD {
+
+	public void refreshGetCodeButton(String text, boolean state);
+	
+	public void operateFail(String msg);
+	
+	public void getCodeSuccess();
+	
+	public void updatePasswordSuccess();
+	
+}

@@ -1,0 +1,319 @@
+package com.johan.xnote.app.dialog;
+
+import java.util.Arrays;
+import java.util.Calendar;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.view.WheelView;
+import com.johan.xnote.app.view.WheelView.OnWheelViewListener;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
+
+public class TimeDialog implements OnClickListener {
+	
+	public static final int SHOW_MODE_DATE = 1;
+	public static final int SHOW_MODE_TIME = 2;
+	
+	private static final int REFRESH_ALL = 1;
+	private static final int REFRESH_YEAR = 2;
+	private static final int REFRESH_MONTH = 3;
+
+	private Dialog timeDialog;
+	
+	private TextView titleView;
+	
+	private WheelView wheelView1, wheelView2, wheelView3;
+	
+	private Button okButton, cancelButton;
+	
+	private int year, month, day, hour, minute;
+	
+	private int showMode;
+	
+	private Context context;
+	
+	public TimeDialog(Context context, int showMode) {
+		this.context = context;
+		timeDialog = new Dialog(context, R.style.CustomDialog);
+		timeDialog.setContentView(R.layout.dialog_time);
+		titleView = (TextView) timeDialog.findViewById(R.id.time_title);
+		wheelView1 = (WheelView) timeDialog.findViewById(R.id.time_wheelview_1);
+		wheelView2 = (WheelView) timeDialog.findViewById(R.id.time_wheelview_2);
+		wheelView3 = (WheelView) timeDialog.findViewById(R.id.time_wheelview_3);
+		okButton = (Button) timeDialog.findViewById(R.id.time_ok_but);
+		cancelButton = (Button) timeDialog.findViewById(R.id.time_cancel_but);
+		this.showMode = showMode;
+		// 初始化
+		init();
+	}
+	
+	private void init() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		if(showMode == SHOW_MODE_DATE) {
+			titleView.setText("选择日期");
+			year = calendar.get(Calendar.YEAR);
+			month = calendar.get(Calendar.MONTH) + 1;
+			day = calendar.get(Calendar.DAY_OF_MONTH);
+			refreshData(REFRESH_ALL);
+			LayoutParams params1 = (LinearLayout.LayoutParams) wheelView1.getLayoutParams();
+			params1.width = AppUtil.dip2px(context, 90);
+			wheelView1.setLayoutParams(params1);
+			LayoutParams params2 = (LinearLayout.LayoutParams) wheelView2.getLayoutParams();
+			params2.width = AppUtil.dip2px(context, 90);
+			wheelView2.setLayoutParams(params2);
+			LayoutParams params3 = (LinearLayout.LayoutParams) wheelView3.getLayoutParams();
+			params3.width = AppUtil.dip2px(context, 90);
+			wheelView3.setLayoutParams(params3);
+			wheelView1.setSeletion(year-2010);
+			wheelView2.setSeletion(month-1);
+			wheelView3.setSeletion(day-1);
+			wheelView1.setOnWheelViewListener(new OnWheelViewListener(){
+				@Override
+				public void onSelected(int selectedIndex, String item) {
+					if(year == Integer.parseInt(item)) {
+						// 和之前的一样
+						return;
+					}
+					year = Integer.parseInt(item);
+					day = 1;
+					refreshData(REFRESH_YEAR);
+					wheelView1.setSeletion(year-2010);
+					wheelView3.setSeletion(0);
+				}
+			});
+			wheelView2.setOnWheelViewListener(new OnWheelViewListener(){
+				@Override
+				public void onSelected(int selectedIndex, String item) {
+					if(month == Integer.parseInt(item)) {
+						// 和之前的一样
+						return;
+					}
+					month = Integer.parseInt(item);
+					day = 1;
+					refreshData(REFRESH_MONTH);
+					wheelView2.setSeletion(month-1);
+					wheelView3.setSeletion(0);
+				}
+			});
+			wheelView3.setOnWheelViewListener(new OnWheelViewListener(){
+				@Override
+				public void onSelected(int selectedIndex, String item) {
+					day = Integer.parseInt(item);
+				}
+			});
+		} else {
+			titleView.setText("选择时间");
+			hour = calendar.get(Calendar.HOUR_OF_DAY);
+			minute = calendar.get(Calendar.MINUTE);
+			refreshData(REFRESH_ALL);
+			LayoutParams params1 = (LinearLayout.LayoutParams) wheelView1.getLayoutParams();
+			params1.width = AppUtil.dip2px(context, 135);
+			wheelView1.setLayoutParams(params1);
+			LayoutParams params2 = (LinearLayout.LayoutParams) wheelView2.getLayoutParams();
+			params2.width = AppUtil.dip2px(context, 135);
+			wheelView1.setSeletion(hour);
+			wheelView2.setSeletion(minute);
+			wheelView1.setOnWheelViewListener(new OnWheelViewListener(){
+				@Override
+				public void onSelected(int selectedIndex, String item) {
+					hour = Integer.parseInt(item);
+				}
+			});
+			wheelView2.setOnWheelViewListener(new OnWheelViewListener(){
+				@Override
+				public void onSelected(int selectedIndex, String item) {
+					minute = Integer.parseInt(item);
+				}
+			});
+		}
+		okButton.setOnClickListener(this);
+		cancelButton.setOnClickListener(this);
+	}
+	
+	/**
+	 * @param time 08:30
+	 */
+	public void setTime(String time) {
+		if("".equals(time)) {
+			return;
+		}
+		if(time.indexOf(":") != -1) {
+			String[] times = time.split(":");
+			if(null != times && times.length == 2) {
+				hour = Integer.parseInt(times[0]);
+				minute = Integer.parseInt(times[1]);
+				refreshData(REFRESH_ALL);
+				wheelView1.setSeletion(hour);
+				wheelView2.setSeletion(minute);
+			}
+		}
+	}
+	
+	/**
+	 * @param date 2016-05-06
+	 */
+	public void setDate(String date) {
+		if("".equals(date)) {
+			return;
+		}
+		if(date.indexOf("-") != -1) {
+			String[] dates = date.split("-");
+			if(null != dates && dates.length == 3) {
+				year = Integer.parseInt(dates[0]);
+				month = Integer.parseInt(dates[1]);
+				day = Integer.parseInt(dates[2]);
+				refreshData(REFRESH_ALL);
+				wheelView1.setSeletion(year-2010);
+				wheelView2.setSeletion(month-1);
+				wheelView3.setSeletion(day-1);
+			}
+		}
+	}
+	
+	private String[] getYearData() {
+		String[] yearData = new String[50];
+		for(int i = 0; i < 50; i++) {
+			yearData[i] = intToString(2010 + i);
+		}
+		return yearData;
+	}
+	
+	private String[] getMonthData() {
+		String[] monthData = new String[12];
+		for(int i = 1; i < 13; i++) {
+			monthData[i-1] = intToString(i);
+		}
+		return monthData;
+	}
+	
+	private String[] getDayData(int year, int month) {
+		int dayCount = getDayCount(year, month);
+		String[] dayData = new String[dayCount];
+		for(int i = 1; i < dayCount + 1; i++) {
+			dayData[i-1] = intToString(i);
+		}
+		return dayData;
+	}
+	
+	private int getDayCount(int year, int month) {
+		if(month == 2) {
+			if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+				return 29;
+			} else {
+				return 28;
+			}
+		} else if(month == 1 | month == 3 | month == 5 | month == 7 | month == 8 | month == 10 | month == 12) {
+			return 31;
+		} else {
+			return 30;
+		}
+	}
+	
+	private String[] getHourData() {
+		String[] hourData = new String[24];
+		for(int i = 0; i < 24; i++) {
+			hourData[i] = intToString(i);
+		}
+		return hourData;
+	}
+	
+	private String[] getMinuteData() {
+		String[] minuteData = new String[60];
+		for(int i = 0; i < 60; i++) {
+			minuteData[i] = intToString(i);
+		}
+		return minuteData;
+	}
+	
+	public String intToString(int number) {
+		if(number < 10) {
+			return "0" + String.valueOf(number);
+		}
+		return String.valueOf(number);
+	}
+	
+	public void refreshData(int refreshWhich) {
+		if(showMode == SHOW_MODE_DATE) {
+			if(refreshWhich == REFRESH_ALL) {
+				wheelView1.setItems(Arrays.asList(getYearData()));
+				wheelView2.setItems(Arrays.asList(getMonthData()));
+				wheelView3.setItems(Arrays.asList(getDayData(year, month)));
+			} else if(refreshWhich == REFRESH_YEAR) {
+				wheelView1.setItems(Arrays.asList(getYearData()));
+				wheelView3.setItems(Arrays.asList(getDayData(year, month)));
+			} else if(refreshWhich == REFRESH_MONTH) {
+				wheelView2.setItems(Arrays.asList(getMonthData()));
+				wheelView3.setItems(Arrays.asList(getDayData(year, month)));
+			}
+		} else {
+			wheelView1.setItems(Arrays.asList(getHourData()));
+			wheelView2.setItems(Arrays.asList(getMinuteData()));
+			wheelView3.setVisibility(View.GONE);
+		}
+	}
+	
+	public void show() {
+		timeDialog.show();
+	}
+	
+	public void dismiss() {
+		timeDialog.dismiss();
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+			case R.id.time_ok_but :
+				dismiss();
+				if(onSelectedTimeListener != null) {
+					StringBuffer dateBuffer = new StringBuffer();
+					dateBuffer.append(year).append("-");
+					if(month < 10) {
+						dateBuffer.append("0");
+					}
+					dateBuffer.append(month).append("-");
+					if(day < 10) {
+						dateBuffer.append("0");
+					}
+					dateBuffer.append(day);
+					StringBuffer timeBuffer = new StringBuffer();
+					if(hour < 10) {
+						timeBuffer.append("0");
+					}
+					timeBuffer.append(hour).append(":");
+					if(minute < 10) {
+						timeBuffer.append("0");
+					}
+					timeBuffer.append(minute);
+					onSelectedTimeListener.onSelectedTime(dateBuffer.toString(), timeBuffer.toString());
+				}
+				break;
+			case R.id.time_cancel_but :
+				dismiss();
+				break;
+			default:
+				break;
+		}
+	}
+	
+	private OnSelectedTimeListener onSelectedTimeListener;
+	
+	public void setOnSelectedTimeListener(OnSelectedTimeListener onSelectedTimeListener) {
+		this.onSelectedTimeListener = onSelectedTimeListener;
+	}
+	
+	public interface OnSelectedTimeListener {
+		public void onSelectedTime(String date, String time);
+	}
+	
+}

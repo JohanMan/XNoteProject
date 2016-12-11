@@ -1,0 +1,79 @@
+1465798285290	Rename package 'com.johan.xnote'
+1465801641127	Rename package 'com.johan.xnote.app'
+1465801665817	Rename package 'com.johan.xnote.core'
+1465801796071	Rename type 'BasePresent'
+1465807406046	Delete element
+1465808439779	Delete element
+1465811541121	Delete element
+1465865976611	Rename method 'onDestory'
+1465868601272	Rename type 'SharePreferenceUtil'
+1465868643240	Rename field 'FILE_NAME'
+1465868664261	Rename local variable 'sp'
+1465868676362	Rename local variable 'sp'
+1465869492047	Copy folder
+1465869751498	Delete element
+1465871208417	Delete element
+1465876343691	Rename type 'MainActivity'
+1465876360848	Rename resource 'activity_main.xml'
+1465876457496	Delete element
+1465884640951	Delete element
+1465886441400	Copy folder
+1465886473317	Rename resource 'app_icon.png'
+1465886760490	Delete element
+1465886787379	Rename resource 'logo.png'
+1465888152487	Copy file
+1465888481003	Delete element
+1465889263109	Delete element
+1465890825256	Delete element
+1465897993048	Delete element
+1465898868669	Rename resource 'layout_title.xml'
+1465951770020	Copy file
+1465951888904	Rename resource 'corner_white_5.xml'
+1465952097418	Rename resource 'corner_gray_transparent_5.xml'
+1465956012599	Rename package 'com.johan.xnote.app.activityapi'
+1465957240783	Delete element
+1465957259321	Rename type 'Util'
+1465957368739	Rename package 'com.johan.xnote.app.activity.api'
+1465957378467	Copy compilation unit
+1465957386432	Delete element
+1465965985640	Rename type 'IForget'
+1465971899095	Copy file
+1465982541361	Rename local variable 'findResule'
+1466044194444	Copy file
+1466044228046	Copy file
+1466044254049	Copy file
+1466045641586	Delete element
+1466048179704	Delete element
+1466049144143	Delete element
+1466049424463	Delete element
+1466057865698	Copy file
+1466059345432	Copy file
+1466066569880	Rename resource 'anim_more_window_in.xml'
+1466066576269	Delete element
+1466066586721	Copy file
+1466066644757	Delete element
+1466066656255	Copy file
+1466129598045	Delete element
+1466130459812	Delete element
+1466130478325	Rename resource 'operation.png'
+1466131718800	Delete element
+1466132563249	Delete element
+1466133810238	Copy file
+1466133900796	Copy compilation unit
+1466134037993	Rename field 'renameNoteBookEvent'
+1466137913870	Delete element
+1466138961946	Delete element
+1466140278966	Copy compilation unit
+1466142127979	Delete element
+1466143120232	Rename resource 'anim_donw_to_up.xml'
+1466143136632	Rename resource 'anim_up_to_down.xml'
+1466143147236	Copy file
+1466143158260	Rename resource 'anim_slidedown_donw_to_up2.xml'
+1466143169352	Copy file
+1466150597533	Copy file
+1466150731369	Rename resource 'corner_drak_gray_white.xml'
+1466150901900	Copy compilation unit
+1466150917991	Rename resource 'dialog_select_photo_way.xml'
+1466156363751	Copy file
+1466156593897	Rename resource 'corner_drak_gray_transparent.xml'
+1466157834057	Rename local variable 'ac'

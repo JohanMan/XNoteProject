@@ -1,0 +1,208 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import com.johan.xnote.api.model.Note;
+import com.johan.xnote.api.model.NoteBook;
+import com.johan.xnote.api.model.NoteBookDao;
+import com.johan.xnote.api.model.NoteDao;
+import com.johan.xnote.app.api.INote;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.action.ActionExecutor;
+import com.johan.xnote.core.action.ActionExecutor.BackgroundAction;
+import com.johan.xnote.core.action.ActionExecutor.UIAction;
+import com.johan.xnote.core.event.Event;
+import com.johan.xnote.core.event.EventBus;
+import com.johan.xnote.core.event.EventSubjecter;
+import com.johan.xnote.core.util.CoreUtil;
+
+import android.os.Bundle;
+
+import com.johan.xnote.core.action.ActionFactory;
+
+public class NotePresenter extends BasePresenter {
+
+	public static final int EVENT_ADD_NEW_NOT_BOOK = 1;
+	public static final int EVENT_NOTIFY_RENAME_NOTE_BOOK = 2;
+	public static final int EVENT_DELETE_NOTE_BOOK = 3;
+	public static final int EVENT_RENAME_NOTE_BOOK = 4;
+	public static final int EVENT_DELETE_NOTE = 5;
+	
+	private INote note;
+	
+	private NoteBookDao noteBookDao;
+	
+	private NoteDao noteDao;
+	
+	private ActionExecutor<?> executor;
+	
+	private List<NoteBook> noteBookList = new ArrayList<NoteBook>();
+	
+	private List<List<Note>> noteList = new ArrayList<List<Note>>();
+	
+	private EventSubjecter eventSubjecter;
+	
+	// 刷选的条件
+	private String filter = "";
+	
+	public NotePresenter(INote note) {
+		this.note = note;
+		noteBookDao = XNoteApplication.getInstance().getDaoSession().getNoteBookDao();
+		noteDao = XNoteApplication.getInstance().getDaoSession().getNoteDao();
+		eventSubjecter = new EventSubjecter();
+		eventSubjecter.addEvent(EVENT_ADD_NEW_NOT_BOOK, addNewNoteBookEvent);
+		eventSubjecter.addEvent(EVENT_NOTIFY_RENAME_NOTE_BOOK, notifyRenameNoteBookEvent);
+		eventSubjecter.addEvent(EVENT_DELETE_NOTE_BOOK, deleteNoteBookEvent);
+		eventSubjecter.addEvent(EVENT_RENAME_NOTE_BOOK, renameNoteBookEvent);
+		eventSubjecter.addEvent(EVENT_DELETE_NOTE, deleteNoteEvent);
+		EventBus.getInstance().register(getClass(), eventSubjecter);
+	}
+	
+	public void refreshListView() {
+		executor = new ActionFactory<Void>()
+				.doInBackground(new BackgroundAction<Void>() {
+					@Override
+					public Void action() {
+						// TODO Auto-generated method stub
+						noteBookList.clear();
+						noteList.clear();
+						List<NoteBook> findNoteBookResult = noteBookDao.queryBuilder().list();
+						noteBookList.addAll(findNoteBookResult);
+						for(NoteBook noteBook : findNoteBookResult) {
+							if(CoreUtil.hasEmpty(filter)) {
+								List<Note> findNoteResult = noteDao.queryBuilder().where(NoteDao.Properties.BookId.eq(noteBook.getBookId())).orderDesc(NoteDao.Properties.Time).list();
+								noteList.add(findNoteResult);
+							} else {
+								List<Note> findNoteResult = noteDao.queryBuilder().where(NoteDao.Properties.BookId.eq(noteBook.getBookId()), NoteDao.Properties.Title.like("%" + filter + "%")).orderDesc(NoteDao.Properties.Time).list();
+								noteList.add(findNoteResult);
+							}
+						}
+						return null;
+					}
+				})
+				.doInUI(new UIAction<Void>() {
+					@Override
+					public void action(Void data) {
+						// TODO Auto-generated method stub
+						note.refreshData();
+					}
+				}).build();
+		executor.execute();
+	}
+	
+	public void filter(String filter) {
+		this.filter = filter;
+		refreshListView();
+	}
+	
+	public List<NoteBook> getNoteBookList() {
+		return noteBookList;
+	}
+	
+	public List<List<Note>> getNoteList() {
+		return noteList;
+	}
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		if(null != executor) {
+			executor.cancel();
+		}
+		EventBus.getInstance().unregister(getClass());
+	}
+	
+	private Event addNewNoteBookEvent = new Event() {
+		@Override
+		public void action(Bundle data) {
+			// TODO Auto-generated method stub
+			String name = data.getString("note_book_name");
+			// 判断是否存在相同名字的笔记本
+			Iterator<NoteBook> findResult = noteBookDao.queryBuilder().where(NoteBookDao.Properties.Name.eq(name)).list().iterator();
+			if(findResult.hasNext()) {
+				note.error("已存在" + name + "笔记本");
+				return;
+			}
+			NoteBook noteBook = new NoteBook(null, name);
+			long id = noteBookDao.insert(noteBook);
+			if(id != -1) {
+				noteBookList.add(noteBook);
+				noteList.add(new ArrayList<Note>());
+				note.refreshData();
+			}
+		}
+	};
+	
+	private Event notifyRenameNoteBookEvent = new Event() {
+		@Override
+		public void action(Bundle data) {
+			// TODO Auto-generated method stub
+			int position = data.getInt("position");
+			if(position < noteBookList.size()) {
+				String noteBookName = noteBookList.get(position).getName();
+				note.showRenameDialog(noteBookName, position);
+			}
+		}
+	};
+	
+	private Event renameNoteBookEvent = new Event() {
+		@Override
+		public void action(Bundle data) {
+			// TODO Auto-generated method stub
+			String name = data.getString("name");
+			int position = data.getInt("position");
+			if(position < noteBookList.size()) {
+				NoteBook renameNoteBook = noteBookList.get(position);
+				renameNoteBook.setName(name);
+				noteBookDao.update(renameNoteBook);
+				noteBookList.get(position).setName(name);
+				note.refreshData();
+			}
+		}
+	};
+	
+	private Event deleteNoteBookEvent = new Event() {
+		@Override
+		public void action(Bundle data) {
+			// TODO Auto-generated method stub
+			int position = data.getInt("position");
+			if(position < noteBookList.size()) {
+				List<Note> deleteNoteList = noteBookList.get(position).getNotes();
+				// 删除NoteBook
+				noteBookDao.delete(noteBookList.get(position));
+				noteBookList.remove(position);
+				// 删除对应的Note
+				for(Note deleteNote : deleteNoteList) {
+					noteDao.delete(deleteNote);
+				}
+				noteList.remove(position);
+				// 更新
+				note.refreshData();
+			}
+		}
+	};
+	
+	private Event deleteNoteEvent = new Event() {
+		@Override
+		public void action(Bundle data) {
+			// TODO Auto-generated method stub
+			int groupPosition = data.getInt("group_position");
+			int childPosition = data.getInt("child_position");
+			if(groupPosition < noteList.size() && childPosition < noteList.get(groupPosition).size()) {
+				noteDao.delete(noteList.get(groupPosition).get(childPosition));
+				noteList.get(groupPosition).remove(childPosition);
+				// 更新
+				note.refreshData();
+			}
+		}
+	};
+	
+}

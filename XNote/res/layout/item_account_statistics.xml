@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.johan.xnote" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="5dp"
+    android:orientation="horizontal" >
+    
+    <TextView 
+        android:id="@+id/item_account_detail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/account_bad_background"
+        android:textSize="14dp"
+        />
+    
+    <com.johan.xnote.app.view.NumberProgressBar
+	     android:id="@+id/item_account_detail_bar"
+	     android:layout_width="0dp"
+	     android:layout_height="wrap_content"
+	     android:layout_weight="1"
+	     custom:progress_unreached_color="#CCCCCC"
+	     custom:progress_reached_color="@color/account_bad_background"
+	     custom:progress_unreached_bar_height="1dp"
+	     custom:progress_reached_bar_height="2dp"
+	     custom:progress_text_size="14sp"
+	     custom:progress_text_color="@color/account_bad_background"
+	     custom:progress_text_offset="2dp"
+	     custom:progress_text_visibility="visible"
+	     custom:progress_max="100"
+	     custom:progress_current="60"
+	     android:layout_gravity="center_vertical"
+	     android:layout_marginLeft="10dp"
+	     android:layout_marginRight="10dp"
+     />
+    
+    <TextView 
+        android:id="@+id/item_account_detail_tip"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textColor="@color/account_bad_background"
+        android:textSize="14dp"
+        />
+
+</LinearLayout>

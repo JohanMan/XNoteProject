@@ -1,0 +1,91 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class RecordAccountActivity$$ViewInjector<T extends com.johan.xnote.app.activity.RecordAccountActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361916, "field 'inView' and method 'selectIn'");
+    target.inView = finder.castView(view, 2131361916, "field 'inView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectIn(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361913, "field 'moneyView'");
+    target.moneyView = finder.castView(view, 2131361913, "field 'moneyView'");
+    view = finder.findRequiredView(source, 2131361920, "field 'dateView' and method 'selectDate'");
+    target.dateView = finder.castView(view, 2131361920, "field 'dateView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectDate(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362054, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362054, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361924, "field 'shopView'");
+    target.shopView = finder.castView(view, 2131361924, "field 'shopView'");
+    view = finder.findRequiredView(source, 2131361922, "field 'timeView' and method 'selectTime'");
+    target.timeView = finder.castView(view, 2131361922, "field 'timeView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectTime(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361926, "field 'remarkView'");
+    target.remarkView = finder.castView(view, 2131361926, "field 'remarkView'");
+    view = finder.findRequiredView(source, 2131361918, "field 'typeView' and method 'selectType'");
+    target.typeView = finder.castView(view, 2131361918, "field 'typeView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectType(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361915, "field 'outView' and method 'selectOut'");
+    target.outView = finder.castView(view, 2131361915, "field 'outView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectOut(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361927, "method 'saveAccount'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.saveAccount(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.inView = null;
+    target.moneyView = null;
+    target.dateView = null;
+    target.toolbar = null;
+    target.shopView = null;
+    target.timeView = null;
+    target.remarkView = null;
+    target.typeView = null;
+    target.outView = null;
+  }
+}

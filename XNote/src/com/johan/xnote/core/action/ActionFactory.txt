@@ -1,0 +1,28 @@
+package com.johan.xnote.core.action;
+
+import com.johan.xnote.core.action.ActionExecutor.BackgroundAction;
+import com.johan.xnote.core.action.ActionExecutor.UIAction;
+
+public class ActionFactory<T> {
+
+	private ActionExecutor<T> executor;
+	
+	public ActionFactory() {
+		executor = new ActionExecutor<T>();
+	}
+	
+	public ActionFactory<T> doInBackground(BackgroundAction<T> backgroundAction) {
+		executor.setBackgroundAction(backgroundAction);
+		return this;
+	}
+	
+	public ActionFactory<T> doInUI(UIAction<T> uiAction) {
+		executor.setUiAction(uiAction);
+		return this;
+	}
+	
+	public ActionExecutor<T> build() {
+		return executor;
+	}
+	
+}

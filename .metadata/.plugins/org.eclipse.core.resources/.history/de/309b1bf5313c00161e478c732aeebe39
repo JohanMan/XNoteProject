@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/layout_title_center"/>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        >
+        
+        <EditText 
+            android:id="@+id/write_note_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:inputType="text"
+            android:textColor="@color/theme_text_color"
+            android:textSize="@dimen/text_size"
+            android:textColorHint="@color/theme_hint_color"
+            android:hint="请输入标题"
+            android:background="@drawable/corner_drak_gray_transparent_5"
+            android:singleLine="true"
+            />
+        
+        <Button 
+            android:id="@+id/write_note_but"
+            android:layout_width="60dp"
+            android:layout_height="38dp"
+            android:padding="8dp"
+            android:textColor="@color/theme_hint_color"
+            android:textSize="@dimen/text_size"
+            android:text="保存"
+            android:background="@drawable/corner_drak_gray_transparent_5"
+            android:layout_marginLeft="10dp"
+            />
+        
+    </LinearLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#DDDDDD"
+        />
+    
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+        
+        <!-- 编辑 -->
+	    <LinearLayout 
+	        android:id="@+id/write_note_editor_layout"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:orientation="vertical"
+	        >
+	    
+		    <com.johan.xnote.app.view.RichEditor 
+		        android:id="@+id/write_note_editor"
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="1"
+		        />
+		    
+		    <HorizontalScrollView
+		        android:id="@+id/write_note_action_layout"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="#cccccc"
+		        android:scrollbars="none"
+		        android:visibility="gone" >
+		
+		        <LinearLayout
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:orientation="horizontal" >
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_undo"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_undo"
+		                android:onClick="undo"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_redo"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_redo"
+		                android:onClick="redo"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_bold"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_bold"
+		                android:onClick="bold"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_italic"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_italic"
+		                android:onClick="italic"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_subscript"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_subscript"
+		                android:onClick="subscript"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_superscript"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_superscript"
+		                android:onClick="superscript"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_strikethrough"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_strikethrough"
+		                android:onClick="strikethrough"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_underline"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_underline"
+		                android:onClick="underline"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_heading1"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_h1"
+		                android:onClick="heading1"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		            
+		            <ImageButton
+		                android:id="@+id/write_note_action_heading2"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_h2"
+		                android:onClick="heading2"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_heading3"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_h3"
+		                android:onClick="heading3"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_heading4"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_h4"
+		                android:onClick="heading4"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_heading5"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_h5"
+		                android:onClick="heading5"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_heading6"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_h6"
+		                android:onClick="heading6"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_txt_color"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_txt_color"
+		                android:onClick="txtColor"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_bg_color"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_bg_color"
+		                android:onClick="bgColor"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_indent"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_indent"
+		                android:onClick="indent"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_outdent"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_outdent"
+		                android:onClick="outdent"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_align_left"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_justify_left"
+		                android:onClick="alignLeft"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_align_center"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_justify_center"
+		                android:onClick="alignCenter"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_align_right"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_justify_right"
+		                android:onClick="alignRight"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <!-- 暂时不想要这功能 -->
+		            <!-- <ImageButton
+		                android:id="@+id/write_note_action_blockquote"
+		                android:layout_width="48dp"
+		                android:layout_height="48dp"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_blockquote"
+		                android:onClick="blockquote"
+		                android:background="@drawable/writenote_action_button_background" />  -->
+		
+		            <ImageButton
+		                android:id="@+id/write_note_action_insert_image"
+		                android:layout_width="@dimen/write_note_action_button_size"
+		                android:layout_height="@dimen/write_note_action_button_size"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_insert_image"
+		                android:onClick="insertImage"
+		                android:scaleType="centerInside"
+		                android:background="@drawable/writenote_action_button_background" />
+		
+		            <!-- 暂时不想要这功能 -->
+		            <!-- <ImageButton
+		                android:id="@+id/write_note_action_insert_link"
+		                android:layout_width="48dp"
+		                android:layout_height="48dp"
+		                android:contentDescription="@null"
+		                android:src="@drawable/richeditor_insert_link"
+		                android:onClick="insertLink"
+		                android:background="@drawable/writenote_action_button_background" />  -->
+		            
+		        </LinearLayout>
+		        
+		    </HorizontalScrollView>
+	    
+	    </LinearLayout>
+	    
+	    <!-- 显示 -->
+	    <com.johan.xnote.app.view.RichShowor
+	        android:id="@+id/write_note_showor"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        />
+    
+    </FrameLayout>
+
+</LinearLayout>

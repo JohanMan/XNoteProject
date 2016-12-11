@@ -1,0 +1,80 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.RecordAccountActivity;
+import com.johan.xnote.app.adapter.AccountAdapter;
+import com.johan.xnote.app.api.IAccount;
+import com.johan.xnote.app.view.MonthView;
+import com.johan.xnote.core.presenter.AccountPresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class AccountFragment extends BaseFragment<AccountPresenter> implements IAccount {
+	
+	@InjectView(R.id.account_year)
+	public TextView yearView;
+	
+	@InjectView(R.id.account_last_year)
+	public ImageView lastYearView;
+	
+	@InjectView(R.id.account_next_year)
+	public ImageView nextYearView;
+	
+	@InjectView(R.id.account_month)
+	public MonthView monthView;
+	
+	@InjectView(R.id.account_list)
+	public ListView listView;
+	
+	private AccountAdapter adapter;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		presenter.init();
+		adapter = new AccountAdapter(getActivity(), presenter.getData());
+		listView.setAdapter(adapter);
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_account;
+	}
+
+	@Override
+	protected AccountPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new AccountPresenter(this);
+	}
+	
+	@OnClick(R.id.account_record)
+	public void recordAccount(View view) {
+		goActivity(RecordAccountActivity.class);
+	}
+
+	@Override
+	public void setYear(int year) {
+		// TODO Auto-generated method stub
+		yearView.setText(String.valueOf(year));
+	}
+
+	@Override
+	public void setMonth(int month) {
+		// TODO Auto-generated method stub
+		monthView.setMonth(month);
+	}
+
+	@Override
+	public void refreshListView() {
+		// TODO Auto-generated method stub
+		adapter.notifyDataSetChanged();
+	}
+
+}

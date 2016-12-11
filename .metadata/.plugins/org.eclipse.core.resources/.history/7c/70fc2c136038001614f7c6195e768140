@@ -1,0 +1,40 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.WriteStickyActivity;
+import com.johan.xnote.core.presenter.StickyPresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class StickyFragment extends BaseFragment<StickyPresenter> {
+	
+	@InjectView(R.id.sticky_list_view)
+	public ListView listView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_sitcky;
+	}
+
+	@Override
+	protected StickyPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new StickyPresenter();
+	}
+	
+	@OnClick(R.id.sticky_write)
+	public void write(View view) {
+		goActivity(WriteStickyActivity.class);
+	}
+
+}

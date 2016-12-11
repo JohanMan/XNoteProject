@@ -1,0 +1,31 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.Iterator;
+
+import com.johan.xnote.api.model.User;
+import com.johan.xnote.api.model.UserDao;
+import com.johan.xnote.app.api.IPersonalInfo;
+import com.johan.xnote.app.application.XNoteApplication;
+
+public class PersonalInfoPresenter extends BasePresenter {
+	
+	private IPersonalInfo personalInfo;
+	
+	private UserDao userDao;
+	
+	public PersonalInfoPresenter(IPersonalInfo personalInfo) {
+		this.personalInfo = personalInfo;
+		userDao = XNoteApplication.getInstance().getDaoSession().getUserDao();
+	}
+
+	public void init() {
+		Iterator<User> iterator = userDao.queryBuilder().list().iterator();
+		if(iterator.hasNext()) {
+			User user = iterator.next();
+			personalInfo.setPhone(user.getPhone());
+			personalInfo.setNickName(user.getNickName());
+			personalInfo.setEmail(user.getEmail());
+		}
+	}
+	
+}

@@ -1,0 +1,33 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.LockScreenPresenter;
+
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import butterknife.InjectView;
+
+public class LockScreenActivity extends BaseActivity<LockScreenPresenter> {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "…Ë÷√À¯∆¡", true);
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_lockscreen;
+	}
+
+	@Override
+	protected LockScreenPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new LockScreenPresenter();
+	}
+
+}

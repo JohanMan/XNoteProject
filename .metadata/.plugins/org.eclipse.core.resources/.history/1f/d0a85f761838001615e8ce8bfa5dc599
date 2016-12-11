@@ -1,0 +1,28 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.RecordAccountPresenter;
+
+import android.os.Bundle;
+
+public class RecordAccountActivity extends BaseActivity<RecordAccountPresenter> {
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_record_account;
+	}
+
+	@Override
+	protected RecordAccountPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new RecordAccountPresenter();
+	}
+
+}

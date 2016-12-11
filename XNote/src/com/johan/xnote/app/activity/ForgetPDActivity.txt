@@ -1,0 +1,97 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.api.IForgetPD;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.core.presenter.ForgetPDPresenter;
+
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import cn.smssdk.SMSSDK;
+
+public class ForgetPDActivity extends BaseActivity<ForgetPDPresenter> implements IForgetPD {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectView(R.id.forgetpd_phone)
+	public EditText phoneView;
+	
+	@InjectView(R.id.forgetpd_code)
+	public EditText codeView;
+	
+	@InjectView(R.id.forgetpd_new_pd)
+	public EditText newPdView;
+
+	@InjectView(R.id.forgetpd_code_but)
+	public Button getCodeButton;
+	
+	@Override
+	protected void preContentView(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		//短信验证初始化
+		SMSSDK.initSDK(getApplicationContext(), "13e5ade8cf920", "24fddbd712169aea05ef16845fe9eb47");
+	}
+	
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "找回密码", true);
+		phoneView.setText(presenter.getPhone());
+	}
+	
+	@OnClick(R.id.forgetpd_code_but)
+	public void getCode(View view) {
+		presenter.getCode(phoneView.getText().toString());
+	}
+	
+	@OnClick(R.id.forgetpd_but)
+	public void updatePassword(View view) {
+		presenter.updatePassword(phoneView.getText().toString(), codeView.getText().toString(), newPdView.getText().toString());
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_forgetpd;
+	}
+
+	@Override
+	protected ForgetPDPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new ForgetPDPresenter(this);
+	}
+
+	@Override
+	public void operateFail(String msg) {
+		// TODO Auto-generated method stub
+		AppUtil.toast(this, msg);
+	}
+
+	@Override
+	public void getCodeSuccess() {
+		// TODO Auto-generated method stub
+		AppUtil.toast(this, "获取验证码成功，请注意查收~");
+		codeView.requestFocus();
+	}
+
+	@Override
+	public void refreshGetCodeButton(String text, boolean state) {
+		// TODO Auto-generated method stub
+		getCodeButton.setText(text);
+		getCodeButton.setEnabled(state);
+	}
+
+	@Override
+	public void updatePasswordSuccess() {
+		// TODO Auto-generated method stub
+		AppUtil.toast(this, "密码修改成功");
+		finish();
+	}
+
+}

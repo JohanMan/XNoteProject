@@ -1,0 +1,9 @@
+package com.johan.xnote.app.api;
+
+public interface IMe {
+
+	public void updateLockScreenState(boolean hasLockPassword);
+	
+	public void goSetLockscreen();
+	
+}

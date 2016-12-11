@@ -1,0 +1,125 @@
+package com.johan.xnote.app.service;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Account;
+import com.johan.xnote.api.model.AccountDao;
+import com.johan.xnote.app.activity.HomeActivity;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.util.FileUtil;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+
+public class XNoteService extends Service {
+	
+	private ExecutorService executor;
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+		executor = Executors.newCachedThreadPool();
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub
+		final int year = intent.getIntExtra("year", 0);
+		final int month = intent.getIntExtra("month", 0);
+		if(year == 0 || month == 0) {
+			return super.onStartCommand(intent, flags, startId);
+		}
+		executor.execute(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				export(year, month);
+			}
+		});
+		return super.onStartCommand(intent, flags, startId);
+	}
+	
+	private void export(int year, int month) {
+		String accountPath = FileUtil.getSDPath() + "/" + FileUtil.ACCOUNT_PATH;
+		FileUtil.createDir(accountPath);
+		String accountFileName = accountPath + "/" + year + "年" + month + "月账单.txt";
+		File file = new File(accountFileName);
+		if(file.exists() && file.isFile()) {
+			file.delete();
+		}
+		OutputStreamWriter outputStreamWriter = null;
+		try {
+			outputStreamWriter = new OutputStreamWriter(new FileOutputStream(file), Charset.forName("gbk"));
+			outputStreamWriter.write(year + "年" + month + "月账单\r\n");
+			AccountDao accountDao = XNoteApplication.getInstance().getDaoSession().getAccountDao();
+			List<Account> accountList = accountDao.queryBuilder().where(AccountDao.Properties.Year.eq(year), AccountDao.Properties.Month.eq(month)).orderAsc(AccountDao.Properties.Day, AccountDao.Properties.Time).list();
+			float inMoney = 0, outMoney = 0;
+			for(Account account : accountList) {
+				StringBuffer buffer = new StringBuffer();
+				boolean isOut = account.getAccountType().getIsOut();
+				if(isOut) {
+					outMoney += account.getMoney();
+				} else {
+					inMoney += account.getMoney();
+				}
+				String tip = isOut ? "支出金额：" : "收入金额：";
+				buffer.append(account.getYear()).append("年").append(account.getMonth()).append("月").append(account.getDay()).append("日").append("    ").append(account.getTime()).append("\r\n")
+					  .append(tip).append(account.getMoney() + "元").append("\r\n")
+					  .append("店名：").append(account.getShop()).append("\r\n")
+					  .append("备注：").append(account.getRemark()).append("\r\n\r\n");
+				outputStreamWriter.write(buffer.toString());
+			}
+			outputStreamWriter.write("共支出" + outMoney + "元    收入" + inMoney + "元");
+		} catch (FileNotFoundException e) {
+			sendNotification(year + "年" + month + "月账单导出出错，请检查SD卡");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			sendNotification(year + "年" + month + "月账单导出出错，请检查SD卡");
+			e.printStackTrace();
+		} finally {
+			if(outputStreamWriter != null) {
+				try {
+					outputStreamWriter.flush();
+					outputStreamWriter.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			sendNotification(year + "年" + month + "月账单导出成功，请查看SD卡/X账本");
+		}
+	}
+	
+	private void sendNotification(String content) {
+		NotificationManager manager = (NotificationManager) getSystemService(android.content.Context.NOTIFICATION_SERVICE);
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("page", 1);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+		builder.setContentTitle("XNote提醒您").setContentText(content).setSmallIcon(R.drawable.app_icon).setDefaults(Notification.DEFAULT_ALL).setContentIntent(pendingIntent).setAutoCancel(true);
+		manager.notify(1, builder.build());
+	}
+
+}

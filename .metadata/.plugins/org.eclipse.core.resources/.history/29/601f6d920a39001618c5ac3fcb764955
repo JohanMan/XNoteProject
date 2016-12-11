@@ -1,0 +1,27 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.core.presenter.MePresenter;
+
+import android.os.Bundle;
+
+public class MeFragment extends BaseFragment<MePresenter> {
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected MePresenter getPresent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

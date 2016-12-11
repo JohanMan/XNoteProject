@@ -1,0 +1,15 @@
+package com.johan.xnote.app.api;
+
+public interface IWriteNote {
+
+	public void setActionBar(String title);
+	
+	public void setBody(String body);
+	
+	public void setTitle(String title);
+	
+	public void error(String msg);
+	
+	public void saveNoteSuccess();
+	
+}

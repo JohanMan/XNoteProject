@@ -1,0 +1,48 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.fragment;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class MeFragment$$ViewInjector<T extends com.johan.xnote.app.fragment.MeFragment> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131362018, "field 'versionInfoView'");
+    target.versionInfoView = finder.castView(view, 2131362018, "field 'versionInfoView'");
+    view = finder.findRequiredView(source, 2131362016, "field 'lockscreenStateView'");
+    target.lockscreenStateView = finder.castView(view, 2131362016, "field 'lockscreenStateView'");
+    view = finder.findRequiredView(source, 2131362013, "method 'goPersonalInfo'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.goPersonalInfo(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362015, "method 'goLockscreen'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.goLockscreen(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362014, "method 'goModifyPassword'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.goModifyPassword(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.versionInfoView = null;
+    target.lockscreenStateView = null;
+  }
+}

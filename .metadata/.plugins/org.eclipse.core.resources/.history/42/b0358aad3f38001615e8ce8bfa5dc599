@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+            
+            <ImageView 
+                android:id="@+id/account_last_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/last"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="30dp"
+     			android:paddingTop="2dp"
+     			android:paddingBottom="2dp"
+                />
+            
+            <ImageView 
+                android:id="@+id/account_next_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="30dp"
+                android:paddingRight="10dp"
+                android:paddingTop="2dp"
+     			android:paddingBottom="2dp"
+                />
+            
+            <TextView 
+                android:id="@+id/account_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_hint_color"
+                android:textSize="@dimen/title_size"
+                android:text="2016"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/account_next_year"
+                android:layout_toRightOf="@+id/account_last_year"
+                />
+            
+        </RelativeLayout>
+	    
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="#DDDDDD"
+	        />
+	    
+	    <com.johan.xnote.app.view.MonthView 
+	        android:id="@+id/account_month"
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        ></com.johan.xnote.app.view.MonthView>
+	    
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="#DDDDDD"
+	        />
+	    
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="8dp"
+	        android:paddingBottom="8dp"
+	        android:orientation="horizontal"
+	        >
+	        
+	        <RelativeLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            >
+	            
+	            <TextView 
+	                android:id="@+id/account_out_money_tip"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:textColor="@color/theme_hint_color"
+	                android:textSize="12sp"
+	                android:text="支出"
+	                android:layout_centerHorizontal="true"
+	                />
+	            
+	            <TextView 
+	                android:id="@+id/account_out_money"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_below="@+id/account_out_money_tip"
+	                android:textColor="@color/account_bad_background"
+	                android:textSize="16sp"
+	                android:layout_centerHorizontal="true"
+	                />
+	            
+	        </RelativeLayout>
+	        
+	        <View 
+	            android:layout_width="0.5dp"
+	            android:layout_height="match_parent"
+	            android:background="#DDDDDD"
+	            />
+	        
+	        <RelativeLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            >
+	            
+	            <TextView 
+	                android:id="@+id/account_in_money_tip"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:textColor="@color/theme_hint_color"
+	                android:textSize="12sp"
+	                android:text="收入"
+	                android:layout_centerHorizontal="true"
+	                />
+	            
+	            <TextView 
+	                android:id="@+id/account_in_money"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_below="@+id/account_in_money_tip"
+	                android:textColor="@color/account_good_background"
+	                android:textSize="16sp"
+	                android:layout_centerHorizontal="true"
+	                />
+	            
+	        </RelativeLayout>
+	        
+	        <View 
+	            android:layout_width="0.5dp"
+	            android:layout_height="match_parent"
+	            android:background="#DDDDDD"
+	            />
+	        
+	        <RelativeLayout 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            >
+	            
+	            <TextView 
+	                android:id="@+id/account_resume_money_tip"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:textColor="@color/theme_hint_color"
+	                android:textSize="12sp"
+	                android:text="盈亏"
+	                android:layout_centerHorizontal="true"
+	                />
+	            
+	            <TextView 
+	                android:id="@+id/account_resume_money"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_below="@+id/account_resume_money_tip"
+	                android:textColor="@color/theme_text_color"
+	                android:textSize="16sp"
+	                android:layout_centerHorizontal="true"
+	                />
+	            
+	        </RelativeLayout>
+	        
+	    </LinearLayout>
+	    
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="#DDDDDD"
+	        />
+	    
+	    <ListView 
+	        android:id="@+id/account_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:divider="#DDDDDD"
+	        android:dividerHeight="0.5dp"
+	        ></ListView>
+    
+    </LinearLayout>
+    
+    <ImageView 
+        android:id="@+id/account_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/write"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+    
+    <ImageView 
+        android:id="@+id/account_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/delete"
+        android:layout_toLeftOf="@+id/account_record"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+    
+    <ImageView 
+        android:id="@+id/account_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cancel"
+        android:layout_toLeftOf="@+id/account_delete"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+
+</RelativeLayout>

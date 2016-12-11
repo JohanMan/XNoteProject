@@ -1,0 +1,65 @@
+package com.johan.xnote.app.dialog;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.util.AppUtil.ScreenSize;
+import com.johan.xnote.core.event.EventBus;
+import com.johan.xnote.core.presenter.NotePresenter;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.MeasureSpec;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class NoteBookOperationDialog extends PopupWindow {
+	
+	private ScreenSize screenSize;
+	
+	private int popupWidth, popupHeight;
+	
+	private int position;
+
+	public NoteBookOperationDialog(Context context, int position) {
+		this.position = position;
+		setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+		setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+		View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_note_book_operation, null);
+		ButterKnife.inject(this, contentView);
+		contentView.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+		popupWidth = contentView.getMeasuredWidth();
+		popupHeight = contentView.getMeasuredHeight();
+		setContentView(contentView);
+		setOutsideTouchable(true);
+		setFocusable(true);
+		screenSize = AppUtil.getScreenSize(context);
+	}
+	
+	public void show(View parent) {
+		int[] location = new int[2];
+		parent.getLocationOnScreen(location);
+		showAtLocation(parent, Gravity.NO_GRAVITY, (location[0] + screenSize.width / 2) - popupWidth / 2, location[1] - popupHeight);
+	}
+	
+	@OnClick(R.id.note_book_operation_rename)
+	public void rename(View view) {
+		Bundle data = new Bundle();
+		data.putInt("position", position);
+		EventBus.getInstance().update(NotePresenter.class, NotePresenter.EVENT_NOTIFY_RENAME_NOTE_BOOK, data);
+		dismiss();
+	}
+	
+	@OnClick(R.id.note_book_operation_delete)
+	public void delete(View view) {
+		Bundle data = new Bundle();
+		data.putInt("position", position);
+		EventBus.getInstance().update(NotePresenter.class, NotePresenter.EVENT_DELETE_NOTE_BOOK, data);
+		dismiss();
+	}
+	
+}

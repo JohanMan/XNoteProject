@@ -1,0 +1,16 @@
+package com.johan.xnote.app.api;
+
+public interface IFlash {
+	
+	// µÇÂ¼Ò³Ãæ
+	public static final int LOGIN = 1;
+	
+	// ËøÆÁÒ³Ãæ
+	public static final int LOCK = 2;
+	
+	// Ö÷Ò³
+	public static final int HOME = 3;
+
+	public void go(int where);
+	
+}

@@ -1,0 +1,36 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.RecordAccountActivity;
+import com.johan.xnote.core.presenter.AccountPresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import butterknife.OnClick;
+
+public class AccountFragment extends BaseFragment<AccountPresenter> {
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_account;
+	}
+
+	@Override
+	protected AccountPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new AccountPresenter();
+	}
+	
+	@OnClick(R.id.account_record)
+	public void recordAccount(View view) {
+		goActivity(RecordAccountActivity.class);
+	}
+
+}

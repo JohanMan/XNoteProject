@@ -1,0 +1,1238 @@
+android.support.annotation.AnimRes
+android.support.annotation.AnimatorRes
+android.support.annotation.AnyRes
+android.support.annotation.ArrayRes
+android.support.annotation.AttrRes
+android.support.annotation.BoolRes
+android.support.annotation.ColorRes
+android.support.annotation.DimenRes
+android.support.annotation.DrawableRes
+android.support.annotation.FractionRes
+android.support.annotation.IdRes
+android.support.annotation.IntDef
+android.support.annotation.IntegerRes
+android.support.annotation.InterpolatorRes
+android.support.annotation.LayoutRes
+android.support.annotation.MenuRes
+android.support.annotation.NonNull
+android.support.annotation.Nullable
+android.support.annotation.PluralsRes
+android.support.annotation.RawRes
+android.support.annotation.StringDef
+android.support.annotation.StringRes
+android.support.annotation.StyleRes
+android.support.annotation.StyleableRes
+android.support.annotation.XmlRes
+android.support.v7.app.ActionBar:
+    public static final int NAVIGATION_MODE_STANDARD
+    public static final int NAVIGATION_MODE_LIST
+    public static final int NAVIGATION_MODE_TABS
+    public static final int DISPLAY_USE_LOGO
+    public static final int DISPLAY_SHOW_HOME
+    public static final int DISPLAY_HOME_AS_UP
+    public static final int DISPLAY_SHOW_TITLE
+    public static final int DISPLAY_SHOW_CUSTOM
+    public abstract void setCustomView(android.view.View)
+    public abstract void setCustomView(android.view.View,android.support.v7.app.ActionBar$LayoutParams)
+    public abstract void setCustomView(int)
+    public abstract void setIcon(int)
+    public abstract void setIcon(android.graphics.drawable.Drawable)
+    public abstract void setLogo(int)
+    public abstract void setLogo(android.graphics.drawable.Drawable)
+    public abstract void setListNavigationCallbacks(android.widget.SpinnerAdapter,android.support.v7.app.ActionBar$OnNavigationListener)
+    public abstract void setSelectedNavigationItem(int)
+    public abstract int getSelectedNavigationIndex()
+    public abstract int getNavigationItemCount()
+    public abstract void setTitle(int)
+    public abstract void setSubtitle(java.lang.CharSequence)
+    public abstract void setSubtitle(int)
+    public abstract void setDisplayOptions(int)
+    public abstract void setDisplayOptions(int,int)
+    public abstract void setDisplayUseLogoEnabled(boolean)
+    public abstract void setDisplayShowTitleEnabled(boolean)
+    public abstract void setDisplayShowCustomEnabled(boolean)
+    public abstract void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    526:526:public void setStackedBackgroundDrawable(android.graphics.drawable.Drawable)
+    536:536:public void setSplitBackgroundDrawable(android.graphics.drawable.Drawable)
+    public abstract android.view.View getCustomView()
+    public abstract java.lang.CharSequence getTitle()
+    public abstract java.lang.CharSequence getSubtitle()
+    public abstract int getNavigationMode()
+    public abstract void setNavigationMode(int)
+    public abstract android.support.v7.app.ActionBar$Tab newTab()
+    public abstract void addTab(android.support.v7.app.ActionBar$Tab)
+    public abstract void addTab(android.support.v7.app.ActionBar$Tab,boolean)
+    public abstract void addTab(android.support.v7.app.ActionBar$Tab,int)
+    public abstract void addTab(android.support.v7.app.ActionBar$Tab,int,boolean)
+    public abstract void removeTab(android.support.v7.app.ActionBar$Tab)
+    public abstract void removeTabAt(int)
+    public abstract void removeAllTabs()
+    public abstract void selectTab(android.support.v7.app.ActionBar$Tab)
+    public abstract android.support.v7.app.ActionBar$Tab getSelectedTab()
+    public abstract android.support.v7.app.ActionBar$Tab getTabAt(int)
+    public abstract int getTabCount()
+    public abstract int getHeight()
+    public abstract void show()
+    public abstract void hide()
+    public abstract boolean isShowing()
+    public abstract void addOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+    public abstract void removeOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+    857:857:public boolean isTitleTruncated()
+    877:877:public void setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+    917:917:public void setHomeActionContentDescription(java.lang.CharSequence)
+    937:937:public void setHomeActionContentDescription(int)
+    967:967:public boolean isHideOnContentScrollEnabled()
+    980:980:public int getHideOffset()
+    993:997:public void setHideOffset(int)
+    1023:1023:public float getElevation()
+    1049:1049:public boolean openOptionsMenu()
+    1059:1059:public boolean onMenuKeyEvent(android.view.KeyEvent)
+android.support.v7.app.ActionBar$DisplayOptions
+android.support.v7.app.ActionBar$LayoutParams:
+    1340:1342:public ActionBar$LayoutParams(int,int,int)
+    1345:1346:public ActionBar$LayoutParams(int)
+android.support.v7.app.ActionBar$NavigationMode
+android.support.v7.app.ActionBar$OnNavigationListener
+android.support.v7.app.ActionBar$Tab:
+    public static final int INVALID_POSITION
+    public abstract int getPosition()
+    public abstract android.support.v7.app.ActionBar$Tab setIcon(android.graphics.drawable.Drawable)
+    public abstract android.support.v7.app.ActionBar$Tab setIcon(int)
+    public abstract android.support.v7.app.ActionBar$Tab setText(java.lang.CharSequence)
+    public abstract android.support.v7.app.ActionBar$Tab setText(int)
+    public abstract android.support.v7.app.ActionBar$Tab setCustomView(android.view.View)
+    public abstract android.support.v7.app.ActionBar$Tab setCustomView(int)
+    public abstract android.support.v7.app.ActionBar$Tab setTag(java.lang.Object)
+    public abstract java.lang.Object getTag()
+    public abstract android.support.v7.app.ActionBar$Tab setTabListener(android.support.v7.app.ActionBar$TabListener)
+    public abstract android.support.v7.app.ActionBar$Tab setContentDescription(int)
+    public abstract android.support.v7.app.ActionBar$Tab setContentDescription(java.lang.CharSequence)
+android.support.v7.app.ActionBar$TabListener
+android.support.v7.app.ActionBarActivity
+android.support.v7.app.ActionBarDrawerToggle
+android.support.v7.app.ActionBarDrawerToggle$1
+android.support.v7.app.ActionBarDrawerToggle$Delegate
+android.support.v7.app.ActionBarDrawerToggle$DelegateProvider
+android.support.v7.app.ActionBarDrawerToggle$DrawerArrowDrawableToggle
+android.support.v7.app.ActionBarDrawerToggle$DrawerToggle
+android.support.v7.app.ActionBarDrawerToggle$DummyDelegate
+android.support.v7.app.ActionBarDrawerToggle$HoneycombDelegate
+android.support.v7.app.ActionBarDrawerToggle$JellybeanMr2Delegate
+android.support.v7.app.ActionBarDrawerToggle$ToolbarCompatDelegate
+android.support.v7.app.ActionBarDrawerToggleHoneycomb
+android.support.v7.app.ActionBarDrawerToggleHoneycomb$SetIndicatorInfo
+android.support.v7.app.AlertController
+android.support.v7.app.AlertController$1
+android.support.v7.app.AlertController$AlertParams
+android.support.v7.app.AlertController$AlertParams$1
+android.support.v7.app.AlertController$AlertParams$2
+android.support.v7.app.AlertController$AlertParams$3
+android.support.v7.app.AlertController$AlertParams$4
+android.support.v7.app.AlertController$AlertParams$OnPrepareListViewListener
+android.support.v7.app.AlertController$ButtonHandler
+android.support.v7.app.AlertController$CheckedItemAdapter
+android.support.v7.app.AlertDialog
+android.support.v7.app.AlertDialog$Builder
+android.support.v7.app.AppCompatActivity:
+    183:183:public boolean supportRequestWindowFeature(int)
+    217:217:public android.support.v7.view.ActionMode startSupportActionMode(android.support.v7.view.ActionMode$Callback)
+    225:225:public void setSupportProgressBarVisibility(boolean)
+    232:232:public void setSupportProgressBarIndeterminateVisibility(boolean)
+    239:239:public void setSupportProgressBarIndeterminate(boolean)
+    246:246:public void setSupportProgress(int)
+    406:406:public android.support.v7.app.ActionBarDrawerToggle$Delegate getDrawerToggleDelegate()
+android.support.v7.app.AppCompatDelegate:
+    static final java.lang.String TAG
+    89:92:public static android.support.v7.app.AppCompatDelegate create(android.app.Dialog,android.support.v7.app.AppCompatCallback)
+    public abstract android.support.v7.app.ActionBarDrawerToggle$Delegate getDrawerToggleDelegate()
+    public abstract boolean requestWindowFeature(int)
+    public abstract android.support.v7.view.ActionMode startSupportActionMode(android.support.v7.view.ActionMode$Callback)
+    public abstract android.view.View createView(android.view.View,java.lang.String,android.content.Context,android.util.AttributeSet)
+android.support.v7.app.AppCompatDelegateImplBase:
+    142:142:public final android.support.v7.app.ActionBarDrawerToggle$Delegate getDrawerToggleDelegate()
+    abstract android.support.v7.view.ActionMode startSupportActionModeFromWindow(android.support.v7.view.ActionMode$Callback)
+android.support.v7.app.AppCompatDelegateImplBase$1
+android.support.v7.app.AppCompatDelegateImplBase$ActionBarDrawableToggleImpl
+android.support.v7.app.AppCompatDelegateImplV7:
+    460:487:public boolean requestWindowFeature(int)
+    1456:1460:private void throwFeatureRequestIfSubDecorInstalled()
+    1463:1463:android.view.ViewGroup getSubDecor()
+android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState:
+    boolean wasLastOpen
+    android.os.Bundle frozenMenuState
+    1637:1641:public void clearMenuPresenters()
+    1703:1712:android.os.Parcelable onSaveInstanceState()
+    1716:1723:void onRestoreInstanceState(android.os.Parcelable)
+    1726:1730:void applyFrozenState()
+android.support.v7.app.AppCompatDelegateImplV7$PanelFeatureState$SavedState:
+    1732:1732:synthetic AppCompatDelegateImplV7$PanelFeatureState$SavedState(android.support.v7.app.AppCompatDelegateImplV7$1)
+android.support.v7.app.AppCompatDialog
+android.support.v7.app.DrawerArrowDrawable
+android.support.v7.appcompat.R:
+    9:9:public R()
+android.support.v7.appcompat.R$anim
+android.support.v7.appcompat.R$attr:
+    22:22:public R$attr()
+android.support.v7.appcompat.R$bool:
+    223:223:public R$bool()
+android.support.v7.appcompat.R$color:
+    232:232:public R$color()
+android.support.v7.appcompat.R$dimen:
+    296:296:public R$dimen()
+android.support.v7.appcompat.R$drawable:
+    364:364:public R$drawable()
+android.support.v7.appcompat.R$id:
+    425:425:public R$id()
+android.support.v7.appcompat.R$integer:
+    506:506:public R$integer()
+android.support.v7.appcompat.R$layout:
+    511:511:public R$layout()
+android.support.v7.appcompat.R$string:
+    542:542:public R$string()
+android.support.v7.appcompat.R$style:
+    561:561:public R$style()
+android.support.v7.appcompat.R$styleable:
+    846:846:public R$styleable()
+android.support.v7.graphics.drawable.DrawableWrapper:
+    211:211:public android.graphics.drawable.Drawable getWrappedDrawable()
+android.support.v7.internal.VersionUtils:
+    10:10:private VersionUtils()
+android.support.v7.internal.app.NavItemSelectedListener
+android.support.v7.internal.app.ToolbarActionBar:
+    94:95:public void setCustomView(android.view.View)
+    99:101:public void setCustomView(android.view.View,android.support.v7.app.ActionBar$LayoutParams)
+    105:107:public void setCustomView(int)
+    111:112:public void setIcon(int)
+    116:117:public void setIcon(android.graphics.drawable.Drawable)
+    121:122:public void setLogo(int)
+    126:127:public void setLogo(android.graphics.drawable.Drawable)
+    132:132:public void setStackedBackgroundDrawable(android.graphics.drawable.Drawable)
+    137:137:public void setSplitBackgroundDrawable(android.graphics.drawable.Drawable)
+    151:151:public float getElevation()
+    161:161:public boolean isTitleTruncated()
+    166:167:public void setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+    176:177:public void setHomeActionContentDescription(java.lang.CharSequence)
+    186:187:public void setHomeActionContentDescription(int)
+    201:202:public void setListNavigationCallbacks(android.widget.SpinnerAdapter,android.support.v7.app.ActionBar$OnNavigationListener)
+    206:214:public void setSelectedNavigationItem(int)
+    218:218:public int getSelectedNavigationIndex()
+    223:223:public int getNavigationItemCount()
+    233:234:public void setTitle(int)
+    243:244:public void setSubtitle(java.lang.CharSequence)
+    248:249:public void setSubtitle(int)
+    253:254:public void setDisplayOptions(int)
+    264:265:public void setDisplayUseLogoEnabled(boolean)
+    279:280:public void setDisplayShowTitleEnabled(boolean)
+    284:285:public void setDisplayShowCustomEnabled(boolean)
+    289:290:public void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    294:294:public android.view.View getCustomView()
+    299:299:public java.lang.CharSequence getTitle()
+    304:304:public java.lang.CharSequence getSubtitle()
+    309:309:public int getNavigationMode()
+    314:318:public void setNavigationMode(int)
+    327:327:public android.support.v7.app.ActionBar$Tab newTab()
+    333:333:public void addTab(android.support.v7.app.ActionBar$Tab)
+    339:339:public void addTab(android.support.v7.app.ActionBar$Tab,boolean)
+    345:345:public void addTab(android.support.v7.app.ActionBar$Tab,int)
+    351:351:public void addTab(android.support.v7.app.ActionBar$Tab,int,boolean)
+    357:357:public void removeTab(android.support.v7.app.ActionBar$Tab)
+    363:363:public void removeTabAt(int)
+    369:369:public void removeAllTabs()
+    375:375:public void selectTab(android.support.v7.app.ActionBar$Tab)
+    381:381:public android.support.v7.app.ActionBar$Tab getSelectedTab()
+    387:387:public android.support.v7.app.ActionBar$Tab getTabAt(int)
+    393:393:public int getTabCount()
+    398:398:public int getHeight()
+    405:406:public void show()
+    412:413:public void hide()
+    417:417:public boolean isShowing()
+    422:422:public boolean openOptionsMenu()
+    462:465:public boolean onMenuKeyEvent(android.view.KeyEvent)
+    475:476:public void addOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+    479:480:public void removeOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+android.support.v7.internal.app.WindowDecorActionBar:
+    private static final java.lang.String TAG
+    private android.support.v7.internal.app.WindowDecorActionBar$TabImpl mSelectedTab
+    private static final int CONTEXT_DISPLAY_NORMAL
+    private static final int CONTEXT_DISPLAY_SPLIT
+    private static final int INVALID_POSITION
+    private android.support.v7.internal.widget.TintManager mTintManager
+    191:194:public WindowDecorActionBar(android.view.View)
+    263:263:public float getElevation()
+    296:317:private void ensureTabsExist()
+    346:347:public void addOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+    350:351:public void removeOnMenuVisibilityListener(android.support.v7.app.ActionBar$OnMenuVisibilityListener)
+    367:369:public void setCustomView(int)
+    373:374:public void setDisplayUseLogoEnabled(boolean)
+    388:389:public void setDisplayShowTitleEnabled(boolean)
+    393:394:public void setDisplayShowCustomEnabled(boolean)
+    403:404:public void setTitle(int)
+    408:409:public void setSubtitle(int)
+    412:423:public void setSelectedNavigationItem(int)
+    426:427:public void removeAllTabs()
+    430:438:private void cleanupTabs()
+    450:451:public void setSubtitle(java.lang.CharSequence)
+    454:458:public void setDisplayOptions(int)
+    469:470:public void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    473:474:public void setStackedBackgroundDrawable(android.graphics.drawable.Drawable)
+    477:480:public void setSplitBackgroundDrawable(android.graphics.drawable.Drawable)
+    483:483:public android.view.View getCustomView()
+    487:487:public java.lang.CharSequence getTitle()
+    491:491:public java.lang.CharSequence getSubtitle()
+    531:545:private void configureTab(android.support.v7.app.ActionBar$Tab,int)
+    549:550:public void addTab(android.support.v7.app.ActionBar$Tab)
+    554:555:public void addTab(android.support.v7.app.ActionBar$Tab,int)
+    559:565:public void addTab(android.support.v7.app.ActionBar$Tab,boolean)
+    569:575:public void addTab(android.support.v7.app.ActionBar$Tab,int,boolean)
+    579:579:public android.support.v7.app.ActionBar$Tab newTab()
+    584:585:public void removeTab(android.support.v7.app.ActionBar$Tab)
+    589:610:public void removeTabAt(int)
+    614:647:public void selectTab(android.support.v7.app.ActionBar$Tab)
+    651:651:public android.support.v7.app.ActionBar$Tab getSelectedTab()
+    656:656:public int getHeight()
+    665:669:public void show()
+    690:694:public void hide()
+    725:725:public boolean isHideOnContentScrollEnabled()
+    730:730:public int getHideOffset()
+    735:740:public void setHideOffset(int)
+    870:872:public boolean isShowing()
+    905:905:public boolean isTitleTruncated()
+    910:911:public void setHomeAsUpIndicator(android.graphics.drawable.Drawable)
+    920:921:public void setHomeActionContentDescription(java.lang.CharSequence)
+    925:926:public void setHomeActionContentDescription(int)
+    1249:1250:public void setCustomView(android.view.View)
+    1254:1256:public void setCustomView(android.view.View,android.support.v7.app.ActionBar$LayoutParams)
+    1260:1261:public void setListNavigationCallbacks(android.widget.SpinnerAdapter,android.support.v7.app.ActionBar$OnNavigationListener)
+    1265:1271:public int getSelectedNavigationIndex()
+    1277:1283:public int getNavigationItemCount()
+    1289:1289:public int getTabCount()
+    1294:1320:public void setNavigationMode(int)
+    1324:1324:public android.support.v7.app.ActionBar$Tab getTabAt(int)
+    1330:1331:public void setIcon(int)
+    1335:1336:public void setIcon(android.graphics.drawable.Drawable)
+    1339:1339:public boolean hasIcon()
+    1344:1345:public void setLogo(int)
+    1349:1350:public void setLogo(android.graphics.drawable.Drawable)
+    1353:1353:public boolean hasLogo()
+    1363:1366:android.support.v7.internal.widget.TintManager getTintManager()
+    75:75:static synthetic android.support.v7.internal.widget.ScrollingTabContainerView access$1300(android.support.v7.internal.app.WindowDecorActionBar)
+android.support.v7.internal.app.WindowDecorActionBar$ActionModeImpl:
+    1095:1095:public void onCloseMenu(android.support.v7.internal.view.menu.MenuBuilder,boolean)
+    1098:1107:public boolean onSubMenuSelected(android.support.v7.internal.view.menu.SubMenuBuilder)
+    1111:1111:public void onCloseSubMenu(android.support.v7.internal.view.menu.SubMenuBuilder)
+android.support.v7.internal.app.WindowDecorActionBar$TabImpl
+android.support.v7.internal.transition.ActionBarTransition:
+    private static final boolean TRANSITIONS_ENABLED
+    private static final int TRANSITION_DURATION
+    25:25:public ActionBarTransition()
+android.support.v7.internal.view.StandaloneActionMode:
+    141:141:public void onCloseMenu(android.support.v7.internal.view.menu.MenuBuilder,boolean)
+    144:149:public boolean onSubMenuSelected(android.support.v7.internal.view.menu.SubMenuBuilder)
+    153:153:public void onCloseSubMenu(android.support.v7.internal.view.menu.SubMenuBuilder)
+    161:161:public boolean isUiFocusable()
+android.support.v7.internal.view.SupportMenuInflater:
+    private static final java.lang.String LOG_TAG
+    private static final java.lang.String XML_MENU
+    private static final java.lang.String XML_GROUP
+    private static final java.lang.String XML_ITEM
+    private static final int NO_ID
+android.support.v7.internal.view.SupportMenuInflater$MenuState:
+    private static final int defaultGroupId
+    private static final int defaultItemId
+    private static final int defaultItemCategory
+    private static final int defaultItemOrder
+    private static final int defaultItemCheckable
+    private static final boolean defaultItemChecked
+    private static final boolean defaultItemVisible
+    private static final boolean defaultItemEnabled
+android.support.v7.internal.view.menu.ActionMenuItem:
+    private static final int NO_ICON
+    private static final int CHECKABLE
+    private static final int CHECKED
+    private static final int EXCLUSIVE
+    private static final int HIDDEN
+    private static final int ENABLED
+    148:149:public android.support.v7.internal.view.menu.ActionMenuItem setExclusiveCheckable(boolean)
+    216:225:public boolean invoke()
+android.support.v7.internal.view.menu.ActionMenuItemView:
+    private static final java.lang.String TAG
+    private static final int MAX_ICON_SIZE
+    208:208:public void setShortcut(boolean,char)
+    218:218:public boolean showsIcon()
+android.support.v7.internal.view.menu.BaseMenuPresenter:
+    231:231:public int getId()
+android.support.v7.internal.view.menu.BaseWrapper:
+    31:31:public java.lang.Object getWrappedObject()
+android.support.v7.internal.view.menu.ListMenuItemView:
+    private static final java.lang.String TAG
+    272:272:public boolean showsIcon()
+android.support.v7.internal.view.menu.ListMenuPresenter:
+    private static final java.lang.String TAG
+    private int mId
+    public static final java.lang.String VIEWS_TAG
+    157:157:int getItemIndexOffset()
+    161:165:public void setItemIndexOffset(int)
+    186:191:public void saveHierarchyState(android.os.Bundle)
+    194:198:public void restoreHierarchyState(android.os.Bundle)
+    201:202:public void setId(int)
+    206:206:public int getId()
+    211:217:public android.os.Parcelable onSaveInstanceState()
+    222:223:public void onRestoreInstanceState(android.os.Parcelable)
+android.support.v7.internal.view.menu.MenuBuilder:
+    private static final java.lang.String TAG
+    private static final java.lang.String PRESENTER_KEY
+    private static final java.lang.String ACTION_VIEW_STATES_KEY
+    private static final java.lang.String EXPANDED_ACTION_VIEW_ID
+    private android.util.SparseArray mFrozenViewStates
+    308:328:private void dispatchSaveInstanceState(android.os.Bundle)
+    331:349:private void dispatchRestoreInstanceState(android.os.Bundle)
+    352:353:public void savePresenterStates(android.os.Bundle)
+    356:357:public void restorePresenterStates(android.os.Bundle)
+    565:566:public void removeItemAt(int)
+    569:575:public void clearAll()
+    772:778:public void setShortcutsVisible(boolean)
+    1224:1225:protected android.support.v7.internal.view.menu.MenuBuilder setHeaderTitleInt(int)
+    1248:1249:protected android.support.v7.internal.view.menu.MenuBuilder setHeaderIconInt(int)
+    1293:1294:public void setCurrentMenuInfo(android.view.ContextMenu$ContextMenuInfo)
+    1297:1298:void setOptionalIconsVisible(boolean)
+android.support.v7.internal.view.menu.MenuDialogHelper:
+    132:133:public void setPresenterCallback(android.support.v7.internal.view.menu.MenuPresenter$Callback)
+android.support.v7.internal.view.menu.MenuItemImpl:
+    private static final java.lang.String TAG
+    private static final int SHOW_AS_ACTION_MASK
+    private static final int CHECKABLE
+    private static final int CHECKED
+    private static final int EXCLUSIVE
+    private static final int HIDDEN
+    private static final int ENABLED
+    private static final int IS_ACTION
+    static final int NO_ICON
+    228:228:java.lang.Runnable getCallback()
+    232:233:public android.view.MenuItem setCallback(java.lang.Runnable)
+android.support.v7.internal.view.menu.MenuItemWrapperICS:
+    static final java.lang.String LOG_TAG
+android.support.v7.internal.view.menu.MenuPopupHelper:
+    private static final java.lang.String TAG
+    80:81:public MenuPopupHelper(android.content.Context,android.support.v7.internal.view.menu.MenuBuilder)
+    253:253:public android.support.v7.internal.view.menu.MenuView getMenuView(android.view.ViewGroup)
+    323:323:public int getId()
+    328:328:public android.os.Parcelable onSaveInstanceState()
+    333:333:public void onRestoreInstanceState(android.os.Parcelable)
+android.support.v7.internal.view.menu.MenuPresenter:
+    public abstract android.support.v7.internal.view.menu.MenuView getMenuView(android.view.ViewGroup)
+    public abstract void setCallback(android.support.v7.internal.view.menu.MenuPresenter$Callback)
+    public abstract int getId()
+    public abstract android.os.Parcelable onSaveInstanceState()
+    public abstract void onRestoreInstanceState(android.os.Parcelable)
+android.support.v7.internal.view.menu.MenuView:
+    public abstract int getWindowAnimations()
+android.support.v7.internal.view.menu.MenuView$ItemView:
+    public abstract void setTitle(java.lang.CharSequence)
+    public abstract void setEnabled(boolean)
+    public abstract void setCheckable(boolean)
+    public abstract void setChecked(boolean)
+    public abstract void setShortcut(boolean,char)
+    public abstract void setIcon(android.graphics.drawable.Drawable)
+    public abstract boolean showsIcon()
+android.support.v7.internal.view.menu.MenuWrapperFactory:
+    32:33:private MenuWrapperFactory()
+android.support.v7.internal.view.menu.SubMenuBuilder:
+    56:57:public void setShortcutsVisible(boolean)
+android.support.v7.internal.view.menu.SubMenuWrapperICS:
+    30:30:public bridge synthetic java.lang.Object getWrappedObject()
+android.support.v7.internal.widget.AbsActionBarView:
+    private static final int FADE_DURATION
+    184:189:public void postShowOverflowMenu()
+    192:195:public boolean hideOverflowMenu()
+    199:202:public boolean isOverflowMenuShowing()
+    206:209:public boolean isOverflowMenuShowPending()
+    213:213:public boolean isOverflowReserved()
+    217:217:public boolean canShowOverflowMenu()
+    221:224:public void dismissPopupMenus()
+android.support.v7.internal.widget.AbsActionBarView$1
+android.support.v7.internal.widget.AbsSpinnerCompat:
+    private android.graphics.Rect mTouchFrame
+    54:56:AbsSpinnerCompat(android.content.Context)
+    59:60:AbsSpinnerCompat(android.content.Context,android.util.AttributeSet)
+    252:255:public void setSelection(int,boolean)
+    273:280:void setSelectionInt(int,boolean)
+    abstract void layout(int,boolean)
+    325:341:public int pointToPosition(int,int)
+android.support.v7.internal.widget.ActionBarContainer:
+    231:231:public android.support.v7.view.ActionMode startActionModeForChild(android.view.View,android.support.v7.view.ActionMode$Callback)
+android.support.v7.internal.widget.ActionBarContextView:
+    private static final java.lang.String TAG
+    private static final int ANIMATE_IDLE
+    private static final int ANIMATE_IN
+    private static final int ANIMATE_OUT
+    302:305:public boolean hideOverflowMenu()
+    310:313:public boolean isOverflowMenuShowing()
+    45:45:public bridge synthetic void dismissPopupMenus()
+    45:45:public bridge synthetic boolean canShowOverflowMenu()
+    45:45:public bridge synthetic boolean isOverflowReserved()
+    45:45:public bridge synthetic boolean isOverflowMenuShowPending()
+    45:45:public bridge synthetic void postShowOverflowMenu()
+android.support.v7.internal.widget.ActionBarOverlayLayout:
+    private static final java.lang.String TAG
+    615:615:public boolean isHideOnContentScrollEnabled()
+    713:714:public boolean hasIcon()
+    719:720:public boolean hasLogo()
+    785:787:public void saveToolbarHierarchyState(android.util.SparseArray)
+    791:793:public void restoreToolbarHierarchyState(android.util.SparseArray)
+android.support.v7.internal.widget.ActionBarOverlayLayout$LayoutParams:
+    815:816:public ActionBarOverlayLayout$LayoutParams(android.view.ViewGroup$MarginLayoutParams)
+android.support.v7.internal.widget.ActivityChooserModel:
+    private static final boolean DEBUG
+    private static final java.lang.String TAG_HISTORICAL_RECORDS
+    private static final java.lang.String TAG_HISTORICAL_RECORD
+    private static final java.lang.String ATTRIBUTE_ACTIVITY
+    private static final java.lang.String ATTRIBUTE_TIME
+    private static final java.lang.String ATTRIBUTE_WEIGHT
+    public static final java.lang.String DEFAULT_HISTORY_FILE_NAME
+    public static final int DEFAULT_HISTORY_MAX_LENGTH
+    private static final int DEFAULT_ACTIVITY_INFLATION
+    private static final float DEFAULT_HISTORICAL_RECORD_WEIGHT
+    private static final java.lang.String HISTORY_FILE_EXTENSION
+    private static final int INVALID_INDEX
+    334:341:public static android.support.v7.internal.widget.ActivityChooserModel get(android.content.Context,java.lang.String)
+    350:358:private ActivityChooserModel(android.content.Context,java.lang.String)
+    370:378:public void setIntent(android.content.Intent)
+    386:388:public android.content.Intent getIntent()
+    501:504:public void setOnChooseActivityListener(android.support.v7.internal.widget.ActivityChooserModel$OnChooseActivityListener)
+    591:600:public void setActivitySorter(android.support.v7.internal.widget.ActivityChooserModel$ActivitySorter)
+    616:626:public void setHistoryMaxSize(int)
+    634:636:public int getHistoryMaxSize()
+    645:648:public int getHistorySize()
+android.support.v7.internal.widget.ActivityChooserModel$ActivityChooserModelClient
+android.support.v7.internal.widget.ActivityChooserModel$DefaultSorter
+android.support.v7.internal.widget.ActivityChooserView:
+    private static final java.lang.String LOG_TAG
+    private final android.graphics.drawable.Drawable mActivityChooserContentBackground
+    private final android.widget.ImageView mDefaultActivityButtonImage
+    192:193:public ActivityChooserView(android.content.Context)
+    202:203:public ActivityChooserView(android.content.Context,android.util.AttributeSet)
+    213:277:public ActivityChooserView(android.content.Context,android.util.AttributeSet,int)
+    521:549:private void updateAppearance()
+    68:68:static synthetic android.support.v7.widget.ListPopupWindow access$100(android.support.v7.internal.widget.ActivityChooserView)
+    68:68:static synthetic void access$400(android.support.v7.internal.widget.ActivityChooserView)
+android.support.v7.internal.widget.ActivityChooserView$1
+android.support.v7.internal.widget.ActivityChooserView$2
+android.support.v7.internal.widget.ActivityChooserView$3
+android.support.v7.internal.widget.ActivityChooserView$4
+android.support.v7.internal.widget.ActivityChooserView$ActivityChooserViewAdapter:
+    public static final int MAX_ACTIVITY_COUNT_UNLIMITED
+    public static final int MAX_ACTIVITY_COUNT_DEFAULT
+    private static final int ITEM_VIEW_TYPE_ACTIVITY
+    private static final int ITEM_VIEW_TYPE_FOOTER
+    private static final int ITEM_VIEW_TYPE_COUNT
+    639:653:private ActivityChooserView$ActivityChooserViewAdapter(android.support.v7.internal.widget.ActivityChooserView)
+    804:804:public int getHistorySize()
+    639:639:synthetic ActivityChooserView$ActivityChooserViewAdapter(android.support.v7.internal.widget.ActivityChooserView,android.support.v7.internal.widget.ActivityChooserView$1)
+android.support.v7.internal.widget.ActivityChooserView$Callbacks:
+    554:554:private ActivityChooserView$Callbacks(android.support.v7.internal.widget.ActivityChooserView)
+    554:554:synthetic ActivityChooserView$Callbacks(android.support.v7.internal.widget.ActivityChooserView,android.support.v7.internal.widget.ActivityChooserView$1)
+android.support.v7.internal.widget.AdapterViewCompat:
+    static final int ITEM_VIEW_TYPE_IGNORE
+    static final int ITEM_VIEW_TYPE_HEADER_OR_FOOTER
+    static final int SYNC_SELECTED_POSITION
+    static final int SYNC_FIRST_POSITION
+    static final int SYNC_MAX_DURATION_MILLIS
+    public static final int INVALID_POSITION
+    public static final long INVALID_ROW_ID
+    230:231:AdapterViewCompat(android.content.Context)
+    234:235:AdapterViewCompat(android.content.Context,android.util.AttributeSet)
+    606:626:public int getPositionForView(android.view.View)
+    767:768:public java.lang.Object getItemAtPosition(int)
+android.support.v7.internal.widget.AdapterViewCompat$AdapterContextMenuInfo
+android.support.v7.internal.widget.AdapterViewCompat$AdapterDataSetObserver:
+    845:846:public void clearSavedState()
+android.support.v7.internal.widget.AdapterViewCompat$OnItemClickListenerWrapper
+android.support.v7.internal.widget.AdapterViewCompat$OnItemLongClickListener:
+    public abstract boolean onItemLongClick(android.support.v7.internal.widget.AdapterViewCompat,android.view.View,int,long)
+android.support.v7.internal.widget.AppCompatPopupWindow:
+    private static final java.lang.String TAG
+android.support.v7.internal.widget.DecorContentParent:
+    public abstract java.lang.CharSequence getTitle()
+    public abstract void setUiOptions(int)
+    public abstract boolean hasIcon()
+    public abstract boolean hasLogo()
+    public abstract void setIcon(int)
+    public abstract void setIcon(android.graphics.drawable.Drawable)
+    public abstract void setLogo(int)
+    public abstract void saveToolbarHierarchyState(android.util.SparseArray)
+    public abstract void restoreToolbarHierarchyState(android.util.SparseArray)
+android.support.v7.internal.widget.DecorToolbar:
+    public abstract java.lang.CharSequence getSubtitle()
+    public abstract void setSubtitle(java.lang.CharSequence)
+    public abstract boolean canSplit()
+    public abstract void setSplitView(android.view.ViewGroup)
+    public abstract void setSplitToolbar(boolean)
+    public abstract void setSplitWhenNarrow(boolean)
+    public abstract boolean hasIcon()
+    public abstract boolean hasLogo()
+    public abstract void setLogo(android.graphics.drawable.Drawable)
+    public abstract boolean hasEmbeddedTabs()
+    public abstract boolean isTitleTruncated()
+    public abstract void setNavigationMode(int)
+    public abstract void setDropdownParams(android.widget.SpinnerAdapter,android.support.v7.internal.widget.AdapterViewCompat$OnItemSelectedListener)
+    public abstract void setDropdownSelectedPosition(int)
+    public abstract int getDropdownSelectedPosition()
+    public abstract int getDropdownItemCount()
+    public abstract void setCustomView(android.view.View)
+    public abstract android.view.View getCustomView()
+    public abstract void setNavigationIcon(android.graphics.drawable.Drawable)
+    public abstract void setNavigationContentDescription(java.lang.CharSequence)
+    public abstract void setNavigationContentDescription(int)
+    public abstract void setDefaultNavigationContentDescription(int)
+    public abstract void setDefaultNavigationIcon(android.graphics.drawable.Drawable)
+    public abstract void saveHierarchyState(android.util.SparseArray)
+    public abstract void restoreHierarchyState(android.util.SparseArray)
+    public abstract void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    public abstract int getHeight()
+    public abstract void setVisibility(int)
+    public abstract int getVisibility()
+    public abstract int getPopupTheme()
+android.support.v7.internal.widget.DrawableUtils
+android.support.v7.internal.widget.ListViewCompat:
+    public static final int INVALID_POSITION
+    public static final int NO_POSITION
+    58:59:public ListViewCompat(android.content.Context)
+    62:63:public ListViewCompat(android.content.Context,android.util.AttributeSet)
+    144:171:public int lookForSelectablePosition(int,boolean)
+android.support.v7.internal.widget.RtlSpacingHelper:
+    public static final int UNDEFINED
+android.support.v7.internal.widget.ScrollingTabContainerView:
+    private static final java.lang.String TAG
+    protected android.support.v4.view.ViewPropertyAnimatorCompat mVisibilityAnim
+    protected final android.support.v7.internal.widget.ScrollingTabContainerView$VisibilityAnimListener mVisAnimListener
+    private static final int FADE_DURATION
+    78:89:public ScrollingTabContainerView(android.content.Context)
+    200:206:private android.support.v7.widget.LinearLayoutCompat createTabLayout()
+    231:253:public void animateToVisibility(int)
+    305:317:public void addTab(android.support.v7.app.ActionBar$Tab,boolean)
+    320:332:public void addTab(android.support.v7.app.ActionBar$Tab,int,boolean)
+    335:342:public void updateTab(int)
+    345:352:public void removeTabAt(int)
+    355:362:public void removeAllTabs()
+android.support.v7.internal.widget.ScrollingTabContainerView$VisibilityAnimListener
+android.support.v7.internal.widget.SpinnerCompat:
+    private static final java.lang.String TAG
+    private static final int MAX_ITEMS_MEASURED
+    public static final int MODE_DIALOG
+    public static final int MODE_DROPDOWN
+    private static final int MODE_THEME
+    100:101:SpinnerCompat(android.content.Context)
+    114:115:SpinnerCompat(android.content.Context,int)
+    125:126:SpinnerCompat(android.content.Context,android.util.AttributeSet)
+    236:241:public void setPopupBackgroundDrawable(android.graphics.drawable.Drawable)
+    250:251:public void setPopupBackgroundResource(int)
+    260:260:public android.graphics.drawable.Drawable getPopupBackground()
+    270:271:public void setDropDownVerticalOffset(int)
+    280:280:public int getDropDownVerticalOffset()
+    290:291:public void setDropDownHorizontalOffset(int)
+    300:300:public int getDropDownHorizontalOffset()
+    314:319:public void setDropDownWidth(int)
+    330:330:public int getDropDownWidth()
+    351:358:public void setGravity(int)
+    622:623:public void setPrompt(java.lang.CharSequence)
+    630:631:public void setPromptId(int)
+    637:637:public java.lang.CharSequence getPrompt()
+    53:53:static synthetic android.graphics.Rect access$400(android.support.v7.internal.widget.SpinnerCompat)
+android.support.v7.internal.widget.SpinnerCompat$DialogPopup:
+    921:921:public java.lang.CharSequence getHintText()
+    947:948:public void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    952:953:public void setVerticalOffset(int)
+    957:958:public void setHorizontalOffset(int)
+    962:962:public android.graphics.drawable.Drawable getBackground()
+    967:967:public int getVerticalOffset()
+    972:972:public int getHorizontalOffset()
+android.support.v7.internal.widget.SpinnerCompat$DropdownPopup:
+    1010:1010:public java.lang.CharSequence getHintText()
+    1019:1053:void computeContentWidth()
+    1056:1100:public void show(int,int)
+    976:976:static synthetic void access$501(android.support.v7.internal.widget.SpinnerCompat$DropdownPopup)
+android.support.v7.internal.widget.SpinnerCompat$DropdownPopup$2
+android.support.v7.internal.widget.SpinnerCompat$DropdownPopup$3
+android.support.v7.internal.widget.SpinnerCompat$SpinnerPopup:
+    public abstract java.lang.CharSequence getHintText()
+    public abstract void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    public abstract void setVerticalOffset(int)
+    public abstract void setHorizontalOffset(int)
+    public abstract android.graphics.drawable.Drawable getBackground()
+    public abstract int getVerticalOffset()
+    public abstract int getHorizontalOffset()
+android.support.v7.internal.widget.ThemeUtils:
+    29:29:public ThemeUtils()
+android.support.v7.internal.widget.TintManager:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+android.support.v7.internal.widget.TintTypedArray:
+    83:83:public int getIndexCount()
+    87:87:public int getIndex(int)
+    91:91:public android.content.res.Resources getResources()
+    103:103:public java.lang.String getNonResourceString(int)
+    119:119:public int getColor(int,int)
+    123:123:public android.content.res.ColorStateList getColorStateList(int)
+    131:131:public float getDimension(int,float)
+    143:143:public int getLayoutDimension(int,java.lang.String)
+    151:151:public float getFraction(int,int,int,float)
+    159:159:public java.lang.CharSequence[] getTextArray(int)
+    163:163:public boolean getValue(int,android.util.TypedValue)
+    167:167:public int getType(int)
+    175:175:public android.util.TypedValue peekValue(int)
+    179:179:public java.lang.String getPositionDescription()
+    187:187:public int getChangingConfigurations()
+android.support.v7.internal.widget.ToolbarWidgetWrapper:
+    private static final java.lang.String TAG
+    private static final int AFFECTS_LOGO_MASK
+    private android.support.v7.internal.widget.SpinnerCompat mSpinner
+    291:291:public java.lang.CharSequence getSubtitle()
+    314:314:public boolean canSplit()
+    319:319:public void setSplitView(android.view.ViewGroup)
+    323:326:public void setSplitToolbar(boolean)
+    331:331:public void setSplitWhenNarrow(boolean)
+    335:335:public boolean hasIcon()
+    340:340:public boolean hasLogo()
+    484:484:public boolean hasEmbeddedTabs()
+    489:489:public boolean isTitleTruncated()
+    509:546:public void setNavigationMode(int)
+    549:555:private void ensureSpinner()
+    560:563:public void setDropdownParams(android.widget.SpinnerAdapter,android.support.v7.internal.widget.AdapterViewCompat$OnItemSelectedListener)
+    567:572:public void setDropdownSelectedPosition(int)
+    576:576:public int getDropdownSelectedPosition()
+    581:581:public int getDropdownItemCount()
+    597:597:public android.view.View getCustomView()
+    671:672:public void saveHierarchyState(android.util.SparseArray)
+    676:677:public void restoreHierarchyState(android.util.SparseArray)
+    682:683:public void setBackgroundDrawable(android.graphics.drawable.Drawable)
+    687:687:public int getHeight()
+    692:693:public void setVisibility(int)
+    697:697:public int getVisibility()
+    713:713:public int getPopupTheme()
+android.support.v7.internal.widget.ViewUtils:
+    private static final java.lang.String TAG
+    55:55:private ViewUtils()
+android.support.v7.view.ActionMode:
+    220:220:public boolean isUiFocusable()
+android.support.v7.widget.ActionMenuPresenter:
+    private static final java.lang.String TAG
+    375:375:public boolean isOverflowReserved()
+    520:522:public android.os.Parcelable onSaveInstanceState()
+    527:535:public void onRestoreInstanceState(android.os.Parcelable)
+android.support.v7.widget.ActionMenuView:
+    private static final java.lang.String TAG
+    static final int MIN_CELL_SIZE
+    static final int GENERATED_ITEM_PADDING
+android.support.v7.widget.ActionMenuView$LayoutParams:
+    807:809:ActionMenuView$LayoutParams(int,int,boolean)
+android.support.v7.widget.AppCompatButton:
+    52:53:public AppCompatButton(android.content.Context)
+android.support.v7.widget.AppCompatCheckBox:
+    45:46:public AppCompatCheckBox(android.content.Context)
+android.support.v7.widget.AppCompatCheckedTextView:
+    42:43:public AppCompatCheckedTextView(android.content.Context)
+android.support.v7.widget.AppCompatEditText:
+    47:48:public AppCompatEditText(android.content.Context)
+android.support.v7.widget.AppCompatMultiAutoCompleteTextView:
+    51:52:public AppCompatMultiAutoCompleteTextView(android.content.Context)
+android.support.v7.widget.AppCompatRadioButton:
+    45:46:public AppCompatRadioButton(android.content.Context)
+android.support.v7.widget.AppCompatRatingBar:
+    56:57:public AppCompatRatingBar(android.content.Context)
+android.support.v7.widget.AppCompatSpinner:
+    53:54:public AppCompatSpinner(android.content.Context)
+android.support.v7.widget.LinearLayoutCompat:
+    public static final int HORIZONTAL
+    public static final int VERTICAL
+    public static final int SHOW_DIVIDER_NONE
+    public static final int SHOW_DIVIDER_BEGINNING
+    public static final int SHOW_DIVIDER_MIDDLE
+    public static final int SHOW_DIVIDER_END
+    private static final int VERTICAL_GRAVITY_COUNT
+    private static final int INDEX_CENTER_VERTICAL
+    private static final int INDEX_TOP
+    private static final int INDEX_BOTTOM
+    private static final int INDEX_FILL
+    377:377:public boolean isBaselineAligned()
+    400:400:public boolean isMeasureWithLargestChildEnabled()
+android.support.v7.widget.LinearLayoutCompat$DividerMode
+android.support.v7.widget.LinearLayoutCompat$LayoutParams:
+    1806:1808:public LinearLayoutCompat$LayoutParams(int,int,float)
+    1821:1822:public LinearLayoutCompat$LayoutParams(android.view.ViewGroup$MarginLayoutParams)
+    1831:1835:public LinearLayoutCompat$LayoutParams(android.support.v7.widget.LinearLayoutCompat$LayoutParams)
+android.support.v7.widget.LinearLayoutCompat$OrientationMode
+android.support.v7.widget.ListPopupWindow:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+    private static final int EXPAND_LIST_TIMEOUT
+    public static final int POSITION_PROMPT_ABOVE
+    public static final int POSITION_PROMPT_BELOW
+    public static final int MATCH_PARENT
+    public static final int WRAP_CONTENT
+    public static final int INPUT_METHOD_FROM_FOCUSABLE
+    public static final int INPUT_METHOD_NEEDED
+    public static final int INPUT_METHOD_NOT_NEEDED
+    203:204:public ListPopupWindow(android.content.Context,android.util.AttributeSet)
+    291:291:public int getPromptPosition()
+    314:314:public boolean isModal()
+    325:326:public void setForceIgnoreOutsideTouch(boolean)
+    340:341:public void setDropDownAlwaysVisible(boolean)
+    349:349:public boolean isDropDownAlwaysVisible()
+    363:364:public void setSoftInputMode(int)
+    373:373:public int getSoftInputMode()
+    382:383:public void setListSelector(android.graphics.drawable.Drawable)
+    389:389:public android.graphics.drawable.Drawable getBackground()
+    407:408:public void setAnimationStyle(int)
+    416:416:public int getAnimationStyle()
+    442:442:public int getHorizontalOffset()
+    451:452:public void setHorizontalOffset(int)
+    458:461:public int getVerticalOffset()
+    470:472:public void setVerticalOffset(int)
+    488:488:public int getWidth()
+    521:521:public int getHeight()
+    530:531:public void setHeight(int)
+    552:553:public void setOnItemSelectedListener(android.widget.AdapterView$OnItemSelectedListener)
+    562:570:public void setPromptView(android.view.View)
+    576:577:public void postShow()
+    719:719:public int getInputMethodMode()
+    729:740:public void setSelection(int)
+    779:788:public boolean performItemClick(int)
+    795:798:public java.lang.Object getSelectedItem()
+    808:811:public int getSelectedItemPosition()
+    821:824:public long getSelectedItemId()
+    834:837:public android.view.View getSelectedView()
+    855:856:void setListItemExpandMax(int)
+    870:950:public boolean onKeyDown(int,android.view.KeyEvent)
+    964:973:public boolean onKeyUp(int,android.view.KeyEvent)
+    988:1009:public boolean onKeyPreIme(int,android.view.KeyEvent)
+    1033:1033:public android.view.View$OnTouchListener createDragToOpenListener(android.view.View)
+    1767:1767:private static boolean isConfirmKey(int)
+android.support.v7.widget.ListPopupWindow$1:
+    1033:1033:ListPopupWindow$1(android.support.v7.widget.ListPopupWindow,android.view.View)
+android.support.v7.widget.PopupMenu
+android.support.v7.widget.PopupMenu$1
+android.support.v7.widget.PopupMenu$OnDismissListener
+android.support.v7.widget.PopupMenu$OnMenuItemClickListener
+android.support.v7.widget.SearchView:
+    private static final boolean DBG
+    private static final java.lang.String LOG_TAG
+    private static final java.lang.String IME_OPTION_NO_MICROPHONE
+    private final android.view.View mSearchPlate
+    private final android.view.View mDropDownAnchor
+    private java.lang.CharSequence mOldQueryText
+    private final android.support.v7.internal.widget.TintManager mTintManager
+    private final android.view.View$OnClickListener mOnClickListener
+    android.view.View$OnKeyListener mTextKeyListener
+    private final android.widget.TextView$OnEditorActionListener mOnEditorActionListener
+    private final android.widget.AdapterView$OnItemClickListener mOnItemClickListener
+    private final android.widget.AdapterView$OnItemSelectedListener mOnItemSelectedListener
+    private android.text.TextWatcher mTextWatcher
+    269:270:public SearchView(android.content.Context)
+    273:274:public SearchView(android.content.Context,android.util.AttributeSet)
+    277:386:public SearchView(android.content.Context,android.util.AttributeSet,int)
+    390:397:private void addOnLayoutChangeListenerToDropDownAnchorSDK11()
+    400:407:private void addOnLayoutChangeListenerToDropDownAnchorBase()
+    649:649:public boolean isIconfiedByDefault()
+    699:699:public boolean isSubmitButtonEnabled()
+    729:729:public boolean isQueryRefinementEnabled()
+    884:895:private void updateFocusedState()
+    992:1031:private boolean onSuggestionsKey(android.view.View,int,android.view.KeyEvent)
+    1135:1146:private void onTextChanged(java.lang.CharSequence)
+    1198:1217:private void onVoiceClicked()
+    1264:1285:private void adjustDropDownSizeAndPosition()
+    1288:1295:private boolean onItemClicked(int,int,java.lang.String)
+    1299:1304:private boolean onItemSelected(int)
+    1341:1361:private void rewriteQueryFromSuggestion(int)
+    1374:1384:private boolean launchSuggestion(int,int,java.lang.String)
+    1391:1401:private void launchIntent(android.content.Intent)
+    1467:1471:private android.content.Intent createVoiceWebSearchIntent(android.content.Intent,android.app.SearchableInfo)
+    1483:1539:private android.content.Intent createVoiceAppSearchIntent(android.content.Intent,android.app.SearchableInfo)
+    1558:1594:private android.content.Intent createIntentFromSuggestion(android.database.Cursor,int,java.lang.String)
+    104:104:static synthetic void access$000(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.support.v4.widget.CursorAdapter access$100(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.view.View$OnFocusChangeListener access$200(android.support.v7.widget.SearchView)
+    104:104:static synthetic void access$300(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.widget.ImageView access$400(android.support.v7.widget.SearchView)
+    104:104:static synthetic void access$500(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.widget.ImageView access$600(android.support.v7.widget.SearchView)
+    104:104:static synthetic void access$700(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.widget.ImageView access$800(android.support.v7.widget.SearchView)
+    104:104:static synthetic void access$900(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.widget.ImageView access$1000(android.support.v7.widget.SearchView)
+    104:104:static synthetic void access$1100(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.support.v7.widget.SearchView$SearchAutoComplete access$1200(android.support.v7.widget.SearchView)
+    104:104:static synthetic void access$1300(android.support.v7.widget.SearchView)
+    104:104:static synthetic android.app.SearchableInfo access$1400(android.support.v7.widget.SearchView)
+    104:104:static synthetic boolean access$1500(android.support.v7.widget.SearchView,android.view.View,int,android.view.KeyEvent)
+    104:104:static synthetic void access$1700(android.support.v7.widget.SearchView,int,java.lang.String,java.lang.String)
+    104:104:static synthetic boolean access$1800(android.support.v7.widget.SearchView,int,int,java.lang.String)
+    104:104:static synthetic boolean access$1900(android.support.v7.widget.SearchView,int)
+    104:104:static synthetic void access$2000(android.support.v7.widget.SearchView,java.lang.CharSequence)
+android.support.v7.widget.SearchView$1
+android.support.v7.widget.SearchView$10
+android.support.v7.widget.SearchView$11
+android.support.v7.widget.SearchView$12
+android.support.v7.widget.SearchView$2
+android.support.v7.widget.SearchView$3
+android.support.v7.widget.SearchView$4
+android.support.v7.widget.SearchView$5
+android.support.v7.widget.SearchView$6
+android.support.v7.widget.SearchView$7
+android.support.v7.widget.SearchView$8
+android.support.v7.widget.SearchView$9
+android.support.v7.widget.SearchView$AutoCompleteTextViewReflector:
+    1807:1817:void showSoftInputUnchecked(android.view.inputmethod.InputMethodManager,android.view.View,int)
+android.support.v7.widget.SearchView$OnQueryTextListener:
+    public abstract boolean onQueryTextChange(java.lang.String)
+android.support.v7.widget.SearchView$OnSuggestionListener:
+    public abstract boolean onSuggestionSelect(int)
+    public abstract boolean onSuggestionClick(int)
+android.support.v7.widget.SearchView$SearchAutoComplete:
+    1660:1660:private boolean isEmpty()
+    1628:1628:static synthetic boolean access$1600(android.support.v7.widget.SearchView$SearchAutoComplete)
+android.support.v7.widget.ShareActionProvider
+android.support.v7.widget.ShareActionProvider$1
+android.support.v7.widget.ShareActionProvider$OnShareTargetSelectedListener
+android.support.v7.widget.ShareActionProvider$ShareActivityChooserModelPolicy
+android.support.v7.widget.ShareActionProvider$ShareMenuItemOnMenuItemClickListener
+android.support.v7.widget.SuggestionsAdapter:
+    private static final boolean DBG
+    private static final java.lang.String LOG_TAG
+    private static final int QUERY_LIMIT
+    static final int REFINE_NONE
+    static final int REFINE_BY_ENTRY
+    static final int REFINE_ALL
+    static final int INVALID_INDEX
+    126:126:public int getQueryRefinement()
+    174:176:public void close()
+android.support.v7.widget.SwitchCompat
+android.support.v7.widget.SwitchCompat$1
+android.support.v7.widget.Toolbar:
+    private static final java.lang.String TAG
+    418:433:public boolean isTitleTruncated()
+    863:864:public void inflateMenu(int)
+    953:954:public void setContentInsetsAbsolute(int,int)
+    1727:1727:private static boolean isCustomView(android.view.View)
+android.support.v7.widget.Toolbar$ExpandedActionViewMenuPresenter:
+    1921:1921:public android.support.v7.internal.view.menu.MenuView getMenuView(android.view.ViewGroup)
+    1950:1950:public void setCallback(android.support.v7.internal.view.menu.MenuPresenter$Callback)
+    2015:2015:public int getId()
+    2020:2020:public android.os.Parcelable onSaveInstanceState()
+    2025:2025:public void onRestoreInstanceState(android.os.Parcelable)
+android.support.v7.widget.Toolbar$LayoutParams:
+    static final int CUSTOM
+    static final int SYSTEM
+    static final int EXPANDED
+    1834:1836:public Toolbar$LayoutParams(int,int,int)
+    1839:1840:public Toolbar$LayoutParams(int)
+butterknife.ButterKnife:
+    private static final java.lang.String TAG
+    88:89:private ButterKnife()
+    222:223:public static void setDebug(boolean)
+    242:243:public static void inject(android.view.View)
+    252:253:public static void inject(android.app.Dialog)
+    263:264:public static void inject(java.lang.Object,android.app.Activity)
+    285:286:public static void inject(java.lang.Object,android.app.Dialog)
+    353:356:public static void apply(java.util.List,butterknife.ButterKnife$Action)
+    360:363:public static void apply(java.util.List,butterknife.ButterKnife$Setter,java.lang.Object)
+    372:375:public static void apply(java.util.List,android.util.Property,java.lang.Object)
+    380:380:public static android.view.View findById(android.view.View,int)
+    386:386:public static android.view.View findById(android.app.Activity,int)
+    392:392:public static android.view.View findById(android.app.Dialog,int)
+butterknife.ButterKnife$Action
+butterknife.ButterKnife$Finder:
+    124:124:public static varargs java.lang.Object[] arrayOf(java.lang.Object[])
+    173:175:public java.lang.Object castParam(java.lang.Object,java.lang.String,int,java.lang.String,int)
+butterknife.ButterKnife$Setter
+butterknife.InjectView
+butterknife.InjectViews
+butterknife.OnCheckedChanged
+butterknife.OnClick
+butterknife.OnEditorAction
+butterknife.OnFocusChange
+butterknife.OnItemClick
+butterknife.OnItemLongClick
+butterknife.OnItemSelected
+butterknife.OnItemSelected$Callback
+butterknife.OnLongClick
+butterknife.OnPageChange
+butterknife.OnPageChange$Callback
+butterknife.OnTextChanged
+butterknife.OnTextChanged$Callback
+butterknife.OnTouch
+butterknife.Optional
+butterknife.internal.Binding
+butterknife.internal.ButterKnifeProcessor
+butterknife.internal.CollectionBinding
+butterknife.internal.CollectionBinding$Kind
+butterknife.internal.ListenerBinding
+butterknife.internal.ListenerClass
+butterknife.internal.ListenerClass$NONE
+butterknife.internal.ListenerMethod
+butterknife.internal.Parameter
+butterknife.internal.ViewBinding
+butterknife.internal.ViewInjection
+butterknife.internal.ViewInjector
+butterknife.internal.ViewInjector$1
+com.edmodo.cropper.CropImageView:
+    public static final int GUIDELINES_OFF
+    public static final int GUIDELINES_ON_TOUCH
+    public static final int GUIDELINES_ON
+    241:250:public void setAspectRatio(int,int)
+com.edmodo.cropper.R:
+    9:9:public R()
+com.edmodo.cropper.R$anim
+com.edmodo.cropper.R$attr
+com.edmodo.cropper.R$bool
+com.edmodo.cropper.R$color:
+    236:236:public R$color()
+com.edmodo.cropper.R$dimen:
+    306:306:public R$dimen()
+com.edmodo.cropper.R$drawable
+com.edmodo.cropper.R$id
+com.edmodo.cropper.R$integer
+com.edmodo.cropper.R$layout
+com.edmodo.cropper.R$string
+com.edmodo.cropper.R$style
+com.edmodo.cropper.R$styleable:
+    865:865:public R$styleable()
+com.edmodo.cropper.cropwindow.edge.Edge:
+    public static final int MIN_CROP_LENGTH_PX
+com.edmodo.cropper.cropwindow.handle.HandleHelper:
+    private static final float UNFIXED_ASPECT_RATIO_CONSTANT
+com.edmodo.cropper.util.AspectRatioUtil:
+    22:22:public AspectRatioUtil()
+com.edmodo.cropper.util.HandleUtil:
+    24:24:public HandleUtil()
+com.edmodo.cropper.util.MathUtil:
+    3:3:public MathUtil()
+com.edmodo.cropper.util.PaintUtil:
+    25:25:public PaintUtil()
+com.johan.xnote.BuildConfig
+com.johan.xnote.R:
+    10:10:public R()
+com.johan.xnote.R$anim
+com.johan.xnote.R$array
+com.johan.xnote.R$attr
+com.johan.xnote.R$bool
+com.johan.xnote.R$color
+com.johan.xnote.R$dimen
+com.johan.xnote.R$drawable
+com.johan.xnote.R$id
+com.johan.xnote.R$integer
+com.johan.xnote.R$layout
+com.johan.xnote.R$raw
+com.johan.xnote.R$string
+com.johan.xnote.R$style
+com.johan.xnote.R$styleable:
+    3145:3145:public R$styleable()
+com.johan.xnote.api.model.Account:
+    43:45:public Account(java.lang.Long)
+    157:162:public void setAccountType(com.johan.xnote.api.model.AccountType)
+    166:170:public void delete()
+    174:178:public void update()
+    182:186:public void refresh()
+com.johan.xnote.api.model.AccountDao:
+    private de.greenrobot.dao.query.Query accountType_AccountsQuery
+    private java.lang.String selectDeep
+    47:48:public AccountDao(de.greenrobot.dao.internal.DaoConfig)
+    175:184:public java.util.List _queryAccountType_Accounts(java.lang.Long)
+    190:200:protected java.lang.String getSelectDeep()
+    204:210:protected com.johan.xnote.api.model.Account loadCurrentDeep(android.database.Cursor,boolean)
+    214:237:public com.johan.xnote.api.model.Account loadDeep(java.lang.Long)
+    242:260:public java.util.List loadAllDeepFromCursor(android.database.Cursor)
+    265:268:protected java.util.List loadDeepAllAndCloseCursor(android.database.Cursor)
+    274:275:public varargs java.util.List queryDeep(java.lang.String,java.lang.String[])
+com.johan.xnote.api.model.AccountType:
+    private java.util.List accounts
+    36:38:public AccountType(java.lang.Long)
+    80:92:public java.util.List getAccounts()
+    97:98:public synchronized void resetAccounts()
+    102:106:public void delete()
+    110:114:public void update()
+    118:122:public void refresh()
+com.johan.xnote.api.model.AccountTypeDao:
+    35:36:public AccountTypeDao(de.greenrobot.dao.internal.DaoConfig)
+com.johan.xnote.api.model.DaoMaster:
+    public static final int SCHEMA_VERSION
+com.johan.xnote.api.model.DaoSession:
+    78:83:public void clear()
+com.johan.xnote.api.model.Note:
+    34:36:public Note(java.lang.Long)
+    116:121:public void setNoteBook(com.johan.xnote.api.model.NoteBook)
+    125:129:public void delete()
+    133:137:public void update()
+    141:145:public void refresh()
+com.johan.xnote.api.model.NoteBook:
+    28:30:public NoteBook(java.lang.Long)
+    80:81:public synchronized void resetNotes()
+    85:89:public void delete()
+    93:97:public void update()
+    101:105:public void refresh()
+com.johan.xnote.api.model.NoteBookDao:
+    34:35:public NoteBookDao(de.greenrobot.dao.internal.DaoConfig)
+com.johan.xnote.api.model.NoteDao:
+    private java.lang.String selectDeep
+    43:44:public NoteDao(de.greenrobot.dao.internal.DaoConfig)
+    162:172:protected java.lang.String getSelectDeep()
+    176:182:protected com.johan.xnote.api.model.Note loadCurrentDeep(android.database.Cursor,boolean)
+    186:209:public com.johan.xnote.api.model.Note loadDeep(java.lang.Long)
+    214:232:public java.util.List loadAllDeepFromCursor(android.database.Cursor)
+    237:240:protected java.util.List loadDeepAllAndCloseCursor(android.database.Cursor)
+    246:247:public varargs java.util.List queryDeep(java.lang.String,java.lang.String[])
+com.johan.xnote.api.model.Sticky:
+    29:31:public Sticky(java.lang.Long)
+com.johan.xnote.api.model.StickyDao:
+    36:37:public StickyDao(de.greenrobot.dao.internal.DaoConfig)
+com.johan.xnote.app.activity.WriteNoteActivity:
+    private static final int PHOTO_REQUEST_GALLERY
+    private static final int PHOTO_REQUEST_CAREMA
+    private static final int PHOTO_REQUEST_CUT
+com.johan.xnote.app.api.IFlash:
+    public static final int LOGIN
+    public static final int LOCK
+    public static final int HOME
+com.johan.xnote.app.application.XNoteApplication:
+    private static final java.lang.String DB_NAME
+    38:38:public android.content.Context getContext()
+com.johan.xnote.app.dialog.SelectPictureWayDialog:
+    public static final int SELECT_CAMERA
+    public static final int SELECT_GALLERY
+com.johan.xnote.app.dialog.TimeDialog:
+    public static final int SHOW_MODE_DATE
+    public static final int SHOW_MODE_TIME
+    private static final int REFRESH_ALL
+    private static final int REFRESH_YEAR
+    private static final int REFRESH_MONTH
+com.johan.xnote.app.dialog.TipDialog:
+    62:63:public com.johan.xnote.app.dialog.TipDialog setOnDismissListener(android.content.DialogInterface$OnDismissListener)
+com.johan.xnote.app.fragment.BaseFragment:
+    81:83:public void goActivityForResult(java.lang.Class,int)
+com.johan.xnote.app.fragment.StickyFragment:
+    public static final java.lang.String RECEIVER_REMIND_ACTION
+com.johan.xnote.app.receiver.RemindReceiver:
+    public static final java.lang.String REMIND_ACTION
+com.johan.xnote.app.util.AppUtil:
+    10:10:public AppUtil()
+    36:41:public static int getStatusBarHeight(android.content.Context)
+    49:53:public static void hideKeyboard(android.view.View)
+    78:85:public static com.johan.xnote.app.util.AppUtil$PictureSize getPictureSize(java.lang.String)
+com.johan.xnote.app.util.AppUtil$PictureSize
+com.johan.xnote.app.util.RichEditorUtils:
+    30:31:private RichEditorUtils()
+    65:65:public static long getCurrentTime()
+com.johan.xnote.app.util.SharePreferencesUtil:
+    public static final java.lang.String KEY_OF_LOGIN_PHONE
+    public static final java.lang.String KEY_OF_LOGIN_PASSWORD
+    public static final java.lang.String KEY_OF_LOGIN_NICK_NAME
+    public static final java.lang.String KEY_OF_LOGIN_EMAIL
+    public static final java.lang.String KEY_OF_LOGIN_LOCK_PASSWORD
+    public static final java.lang.String KEY_OF_LOGIN_ISLOGINED
+    public static final java.lang.String KEY_OF_REGISTER_TIP
+    private static final java.lang.String SHARE_NAME
+    8:8:public SharePreferencesUtil()
+com.johan.xnote.app.util.SystemBarTintManager:
+    public static final int DEFAULT_TINT_COLOR
+    private boolean mNavBarTintEnabled
+    157:161:public void setNavigationBarTintEnabled(boolean)
+    169:171:public void setTintColor(int)
+    179:181:public void setTintResource(int)
+    189:191:public void setTintDrawable(android.graphics.drawable.Drawable)
+    199:201:public void setTintAlpha(float)
+    220:223:public void setStatusBarTintResource(int)
+    232:235:public void setStatusBarTintDrawable(android.graphics.drawable.Drawable)
+    244:247:public void setStatusBarAlpha(float)
+    255:258:public void setNavigationBarTintColor(int)
+    266:269:public void setNavigationBarTintResource(int)
+    278:281:public void setNavigationBarTintDrawable(android.graphics.drawable.Drawable)
+    290:293:public void setNavigationBarAlpha(float)
+    301:301:public com.johan.xnote.app.util.SystemBarTintManager$SystemBarConfig getConfig()
+    310:310:public boolean isStatusBarTintEnabled()
+    319:319:public boolean isNavBarTintEnabled()
+com.johan.xnote.app.util.SystemBarTintManager$SystemBarConfig:
+    private static final java.lang.String STATUS_BAR_HEIGHT_RES_NAME
+    private static final java.lang.String NAV_BAR_HEIGHT_RES_NAME
+    private static final java.lang.String NAV_BAR_HEIGHT_LANDSCAPE_RES_NAME
+    private static final java.lang.String NAV_BAR_WIDTH_RES_NAME
+    private static final java.lang.String SHOW_NAV_BAR_RES_NAME
+    495:495:public int getActionBarHeight()
+    534:534:public int getPixelInsetTop(boolean)
+    543:546:public int getPixelInsetBottom()
+    556:559:public int getPixelInsetRight()
+com.johan.xnote.app.view.AccountStatisticsView:
+    55:56:public void clear()
+com.johan.xnote.app.view.LockView$Point:
+    public static final int STATE_NORMOL
+    public static final int STATE_ERROR
+    public static final int STATE_PRESS
+com.johan.xnote.app.view.NumberProgressBar:
+    private static final java.lang.String INSTANCE_STATE
+    private static final java.lang.String INSTANCE_TEXT_COLOR
+    private static final java.lang.String INSTANCE_TEXT_SIZE
+    private static final java.lang.String INSTANCE_REACHED_BAR_HEIGHT
+    private static final java.lang.String INSTANCE_REACHED_BAR_COLOR
+    private static final java.lang.String INSTANCE_UNREACHED_BAR_HEIGHT
+    private static final java.lang.String INSTANCE_UNREACHED_BAR_COLOR
+    private static final java.lang.String INSTANCE_MAX
+    private static final java.lang.String INSTANCE_PROGRESS
+    private static final java.lang.String INSTANCE_SUFFIX
+    private static final java.lang.String INSTANCE_PREFIX
+    private static final java.lang.String INSTANCE_TEXT_VISIBILITY
+    private static final int PROGRESS_TEXT_VISIBLE
+    426:433:public void incrementProgressBy(int)
+com.johan.xnote.app.view.OnProgressBarListener:
+    public abstract void onProgressChange(int,int)
+com.johan.xnote.app.view.PinnedHeaderExpandableListView:
+    private static final int MAX_ALPHA
+com.johan.xnote.app.view.PinnedHeaderExpandableListView$HeaderAdapter:
+    public static final int PINNED_HEADER_GONE
+    public static final int PINNED_HEADER_VISIBLE
+    public static final int PINNED_HEADER_PUSHED_UP
+com.johan.xnote.app.view.RichEditor:
+    private static final java.lang.String SETUP_HTML
+    private static final java.lang.String CALLBACK_SCHEME
+    private static final java.lang.String STATE_SCHEME
+    245:250:public void loadCSS(java.lang.String)
+    306:307:public void removeFormat()
+    334:335:public void setBlockquote()
+    338:339:public void setBullets()
+    342:343:public void setNumbers()
+    351:353:public void insertLink(java.lang.String,java.lang.String)
+    356:358:public void insertTodo()
+    361:363:public void focusEditor()
+    366:367:public void clearFocusEditor()
+com.johan.xnote.app.view.RichShowor:
+    private static final java.lang.String SETUP_HTML
+com.johan.xnote.app.view.WheelView:
+    public static final int OFF_SET_DEFAULT
+    private static final int SCROLL_DIRECTION_UP
+    private static final int SCROLL_DIRECTION_DOWN
+com.johan.xnote.core.action.ActionService:
+    6:6:public ActionService()
+com.johan.xnote.core.event.EventBus$EventBusInstance:
+    11:11:private EventBus$EventBusInstance()
+com.johan.xnote.core.presenter.ForgetPDPresenter:
+    private static final java.lang.String COUNRTY_OF_CHINA
+com.johan.xnote.core.presenter.NotePresenter:
+    public static final int EVENT_ADD_NEW_NOT_BOOK
+    public static final int EVENT_NOTIFY_RENAME_NOTE_BOOK
+    public static final int EVENT_DELETE_NOTE_BOOK
+    public static final int EVENT_RENAME_NOTE_BOOK
+    public static final int EVENT_DELETE_NOTE
+com.johan.xnote.core.presenter.StickyPresenter:
+    61:61:public java.lang.String[] getColors()
+com.johan.xnote.core.presenter.WriteNotePresenter:
+    public static final int EVENT_SELECT_NOTE_BOOK
+com.johan.xnote.core.util.CoreUtil:
+    12:12:public CoreUtil()
+com.johan.xnote.core.util.DataUtil:
+    7:7:public DataUtil()
+    14:14:public static void encryptionData()
+    21:21:public static void decryptionData()
+com.johan.xnote.core.util.FileUtil:
+    public static final java.lang.String PROJECT_PATH
+    public static final java.lang.String TEMP_IMG_PATH
+    public static final java.lang.String ACCOUNT_PATH
+    18:18:public FileUtil()
+com.johan.xnote.core.util.FileUtil$SaveImage:
+    private static final long serialVersionUID

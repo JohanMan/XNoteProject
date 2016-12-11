@@ -1,0 +1,40 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.app.api.IMe;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.util.CoreUtil;
+
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
+public class MePresenter extends BasePresenter {
+	
+	private IMe me;
+	
+	public MePresenter(IMe me) {
+		this.me = me;
+	}
+
+	public String getVersionInfo(Context context) {
+		try {
+	        PackageManager manager = context.getPackageManager();
+	        PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+	        String version = info.versionName;
+	        return version;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "";
+	    }
+	}
+	
+	public void refreshLockScreenState() {
+		String lockPassword = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_LOCK_PASSWORD, "");
+		if(CoreUtil.hasEmpty(lockPassword)) {
+			me.updateLockScreenState(false);
+			return;
+		}
+		me.updateLockScreenState(true);
+	}
+	
+}

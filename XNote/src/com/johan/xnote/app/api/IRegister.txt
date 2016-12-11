@@ -1,0 +1,9 @@
+package com.johan.xnote.app.api;
+
+public interface IRegister {
+
+	public void registerFail(String msg);
+	
+	public void registerSuccess();
+	
+}

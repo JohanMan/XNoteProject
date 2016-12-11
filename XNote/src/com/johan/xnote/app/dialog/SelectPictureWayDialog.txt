@@ -1,0 +1,68 @@
+package com.johan.xnote.app.dialog;
+
+import com.johan.xnote.R;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+
+public class SelectPictureWayDialog implements OnClickListener {
+	
+	public static final int SELECT_CAMERA = 1;
+	public static final int SELECT_GALLERY = 2;
+
+	private Dialog selectPictureWayDialog;
+	
+	private TextView camera, gallery;
+	
+	private OnSelectPictureWayListener listener;
+
+	public SelectPictureWayDialog(Context context) {
+		selectPictureWayDialog = new Dialog(context, R.style.CustomDialog);
+		selectPictureWayDialog.setContentView(R.layout.dialog_select_picture_way);
+		camera = (TextView) selectPictureWayDialog.findViewById(R.id.select_picture_way_carema);
+		gallery = (TextView) selectPictureWayDialog.findViewById(R.id.select_picture_way_gallery);
+		camera.setOnClickListener(this);
+		gallery.setOnClickListener(this);
+	}
+	
+	public void show() {
+		selectPictureWayDialog.show();
+	}
+	
+	public void dismiss() {
+		selectPictureWayDialog.dismiss();
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+			case R.id.select_picture_way_carema :
+				if(listener != null) {
+					listener.onSelectedPictureWay(SELECT_CAMERA);
+				}
+				dismiss();
+				break;
+			case R.id.select_picture_way_gallery :
+				if(listener != null) {
+					listener.onSelectedPictureWay(SELECT_GALLERY);
+				}
+				dismiss();
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public void setOnSelectPictureWayListener(OnSelectPictureWayListener listener) {
+		this.listener = listener;
+	}
+	
+	public interface OnSelectPictureWayListener {
+		public void onSelectedPictureWay(int way);
+	}
+	
+}

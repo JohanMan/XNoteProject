@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/select_note_book_width"
+    android:layout_height="wrap_content" >
+    
+    <ListView 
+        android:id="@+id/select_note_book_listview"
+        android:layout_width="@dimen/select_note_book_width"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        ></ListView>
+
+</FrameLayout>

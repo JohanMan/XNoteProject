@@ -1,0 +1,9 @@
+package com.johan.xnote.app.api;
+
+public interface IAccount {
+
+	public void setYear(int year);
+	
+	public void setMonth(int month);
+	
+}

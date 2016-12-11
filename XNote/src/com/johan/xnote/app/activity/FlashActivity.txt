@@ -1,0 +1,69 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.api.IFlash;
+import com.johan.xnote.core.presenter.FlashPresenter;
+
+import android.os.Bundle;
+import android.os.Handler;
+
+public class FlashActivity extends BaseActivity<FlashPresenter> implements IFlash {
+	
+	private Handler handler;
+	
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		handler = new Handler();
+		presenter.shouldGo();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_flash;
+	}
+
+	@Override
+	protected FlashPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new FlashPresenter(this);
+	}
+
+	@Override
+	public void go(final int where) {
+		// TODO Auto-generated method stub
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				int version = Integer.valueOf(android.os.Build.VERSION.SDK); 
+				switch (where) {
+					case LOGIN :
+						goActivity(LoginActivity.class);
+						break;
+					case HOME :
+						goActivity(HomeActivity.class);
+						break;
+					case LOCK :
+						goActivity(CheckLockScreenActivity.class);
+						break;
+					default:
+						break;
+				}
+				finish();
+				if (version > 5) { 
+					overridePendingTransition(R.anim.fade_in, R.anim.fade_out); 
+				} 
+			}
+		}, 1000);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		handler.removeCallbacksAndMessages(null);
+		super.onDestroy();
+	}
+	
+}

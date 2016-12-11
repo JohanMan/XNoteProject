@@ -1,0 +1,34 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.app.api.ILogin;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.util.CoreUtil;
+import com.johan.xnote.core.util.DataUtil;
+
+public class LoginPresenter extends BasePresenter {
+
+	private ILogin login;
+	
+	public LoginPresenter(ILogin login) {
+		this.login = login;
+	}
+	
+	public void login(String phone, String password) {
+		if(CoreUtil.hasEmpty(phone, password)) {
+			login.loginFail("手机和密码都不能为空~");
+			return;
+		}
+		String loginPhone = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+		if(!phone.equals(loginPhone)) {
+			login.loginFail("没有这个号码，请先注册~");
+			return;
+		}
+		String loginPassword = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PASSWORD, "");
+		if(DataUtil.md5(password).equals(loginPassword)) {
+			login.loginSuccess();
+		} else {
+			login.loginFail("密码错误~");
+		}
+	}
+	
+}

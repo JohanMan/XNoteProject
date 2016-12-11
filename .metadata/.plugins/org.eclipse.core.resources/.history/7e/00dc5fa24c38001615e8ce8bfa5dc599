@@ -1,0 +1,53 @@
+package com.johan.xnote.app.dialog;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Account;
+import com.johan.xnote.api.model.AccountDao;
+import com.johan.xnote.api.model.AccountType;
+import com.johan.xnote.api.model.AccountTypeDao;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.app.view.AccountStatisticsView;
+
+import android.app.Dialog;
+import android.content.Context;
+
+public class ShowAccountBarDialog {
+
+	private Context context;
+	
+	private Dialog showDialog;
+	
+	private AccountStatisticsView statisticsView;
+	
+	public ShowAccountBarDialog(Context context, int year, int month) {
+		this.context = context;
+		showDialog = new Dialog(context, R.style.CustomDialog);
+		showDialog.setContentView(R.layout.dialog_show_account_bar);
+		statisticsView = (AccountStatisticsView) showDialog.findViewById(R.id.show_account_bar_view);
+	}
+	
+	private void init(int year, int month) {
+		AccountDao accountDao = XNoteApplication.getInstance().getDaoSession().getAccountDao();
+		AccountTypeDao accountTypeDao = XNoteApplication.getInstance().getDaoSession().getAccountTypeDao();
+		List<Account> accountList = accountDao.queryBuilder().where(AccountDao.Properties.Year.eq(year), AccountDao.Properties.Month.eq(month)).list();
+		List<AccountType> accountTypeList = accountTypeDao.queryBuilder().list();
+		for(Account account : accountList) {
+			for(AccountType accountType : accountTypeList) {
+				if(accountType.getTypeId() == account.getAccountType().getTypeId()) {
+					accountType.addMoney(account.getMoney());
+				}
+			}
+		}
+	}
+
+	public void show() {
+		showDialog.show();
+	}
+	
+	public void dismiss() {
+		showDialog.dismiss();
+	}
+	
+}

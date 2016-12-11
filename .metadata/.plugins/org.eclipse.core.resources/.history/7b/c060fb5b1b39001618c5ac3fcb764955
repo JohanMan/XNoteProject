@@ -1,0 +1,47 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class ForgetPDActivity$$ViewInjector<T extends com.johan.xnote.app.activity.ForgetPDActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361881, "field 'codeView'");
+    target.codeView = finder.castView(view, 2131361881, "field 'codeView'");
+    view = finder.findRequiredView(source, 2131362048, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362048, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361879, "field 'phoneView'");
+    target.phoneView = finder.castView(view, 2131361879, "field 'phoneView'");
+    view = finder.findRequiredView(source, 2131361880, "field 'getCodeButton' and method 'getCode'");
+    target.getCodeButton = finder.castView(view, 2131361880, "field 'getCodeButton'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.getCode(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361882, "field 'newPdView'");
+    target.newPdView = finder.castView(view, 2131361882, "field 'newPdView'");
+    view = finder.findRequiredView(source, 2131361883, "method 'updatePassword'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.updatePassword(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.codeView = null;
+    target.toolbar = null;
+    target.phoneView = null;
+    target.getCodeButton = null;
+    target.newPdView = null;
+  }
+}

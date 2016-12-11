@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/tip_dialog_background"
+    android:padding="20dp" >
+    
+    <TextView 
+        android:id="@+id/tip_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_color"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        />
+    
+    <TextView 
+        android:id="@+id/tip_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_text_color"
+        android:textSize="@dimen/text_size"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="5dp"
+        />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <Button 
+	        android:id="@+id/tip_cancel_but"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/theme_color"
+	        android:textSize="@dimen/text_size"
+	        android:layout_gravity="left"
+	        android:background="#eeeeee"
+	        />
+        <Button 
+	        android:id="@+id/tip_ok_but"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="@color/theme_color"
+	        android:textSize="@dimen/text_size"
+	        android:layout_gravity="right"
+	        android:background="#eeeeee"
+	        />
+    </LinearLayout>
+    
+
+</LinearLayout>

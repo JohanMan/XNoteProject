@@ -1,0 +1,17 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.app.api.IPersonalInfo;
+
+public class PersonalInfoPresenter extends BasePresenter {
+	
+	private IPersonalInfo personalInfo;
+	
+	public PersonalInfoPresenter(IPersonalInfo personalInfo) {
+		this.personalInfo = personalInfo;
+	}
+
+	public void init() {
+		
+	}
+	
+}

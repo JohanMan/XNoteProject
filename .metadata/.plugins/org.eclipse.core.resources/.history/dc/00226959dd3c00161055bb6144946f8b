@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.johan.xnote"
+    android:versionCode="1"
+    android:versionName="v1.1" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="19" />
+    
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission android:name="android.permission.GET_TASKS" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+	<uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+ 	<uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+	<uses-permission android:name="android.permission.CAMERA" />  
+	<uses-permission android:name ="android.permission.GET_TASKS" />
+	
+	<uses-permission android:name="android.permission.READ_LOGS" />
+
+    <application
+        android:name="com.johan.xnote.app.application.XNoteApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/ApplicationTheme" >
+        <!-- FlashActivity -->
+        <activity
+            android:name="com.johan.xnote.app.activity.FlashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/FullscreenTheme"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- LoginActivity -->
+        <activity android:name="com.johan.xnote.app.activity.LoginActivity" android:screenOrientation="portrait"></activity>
+        <!-- CheckLockScreenActivity -->
+        <activity android:name="com.johan.xnote.app.activity.CheckLockScreenActivity" android:screenOrientation="portrait"></activity>
+        <!-- HomeActivity -->
+        <activity android:name="com.johan.xnote.app.activity.HomeActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan" android:launchMode="singleTop"></activity>
+        <!-- RegisterActivity -->
+        <activity android:name="com.johan.xnote.app.activity.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <!-- ForgetPDActivity -->
+        <activity android:name="com.johan.xnote.app.activity.ForgetPDActivity" android:screenOrientation="portrait"></activity>
+        <!-- WriteNoteActivity -->
+        <activity android:name="com.johan.xnote.app.activity.WriteNoteActivity" android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:windowSoftInputMode="adjustResize"></activity>
+        <!-- CropActivity -->
+        <activity android:name="com.johan.xnote.app.activity.CropActivity" android:screenOrientation="portrait"></activity>
+        <!-- RecordAccountActivity -->
+        <activity android:name="com.johan.xnote.app.activity.RecordAccountActivity" android:screenOrientation="portrait"></activity>
+        <!-- WriteStickyActivity -->
+        <activity android:name="com.johan.xnote.app.activity.WriteStickyActivity" android:screenOrientation="portrait"></activity>
+        <!-- PersonalInfoActivity -->
+        <activity android:name="com.johan.xnote.app.activity.PersonalInfoActivity" android:screenOrientation="portrait"></activity>
+        <!-- ModifyPasswordActivity -->
+        <activity android:name="com.johan.xnote.app.activity.ModifyPasswordActivity" android:screenOrientation="portrait"></activity>
+        <!-- LockScreenActivity -->
+        <activity android:name="com.johan.xnote.app.activity.LockScreenActivity" android:screenOrientation="portrait"></activity>
+        <!-- AboutActivity -->
+        <activity android:name="com.johan.xnote.app.activity.AboutActivity" android:screenOrientation="portrait"></activity>
+        <!-- 短信验证mob -->
+		<activity
+			android:name="com.mob.tools.MobUIShell"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:configChanges="keyboardHidden|orientation|screenSize"
+			android:windowSoftInputMode="stateHidden|adjustResize">
+		</activity>
+        <receiver android:name="com.johan.xnote.app.receiver.RemindReceiver" android:process=":newinst"></receiver>
+        <service android:name="com.johan.xnote.app.service.XNoteService"></service>
+        <!-- 友盟更新 -->
+        <!-- Update Activitys Start -->
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <!-- Update Activitys End -->
+   		<!-- Caution! Do not change this app key. It is only for demo usage. -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="576cde5de0f55a5c6b000f77" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" >
+        </meta-data>
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <!-- 软件更新界面 -->
+        <activity
+		    android:name="com.tencent.bugly.beta.ui.BetaActivity"
+		    android:theme="@android:style/Theme.Translucent" />
+    </application>
+
+</manifest>

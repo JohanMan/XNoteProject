@@ -1,0 +1,35 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.app.api.IPersonalInfo;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.util.CoreUtil;
+
+public class PersonalInfoPresenter extends BasePresenter {
+	
+	private IPersonalInfo personalInfo;
+	
+	public PersonalInfoPresenter(IPersonalInfo personalInfo) {
+		this.personalInfo = personalInfo;
+	}
+
+	public void init() {
+		String phone = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+		String nickName = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_NICK_NAME, "");
+		String email = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_EMAIL, "");
+		personalInfo.setPhone(phone);
+		personalInfo.setNickName(nickName);
+		personalInfo.setEmail(email);
+	}
+	
+	public void update(String phone, String nickName, String email) {
+		if(CoreUtil.hasEmpty(phone, nickName)) {
+			personalInfo.updateFail("手机和昵称不能为空~");
+			return;
+		}
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, phone);
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_NICK_NAME, nickName);
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_EMAIL, email);
+		personalInfo.updateSuccess();
+	}
+	
+}

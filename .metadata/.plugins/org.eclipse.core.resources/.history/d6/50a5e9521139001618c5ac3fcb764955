@@ -1,0 +1,5 @@
+package com.johan.xnote.core.presenter;
+
+public class MePresenter extends BasePresenter {
+
+}

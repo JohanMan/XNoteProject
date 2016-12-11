@@ -1,0 +1,67 @@
+package com.johan.xnote.app.service;
+
+import java.io.File;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import com.johan.xnote.api.model.Account;
+import com.johan.xnote.api.model.AccountDao;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.util.FileUtil;
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+
+public class XNoteService extends Service {
+	
+	private ExecutorService executor;
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+		executor = Executors.newCachedThreadPool();
+	}
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub
+		final int year = intent.getIntExtra("year", 0);
+		final int month = intent.getIntExtra("month", 0);
+		if(year == 0 || month == 0) {
+			return super.onStartCommand(intent, flags, startId);
+		}
+		executor.execute(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				export(year, month);
+			}
+		});
+		return super.onStartCommand(intent, flags, startId);
+	}
+	
+	private void export(int year, int month) {
+		String accountPath = FileUtil.getSDPath() + "/" + FileUtil.ACCOUNT_PATH;
+		FileUtil.createDir(accountPath);
+		String accountFileName = accountPath + "/" + year + "Äê" + month + "ÔÂÕËµ¥";
+		File file = new File(accountFileName);
+		if(file.exists() && file.isFile()) {
+			file.delete();
+		}
+		AccountDao accountDao = XNoteApplication.getInstance().getDaoSession().getAccountDao();
+		List<Account> accountList = accountDao.queryBuilder().where(AccountDao.Properties.Year.eq(year), AccountDao.Properties.Month.eq(month)).orderAsc(AccountDao.Properties.Day, AccountDao.Properties.Time).list();
+		for(Account account : accountList) {
+			
+		}
+	}
+
+}

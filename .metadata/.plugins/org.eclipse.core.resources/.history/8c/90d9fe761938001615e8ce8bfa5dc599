@@ -1,0 +1,59 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.RecordAccountPresenter;
+
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.widget.EditText;
+import android.widget.TextView;
+import butterknife.InjectView;
+
+public class RecordAccountActivity extends BaseActivity<RecordAccountPresenter> {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectView(R.id.record_account_money)
+	public EditText moneyView;
+	
+	@InjectView(R.id.record_account_in)
+	public TextView inView;
+	
+	@InjectView(R.id.record_account_out)
+	public TextView outView;
+	
+	@InjectView(R.id.record_account_type)
+	public EditText typeView;
+	
+	@InjectView(R.id.record_account_date)
+	public EditText dateView;
+	
+	@InjectView(R.id.record_account_time)
+	public EditText timeView;
+	
+	@InjectView(R.id.record_account_shop)
+	public EditText shopView;
+	
+	@InjectView(R.id.record_account_remark)
+	public EditText remarkView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "╪гук", true);
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_record_account;
+	}
+
+	@Override
+	protected RecordAccountPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new RecordAccountPresenter();
+	}
+
+}

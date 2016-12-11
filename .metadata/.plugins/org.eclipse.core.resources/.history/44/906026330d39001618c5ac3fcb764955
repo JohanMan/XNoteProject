@@ -1,0 +1,60 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.fragment;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class StickyFragment$$ViewInjector<T extends com.johan.xnote.app.fragment.StickyFragment> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131362008, "field 'cancelView' and method 'cancel'");
+    target.cancelView = finder.castView(view, 2131362008, "field 'cancelView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.cancel(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362006, "field 'deleteView' and method 'delete'");
+    target.deleteView = finder.castView(view, 2131362006, "field 'deleteView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.delete(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362007, "field 'colorView' and method 'color'");
+    target.colorView = finder.castView(view, 2131362007, "field 'colorView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.color(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362004, "field 'listView'");
+    target.listView = finder.castView(view, 2131362004, "field 'listView'");
+    view = finder.findRequiredView(source, 2131362005, "method 'write'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.write(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.cancelView = null;
+    target.deleteView = null;
+    target.colorView = null;
+    target.listView = null;
+  }
+}

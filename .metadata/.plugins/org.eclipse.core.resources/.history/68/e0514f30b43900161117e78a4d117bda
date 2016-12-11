@@ -1,0 +1,36 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class PersonalInfoActivity$$ViewInjector<T extends com.johan.xnote.app.activity.PersonalInfoActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361904, "field 'phoneView'");
+    target.phoneView = finder.castView(view, 2131361904, "field 'phoneView'");
+    view = finder.findRequiredView(source, 2131361910, "field 'emailView'");
+    target.emailView = finder.castView(view, 2131361910, "field 'emailView'");
+    view = finder.findRequiredView(source, 2131362053, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362053, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361907, "field 'nickNameView'");
+    target.nickNameView = finder.castView(view, 2131361907, "field 'nickNameView'");
+    view = finder.findRequiredView(source, 2131361911, "method 'update'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.update(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.phoneView = null;
+    target.emailView = null;
+    target.toolbar = null;
+    target.nickNameView = null;
+  }
+}

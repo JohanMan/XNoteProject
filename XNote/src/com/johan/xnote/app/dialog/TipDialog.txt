@@ -1,0 +1,66 @@
+package com.johan.xnote.app.dialog;
+
+import com.johan.xnote.R;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface.OnDismissListener;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class TipDialog {
+
+	private Dialog tipDialog;
+	
+	private TextView titleView, contentView;
+	
+	private Button cancelButton, okButton;
+	
+	public TipDialog(Context context) {
+		tipDialog = new Dialog(context, R.style.CustomDialog);
+		tipDialog.setContentView(R.layout.dialog_tip);
+		titleView = (TextView) tipDialog.findViewById(R.id.tip_title);
+		contentView = (TextView) tipDialog.findViewById(R.id.tip_content);
+		okButton = (Button) tipDialog.findViewById(R.id.tip_ok_but);
+		cancelButton = (Button) tipDialog.findViewById(R.id.tip_cancel_but);
+	}
+	
+	public TipDialog setTitle(String title) {
+		titleView.setText(title);
+		return this;
+	}
+	
+	public TipDialog setContent(String content) {
+		contentView.setText(content);
+		return this;
+	}
+	
+	public TipDialog setOkButtonListener(String ok, OnClickListener listener) {
+		okButton.setText(ok);
+		okButton.setOnClickListener(listener);
+		return this;
+	}
+	
+	public TipDialog setCancelButtonListener(String cancel, OnClickListener listener) {
+		cancelButton.setText(cancel);
+		cancelButton.setVisibility(View.VISIBLE);
+		cancelButton.setOnClickListener(listener);
+		return this;
+	}
+	
+	public void show() {
+		tipDialog.show();
+	}
+	
+	public void dismiss() {
+		tipDialog.dismiss();
+	}
+	
+	public TipDialog setOnDismissListener(OnDismissListener onDismissListener) {
+		tipDialog.setOnDismissListener(onDismissListener);
+		return this;
+	}
+	
+}

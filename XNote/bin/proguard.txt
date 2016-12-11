@@ -1,0 +1,232 @@
+# view res/layout/abc_alert_dialog_material.xml #generated:130
+-keep class android.support.v4.widget.Space { <init>(...); }
+
+# view res/layout/abc_action_menu_item_layout.xml #generated:17
+-keep class android.support.v7.internal.view.menu.ActionMenuItemView { <init>(...); }
+
+# view res/layout/abc_expanded_menu_layout.xml #generated:17
+-keep class android.support.v7.internal.view.menu.ExpandedMenuView { <init>(...); }
+
+# view res/layout/abc_list_menu_item_layout.xml #generated:17
+# view res/layout/abc_popup_menu_item_layout.xml #generated:17
+-keep class android.support.v7.internal.view.menu.ListMenuItemView { <init>(...); }
+
+# view res/layout/abc_screen_toolbar.xml #generated:27
+-keep class android.support.v7.internal.widget.ActionBarContainer { <init>(...); }
+
+# view res/layout/abc_action_mode_bar.xml #generated:19
+# view res/layout/abc_screen_toolbar.xml #generated:43
+-keep class android.support.v7.internal.widget.ActionBarContextView { <init>(...); }
+
+# view res/layout/abc_screen_toolbar.xml #generated:17
+-keep class android.support.v7.internal.widget.ActionBarOverlayLayout { <init>(...); }
+
+# view res/layout/abc_activity_chooser_view.xml #generated:19
+-keep class android.support.v7.internal.widget.ActivityChooserView$InnerLayout { <init>(...); }
+
+# view res/layout/abc_screen_content_include.xml #generated:19
+-keep class android.support.v7.internal.widget.ContentFrameLayout { <init>(...); }
+
+# view res/layout/abc_alert_dialog_material.xml #generated:48
+-keep class android.support.v7.internal.widget.DialogTitle { <init>(...); }
+
+# view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:23
+-keep class android.support.v7.internal.widget.FitWindowsFrameLayout { <init>(...); }
+
+# view res/layout/abc_dialog_title_material.xml #generated:22
+# view res/layout/abc_screen_simple.xml #generated:17
+-keep class android.support.v7.internal.widget.FitWindowsLinearLayout { <init>(...); }
+
+# view v11\res/layout-v11/abc_screen_content_include.xml #generated:19
+-keep class android.support.v7.internal.widget.NativeActionModeAwareLayout { <init>(...); }
+
+# view res/layout/abc_action_mode_close_item_material.xml #generated:17
+# view res/layout/abc_search_dropdown_item_icons_2line.xml #generated:27
+# view res/layout/abc_search_dropdown_item_icons_2line.xml #generated:37
+# view res/layout/abc_search_dropdown_item_icons_2line.xml #generated:48
+# view res/layout/abc_search_view.xml #generated:116
+# view res/layout/abc_search_view.xml #generated:128
+# view res/layout/abc_search_view.xml #generated:38
+# view res/layout/abc_search_view.xml #generated:60
+# view res/layout/abc_search_view.xml #generated:97
+-keep class android.support.v7.internal.widget.TintImageView { <init>(...); }
+
+# view res/layout/abc_screen_simple.xml #generated:25
+# view res/layout/abc_screen_simple_overlay_action_mode.xml #generated:32
+-keep class android.support.v7.internal.widget.ViewStubCompat { <init>(...); }
+
+# view res/layout/abc_action_menu_layout.xml #generated:17
+-keep class android.support.v7.widget.ActionMenuView { <init>(...); }
+
+# view res/layout/abc_search_view.xml #generated:78
+-keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
+
+# view res/layout/abc_screen_toolbar.xml #generated:36
+# view res/layout/layout_title_center.xml #generated:6
+-keep class android.support.v7.widget.Toolbar { <init>(...); }
+
+# view res/layout/activity_crop.xml #generated:9
+-keep class com.edmodo.cropper.CropImageView { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class com.johan.xnote.app.activity.AboutActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:50
+-keep class com.johan.xnote.app.activity.CheckLockScreenActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:60
+-keep class com.johan.xnote.app.activity.CropActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class com.johan.xnote.app.activity.FlashActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:56
+-keep class com.johan.xnote.app.activity.ForgetPDActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
+-keep class com.johan.xnote.app.activity.HomeActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
+-keep class com.johan.xnote.app.activity.LockScreenActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:48
+-keep class com.johan.xnote.app.activity.LoginActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:68
+-keep class com.johan.xnote.app.activity.ModifyPasswordActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.johan.xnote.app.activity.PersonalInfoActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:62
+-keep class com.johan.xnote.app.activity.RecordAccountActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:54
+-keep class com.johan.xnote.app.activity.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:58
+-keep class com.johan.xnote.app.activity.WriteNoteActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:64
+-keep class com.johan.xnote.app.activity.WriteStickyActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:30
+-keep class com.johan.xnote.app.application.XNoteApplication { <init>(...); }
+
+# view AndroidManifest.xml #generated:80
+-keep class com.johan.xnote.app.receiver.RemindReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:81
+-keep class com.johan.xnote.app.service.XNoteService { <init>(...); }
+
+# view res/layout/dialog_show_account_bar.xml #generated:18
+-keep class com.johan.xnote.app.view.AccountStatisticsView { <init>(...); }
+
+# view res/layout/item_sticky.xml #generated:7
+-keep class com.johan.xnote.app.view.DotView { <init>(...); }
+
+# view res/layout/activity_check_lockscreen.xml #generated:27
+# view res/layout/activity_lockscreen.xml #generated:20
+-keep class com.johan.xnote.app.view.LockView { <init>(...); }
+
+# view res/layout/fragment_account.xml #generated:68
+-keep class com.johan.xnote.app.view.MonthView { <init>(...); }
+
+# view res/layout/item_account_statistics.xml #generated:17
+-keep class com.johan.xnote.app.view.NumberProgressBar { <init>(...); }
+
+# view res/layout/fragment_note.xml #generated:34
+-keep class com.johan.xnote.app.view.PinnedHeaderExpandableListView { <init>(...); }
+
+# view res/layout/activity_write_note.xml #generated:66
+-keep class com.johan.xnote.app.view.RichEditor { <init>(...); }
+
+# view res/layout/activity_write_note.xml #generated:333
+-keep class com.johan.xnote.app.view.RichShowor { <init>(...); }
+
+# view res/layout/dialog_time.xml #generated:33
+# view res/layout/dialog_time.xml #generated:38
+# view res/layout/dialog_time.xml #generated:43
+-keep class com.johan.xnote.app.view.WheelView { <init>(...); }
+
+# view AndroidManifest.xml #generated:74
+-keep class com.mob.tools.MobUIShell { <init>(...); }
+
+# view AndroidManifest.xml #generated:103
+-keep class com.tencent.bugly.beta.ui.BetaActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:84
+-keep class com.umeng.update.UpdateDialogActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:98
+-keep class com.umeng.update.net.DownloadingService { <init>(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:286
+-keepclassmembers class * { *** alignCenter(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:276
+-keepclassmembers class * { *** alignLeft(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:296
+-keepclassmembers class * { *** alignRight(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:246
+-keepclassmembers class * { *** bgColor(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:116
+-keepclassmembers class * { *** bold(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:176
+-keepclassmembers class * { *** heading1(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:186
+-keepclassmembers class * { *** heading2(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:196
+-keepclassmembers class * { *** heading3(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:206
+-keepclassmembers class * { *** heading4(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:216
+-keepclassmembers class * { *** heading5(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:226
+-keepclassmembers class * { *** heading6(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:256
+-keepclassmembers class * { *** indent(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:86
+-keepclassmembers class * { *** insertImage(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:126
+-keepclassmembers class * { *** italic(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:266
+-keepclassmembers class * { *** outdent(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:106
+-keepclassmembers class * { *** redo(...); }
+
+# onClick res/layout/activity_write_sticky.xml #generated:83
+-keepclassmembers class * { *** save(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:156
+-keepclassmembers class * { *** strikethrough(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:136
+-keepclassmembers class * { *** subscript(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:146
+-keepclassmembers class * { *** superscript(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:236
+-keepclassmembers class * { *** txtColor(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:166
+-keepclassmembers class * { *** underline(...); }
+
+# onClick res/layout/activity_write_note.xml #generated:96
+-keepclassmembers class * { *** undo(...); }
+

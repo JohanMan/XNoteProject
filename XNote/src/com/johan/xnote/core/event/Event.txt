@@ -1,0 +1,9 @@
+package com.johan.xnote.core.event;
+
+import android.os.Bundle;
+
+public interface Event {
+
+	public void action(Bundle data);
+	
+}

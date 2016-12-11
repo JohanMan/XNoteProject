@@ -1,0 +1,33 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.dialog;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class NoteBookOperationDialog$$ViewInjector<T extends com.johan.xnote.app.dialog.NoteBookOperationDialog> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361972, "method 'delete'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.delete(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361971, "method 'rename'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.rename(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+  }
+}

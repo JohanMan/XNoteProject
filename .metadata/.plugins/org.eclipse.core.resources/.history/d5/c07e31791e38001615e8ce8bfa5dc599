@@ -1,0 +1,38 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.johan.xnote.api.model.AccountType;
+import com.johan.xnote.api.model.AccountTypeDao;
+import com.johan.xnote.app.api.IRecordAccount;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.util.CoreUtil;
+
+public class RecordAccountPresenter extends BasePresenter {
+
+	private IRecordAccount recordAccount;
+	
+	public RecordAccountPresenter(IRecordAccount recordAccount) {
+		this.recordAccount = recordAccount;
+	}
+	
+	public List<String> getTypeList(boolean isOut) {
+		AccountTypeDao accountTypeDao = XNoteApplication.getInstance().getDaoSession().getAccountTypeDao();
+		List<AccountType> accountTypeList = accountTypeDao.queryBuilder().where(AccountTypeDao.Properties.IsOut.eq(isOut)).list();
+		List<String> typeList = new ArrayList<String>();
+		for(AccountType accountType : accountTypeList) {
+			typeList.add(accountType.getName());
+		}
+		return typeList;
+	}
+	
+	public void saveAccount(String money, boolean isOut, String type, String date, String time, String shop, String remark) {
+		if(CoreUtil.hasEmpty(money, type, date, time)) {
+			recordAccount.error("金额、类别、日期、时间都不能为空~");
+			return;
+		}
+		
+	}
+	
+}

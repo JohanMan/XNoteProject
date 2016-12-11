@@ -1,0 +1,66 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.activity;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class WriteStickyActivity$$ViewInjector<T extends com.johan.xnote.app.activity.WriteStickyActivity> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361969, "field 'remindTimeView' and method 'selectRemindTime'");
+    target.remindTimeView = finder.castView(view, 2131361969, "field 'remindTimeView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectRemindTime(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362051, "field 'toolbar'");
+    target.toolbar = finder.castView(view, 2131362051, "field 'toolbar'");
+    view = finder.findRequiredView(source, 2131361967, "field 'remindTipView' and method 'clickRemindTip'");
+    target.remindTipView = finder.castView(view, 2131361967, "field 'remindTipView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.clickRemindTip(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361968, "field 'remindDateView' and method 'selectRemindDate'");
+    target.remindDateView = finder.castView(view, 2131361968, "field 'remindDateView'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.selectRemindDate(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361965, "field 'editTimeView'");
+    target.editTimeView = finder.castView(view, 2131361965, "field 'editTimeView'");
+    view = finder.findRequiredView(source, 2131361966, "field 'contentView'");
+    target.contentView = finder.castView(view, 2131361966, "field 'contentView'");
+    view = finder.findRequiredView(source, 2131361970, "method 'save'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.save(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.remindTimeView = null;
+    target.toolbar = null;
+    target.remindTipView = null;
+    target.remindDateView = null;
+    target.editTimeView = null;
+    target.contentView = null;
+  }
+}

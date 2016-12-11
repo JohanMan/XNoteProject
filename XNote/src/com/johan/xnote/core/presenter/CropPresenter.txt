@@ -1,0 +1,98 @@
+package com.johan.xnote.core.presenter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.johan.xnote.app.api.ICrop;
+import com.johan.xnote.core.action.ActionExecutor;
+import com.johan.xnote.core.action.ActionExecutor.BackgroundAction;
+import com.johan.xnote.core.action.ActionExecutor.UIAction;
+import com.johan.xnote.core.action.ActionFactory;
+import com.johan.xnote.core.util.FileUtil;
+import com.johan.xnote.core.util.FileUtil.SaveImage;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.net.Uri;
+
+public class CropPresenter extends BasePresenter {
+	
+	private ICrop crop;
+	private Activity activity;
+	
+	private ActionExecutor<Bitmap> initExecutor;
+	
+	private ActionExecutor<SaveImage> saveExecutor;
+	
+	public CropPresenter(Activity activity, ICrop crop) {
+		this.activity = activity;
+		this.crop = crop;
+	}
+
+	public void initBitmap(final Uri uri) {
+		initExecutor = new ActionFactory<Bitmap>().doInBackground(new BackgroundAction<Bitmap>() {
+			@Override
+			public Bitmap action() {
+				// TODO Auto-generated method stub
+				try {
+					return FileUtil.getBitmapFormUri(activity, uri);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					crop.setBitmapFail(e.getMessage());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					crop.setBitmapFail(e.getMessage());
+				}
+				return null;
+			}
+		}).doInUI(new UIAction<Bitmap>() {
+			@Override
+			public void action(Bitmap data) {
+				// TODO Auto-generated method stub
+				crop.setBitmapSuccess(data);
+			}
+		}).build();
+		initExecutor.execute();
+	}
+	
+	public void saveBitmap(final Bitmap bitmap) {
+		saveExecutor = new ActionFactory<SaveImage>().doInBackground(new BackgroundAction<SaveImage>() {
+			@Override
+			public SaveImage action() {
+				// TODO Auto-generated method stub
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return FileUtil.saveBitmap(bitmap);
+			}
+		}).doInUI(new UIAction<SaveImage>() {
+			@Override
+			public void action(SaveImage data) {
+				// TODO Auto-generated method stub
+				if(null != data) {
+					crop.saveBitmapSuccess(data);
+					return;
+				}
+				crop.saveBitmapFail("Î´Öª´íÎó~");
+			}
+		}).build();
+		saveExecutor.execute();
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		if(null != initExecutor) {
+			initExecutor.cancel();
+		}
+		if(null != saveExecutor) {
+			saveExecutor.cancel();
+		}
+	}
+	
+}

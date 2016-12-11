@@ -1,0 +1,42 @@
+package com.johan.xnote.core.event;
+
+import java.util.Hashtable;
+
+import android.os.Bundle;
+
+public class EventBus {
+	
+	private Hashtable<String, EventSubjecter> subjectTable;
+
+	private static class EventBusInstance {
+		private static final EventBus INSTANCE = new EventBus();
+	}
+	
+	private EventBus() {
+		subjectTable = new Hashtable<String, EventSubjecter>();
+	}
+	
+	public static EventBus getInstance() {
+		return EventBusInstance.INSTANCE;
+	}
+	
+	public void register(Class<?> clazz, EventSubjecter subjecter) {
+		subjectTable.put(clazz.getName(), subjecter);
+	}
+	
+	public void unregister(Class<?> clazz) {
+		EventSubjecter subjecter = subjectTable.get(clazz.getName());
+		if(null != subjecter) {
+			subjecter.clearEvent();
+			subjectTable.remove(clazz.getName());
+		}
+	}
+	
+	public void update(Class<?> clazz, int id, Bundle data) {
+		EventSubjecter subjecter = subjectTable.get(clazz.getName());
+		if(null  != subjecter) {
+			subjecter.doEvent(id, data);
+		}
+	}
+	
+}

@@ -1,0 +1,35 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.PersonalInfoPresenter;
+
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import butterknife.InjectView;
+
+public class PersonalInfoActivity extends BaseActivity<PersonalInfoPresenter> {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_personal_info;
+	}
+
+	@Override
+	protected PersonalInfoPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new PersonalInfoPresenter();
+	}
+	
+	
+
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        
+        <EditText 
+            android:id="@+id/note_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme_hint_color"
+            android:textSize="14sp"
+            android:textColorHint="@color/theme_hint_color"
+            android:hint="搜索"
+            android:background="@drawable/corner_light_gray_5"
+            android:padding="6dp"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="6dp"
+            android:layout_margin="10dp"
+            android:singleLine="true"
+            />
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#DDDDDD"
+            />
+        
+        <com.johan.xnote.app.view.PinnedHeaderExpandableListView
+	        android:id="@+id/note_listview"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:divider="#DFDFDF"
+	        android:dividerHeight="0.5dp"
+	        android:childDivider="#DFDFDF"
+	        />
+        
+    </LinearLayout>
+    
+    <ImageView 
+        android:id="@+id/note_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/write"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+    
+    <ImageView 
+        android:id="@+id/note_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/note_write"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+
+</RelativeLayout>

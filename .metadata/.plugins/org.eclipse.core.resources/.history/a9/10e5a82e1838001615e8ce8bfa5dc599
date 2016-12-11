@@ -1,0 +1,33 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.AccountPresenter;
+
+import android.os.Bundle;
+import android.widget.ImageView;
+import butterknife.InjectView;
+
+public class AccountFragment extends BaseFragment<AccountPresenter> {
+	
+	@InjectView(R.id.account_record)
+	public ImageView record;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_account;
+	}
+
+	@Override
+	protected AccountPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new AccountPresenter();
+	}
+
+}

@@ -1,0 +1,59 @@
+package com.johan.xnote.app.view;
+
+import com.johan.xnote.R;
+import com.johan.xnote.model.AccountType;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class AccountStatisticsView extends LinearLayout {
+	
+	private Context context;
+	
+	public AccountStatisticsView(Context context) {
+		super(context);
+		this.context = context;
+		setOrientation(LinearLayout.VERTICAL);
+	}
+
+	public AccountStatisticsView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		this.context = context;
+		setOrientation(LinearLayout.VERTICAL);
+	}
+	
+	public void insertData(String title, int progress, String tip, boolean isOut) {
+		LinearLayout layout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.item_account_statistics, null);
+		TextView titleView = (TextView) layout.findViewById(R.id.item_account_detail_title);
+		titleView.setText(title);
+		NumberProgressBar progressBar = (NumberProgressBar) layout.findViewById(R.id.item_account_detail_bar);
+		progressBar.setProgress(progress);
+		TextView tipView = (TextView) layout.findViewById(R.id.item_account_detail_tip);
+		tipView.setText(tip + "Ԫ");
+		if(isOut) {
+			titleView.setTextColor(context.getResources().getColor(R.color.account_bad_background));
+			progressBar.setProgressTextColor(context.getResources().getColor(R.color.account_bad_background));
+			progressBar.setReachedBarColor(context.getResources().getColor(R.color.account_bad_background));
+			tipView.setTextColor(context.getResources().getColor(R.color.account_bad_background));
+		} else {
+			titleView.setTextColor(context.getResources().getColor(R.color.account_good_background));
+			progressBar.setProgressTextColor(context.getResources().getColor(R.color.account_good_background));
+			progressBar.setReachedBarColor(context.getResources().getColor(R.color.account_good_background));
+			tipView.setTextColor(context.getResources().getColor(R.color.account_good_background));
+		}
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		if(isOut) {
+			addView(layout, 0, params);
+		} else {
+			addView(layout, params);
+		}
+	}
+	
+	public void clear() {
+		removeAllViews();
+	}
+
+}

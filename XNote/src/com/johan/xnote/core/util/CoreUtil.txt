@@ -1,0 +1,60 @@
+package com.johan.xnote.core.util;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+public class CoreUtil {
+
+	/**
+	 * 判断空值
+	 * @param params
+	 * @return
+	 */
+	public static boolean hasEmpty(String... params) {
+		for(String param : params) {
+			if("".equals(param)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 是否是电话号码
+	 * @param mobiles
+	 * @return
+	 */
+	public static boolean isMobileNumber(String mobiles) {
+		Pattern p = Pattern.compile("^((1[0-9][0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		Matcher m = p.matcher(mobiles);
+		return m.matches();
+	}
+	
+	/**
+	 * 判断是否连接网络
+	 * @param context
+	 * @return
+	 */
+	public static boolean isNetworkConnected(Context context) {
+		ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        return ni != null && ni.isConnectedOrConnecting();
+	}
+	
+	/**
+	 * 当前时间字符串
+	 * @return
+	 */
+	public static String getNowTime(String pattern) {
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		Date date = new Date(System.currentTimeMillis());
+		return format.format(date);
+	}
+	
+}

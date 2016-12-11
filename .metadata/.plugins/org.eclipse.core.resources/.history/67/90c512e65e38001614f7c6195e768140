@@ -1,0 +1,117 @@
+package com.johan.xnote.app.adapter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.MyStickyNoteActivity;
+import com.johan.xnote.app.view.DotView;
+import com.johan.xnote.app.view.FoldingTextView;
+import com.johan.xnote.core.presenter.MyStickyNotePresenter;
+import com.johan.xnote.core.presenter.Publisher;
+import com.johan.xnote.model.Note;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+public class MyStickyNoteAdapter extends AbstractBaseAdapter<Note>{
+	
+	private boolean canSelected = false;
+
+	public MyStickyNoteAdapter(Context context, List<Note> dataList) {
+		super(context, dataList);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder holder = ViewHolder.get(context, convertView, parent, R.layout.item_mystickynote);
+		RelativeLayout layout = (RelativeLayout) holder.getConvertView();
+		DotView dotView = holder.getView(R.id.item_mystickynote_dot);
+		TextView editTimeView = holder.getView(R.id.item_mystickynote_edittime);
+		FoldingTextView thingView = holder.getView(R.id.item_mystickynote_thing);
+		TextView remindTimeView = holder.getView(R.id.item_mystickynote_remind_time);
+		// Êý¾Ý
+		final Note note = dataList.get(position);
+		// layout
+		layout.setOnLongClickListener(new OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				// TODO Auto-generated method stub
+				if(!canSelected) {
+					note.setSelected(true);
+					refreshCanSelected();
+					notifyDataSetChanged();
+					notifyActivity();
+				}
+				return true;
+			}
+		});
+		layout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(canSelected) {
+					note.setSelected(!note.isSelected());
+					refreshCanSelected();
+					notifyDataSetChanged();
+					notifyActivity();
+				}
+			}
+		});
+		if(note.isSelected()) {
+			layout.setBackgroundColor(context.getResources().getColor(R.color.mystickynote_item_selected_background));
+		} else {
+			layout.setBackgroundColor(context.getResources().getColor(R.color.mystickynote_item_normal_background));
+		}
+		// dotView
+		dotView.setColor(note.color);
+		// editTimeView
+		editTimeView.setText(note.editTime);
+		// thingView
+		thingView.setText(note.thing);
+		// remindTimeView
+		if(note.isRemind == 1) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date date = new Date(note.remindTime);
+			remindTimeView.setText(format.format(date));
+			remindTimeView.setVisibility(View.VISIBLE);
+		} else {
+			remindTimeView.setVisibility(View.GONE);
+		}
+		return holder.getConvertView();
+	}
+	
+	private void refreshCanSelected() {
+		for(Note note : dataList) {
+			if(note.isSelected()) {
+				canSelected = true;
+				return;
+			}
+		}
+		canSelected = false;
+	}
+	
+	private void notifyActivity() {
+		Bundle data = new Bundle();
+		data.putBoolean("can_selected", canSelected);
+		Publisher.getInstance().notifySubscriber(MyStickyNoteActivity.class.getName(), MyStickyNotePresenter.EVENT_SELECTED_MODE, data);
+	}
+	
+	public void selectedAll(boolean isSelected) {
+		for(Note note : dataList) {
+			note.setSelected(isSelected);
+		}
+		canSelected = isSelected;
+		notifyDataSetChanged();
+	}
+
+}

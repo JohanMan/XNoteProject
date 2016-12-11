@@ -1,0 +1,104 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.List;
+
+import com.johan.xnote.api.model.Note;
+import com.johan.xnote.api.model.NoteDao;
+import com.johan.xnote.app.api.IWriteNote;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.event.Event;
+import com.johan.xnote.core.event.EventBus;
+import com.johan.xnote.core.event.EventSubjecter;
+import com.johan.xnote.core.util.CoreUtil;
+
+import android.os.Bundle;
+
+public class WriteNotePresenter extends BasePresenter {
+	
+	public static final int EVENT_SELECT_NOTE_BOOK = 1;
+	
+	private NoteDao noteDao;
+	
+	private IWriteNote writeNote;
+	
+	private EventSubjecter subjecter;
+	
+	private long noteBookId = -1;
+	
+	private long noteId = -1;
+	
+	public WriteNotePresenter(IWriteNote writeNote) {
+		// TODO Auto-generated constructor stub
+		this.writeNote = writeNote;
+		noteDao = XNoteApplication.getInstance().getDaoSession().getNoteDao();
+	}
+
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		subjecter = new EventSubjecter();
+		subjecter.addEvent(EVENT_SELECT_NOTE_BOOK, updateNoteBook);
+		EventBus.getInstance().register(getClass(), subjecter);
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		EventBus.getInstance().unregister(getClass());
+	}
+	
+	private Event updateNoteBook = new Event() {
+		@Override
+		public void action(Bundle data) {
+			// TODO Auto-generated method stub
+			noteBookId = data.getLong("id");
+			String noteName = data.getString("name");
+			writeNote.setActionBar(noteName);
+		}
+	};
+	
+	public void init(long noteId, long noteBookId) {
+		// 新建的
+		if(noteId == -1) {
+			return;
+		}
+		// 更新的
+		this.noteId = noteId;
+		this.noteBookId = noteBookId;
+		Note note = noteDao.queryBuilder().where(NoteDao.Properties.NoteId.eq(noteId)).list().get(0);
+		writeNote.setTitle(note.getTitle());
+		writeNote.setBody(note.getBody());
+		writeNote.setActionBar(note.getNoteBook().getName());
+	}
+	
+	public void saveNote(String title, String content) {
+		if(noteBookId == -1) {
+			writeNote.error("请选择笔记本~");
+			return;
+		}
+		if(CoreUtil.hasEmpty(title, content)) {
+			writeNote.error("标题和内容不能为空~");
+			return;
+		}
+		String time = CoreUtil.getNowTime("yyyy-MM-dd HH:mm");
+		if(noteId == -1) {
+			// 新建的
+			Note note = new Note(null, time, title, content, noteBookId);
+			noteId = noteDao.insert(note);
+		} else {
+			// 更新的
+			List<Note> findResult = noteDao.queryBuilder().where(NoteDao.Properties.NoteId.eq(noteId)).list();
+			if(findResult.size() == 0) {
+				writeNote.error("未知错误~");
+			}
+			Note note = findResult.get(0);
+			note.setBookId(noteBookId);
+			note.setTitle(title);
+			note.setTime(time);
+			note.setBody(content);
+			noteDao.update(note);
+		}
+		writeNote.saveNoteSuccess();
+	}
+	
+}

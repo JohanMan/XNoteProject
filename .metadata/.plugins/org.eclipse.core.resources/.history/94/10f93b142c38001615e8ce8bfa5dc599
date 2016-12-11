@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+            
+            <ImageView 
+                android:id="@+id/account_last_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/last"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                />
+            
+            <ImageView 
+                android:id="@+id/account_next_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                />
+            
+            <TextView 
+                android:id="@+id/account_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_hint_color"
+                android:textSize="@dimen/title_size"
+                android:text="2016"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/account_next_year"
+                android:layout_toRightOf="@+id/account_last_year"
+                />
+            
+        </RelativeLayout>
+	    
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="#DDDDDD"
+	        />
+	    
+	    <com.johan.xnote.app.view.MonthView 
+	        android:id="@+id/account_month"
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        ></com.johan.xnote.app.view.MonthView>
+	    
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="#DDDDDD"
+	        />
+	    
+	    <View 
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="#DDDDDD"
+	        android:layout_marginTop="10dp"
+	        />
+	    
+	    <ListView 
+	        android:id="@+id/account_list"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:divider="#DDDDDD"
+	        android:dividerHeight="0.5dp"
+	        ></ListView>
+    
+    </LinearLayout>
+    
+    <ImageView 
+        android:id="@+id/account_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/write"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/layout_padding"
+        />
+
+</RelativeLayout>

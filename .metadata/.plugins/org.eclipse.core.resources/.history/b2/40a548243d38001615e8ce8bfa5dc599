@@ -1,0 +1,145 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.RecordAccountActivity;
+import com.johan.xnote.app.adapter.AccountAdapter;
+import com.johan.xnote.app.api.IAccount;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.view.MonthView;
+import com.johan.xnote.app.view.MonthView.OnSelectListener;
+import com.johan.xnote.core.presenter.AccountPresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ListView;
+import android.widget.TextView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class AccountFragment extends BaseFragment<AccountPresenter> implements IAccount {
+	
+	@InjectView(R.id.account_year)
+	public TextView yearView;
+	
+	@InjectView(R.id.account_month)
+	public MonthView monthView;
+	
+	@InjectView(R.id.account_in_money)
+	public TextView inMoneyView;
+
+	@InjectView(R.id.account_out_money)
+	public TextView outMoneyView;
+
+	@InjectView(R.id.account_resume_money)
+	public TextView resumeMoneyView;
+	
+	@InjectView(R.id.account_list)
+	public ListView listView;
+	
+	private AccountAdapter adapter;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		presenter.init();
+		adapter = new AccountAdapter(getActivity(), presenter.getData());
+		listView.setAdapter(adapter);
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if(!adapter.isEditable()) {
+					presenter.getData().get(position).setSelected(true);
+					return true;
+				}
+				return false;
+			}
+		});
+		monthView.setOnSelectListener(new OnSelectListener() {
+			@Override
+			public void onSelect(int month) {
+				// TODO Auto-generated method stub
+				presenter.selectMonth(month);
+			}
+		});
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		presenter.loadData();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_account;
+	}
+
+	@Override
+	protected AccountPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new AccountPresenter(this);
+	}
+	
+	@OnClick(R.id.account_record)
+	public void recordAccount(View view) {
+		goActivity(RecordAccountActivity.class);
+	}
+	
+	@OnClick(R.id.account_last_year)
+	public void lastYear(View view) {
+		presenter.selectLastYear();
+	}
+	
+	@OnClick(R.id.account_next_year)
+	public void nextYear(View view) {
+		presenter.selectNextYear();
+	}
+
+	@Override
+	public void setYear(int year) {
+		// TODO Auto-generated method stub
+		yearView.setText(String.valueOf(year));
+	}
+
+	@Override
+	public void setMonth(int month) {
+		// TODO Auto-generated method stub
+		monthView.setMonth(month);
+	}
+
+	@Override
+	public void refreshListView() {
+		// TODO Auto-generated method stub
+		adapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void setInMoney(String inMoney) {
+		// TODO Auto-generated method stub
+		inMoneyView.setText(inMoney);
+	}
+
+	@Override
+	public void setOutMoney(String outMoney) {
+		// TODO Auto-generated method stub
+		outMoneyView.setText(outMoney);
+	}
+
+	@Override
+	public void setResumeMoney(String resumeMoney) {
+		// TODO Auto-generated method stub
+		resumeMoneyView.setText(resumeMoney);
+	}
+
+	@Override
+	public void error(String msg) {
+		// TODO Auto-generated method stub
+		AppUtil.toast(getActivity(), msg);
+	}
+
+}

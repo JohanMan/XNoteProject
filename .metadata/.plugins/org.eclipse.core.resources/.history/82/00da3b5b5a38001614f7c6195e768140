@@ -1,0 +1,10 @@
+package com.johan.xnote.core.presenter;
+
+public class WriteStickyPresenter extends BasePresenter {
+
+	public String getCurrentTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

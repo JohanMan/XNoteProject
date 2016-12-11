@@ -1,0 +1,31 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.PersonalInfoPresenter;
+
+import android.os.Bundle;
+import butterknife.OnClick;
+
+public class PersonalInfoActivity extends BaseActivity<PersonalInfoPresenter> {
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_personal_info;
+	}
+
+	@Override
+	protected PersonalInfoPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new PersonalInfoPresenter();
+	}
+	
+	
+
+}

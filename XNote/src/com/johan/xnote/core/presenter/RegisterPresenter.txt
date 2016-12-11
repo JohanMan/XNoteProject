@@ -1,0 +1,37 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.app.api.IRegister;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.util.CoreUtil;
+import com.johan.xnote.core.util.DataUtil;
+
+public class RegisterPresenter extends BasePresenter {
+
+	private IRegister register;
+	
+	public RegisterPresenter(IRegister register) {
+		this.register = register;
+	}
+	
+	public void register(String phone, String nickName, String password, String email) {
+		if(CoreUtil.hasEmpty(phone, nickName, password)) {
+			register.registerFail("手机、昵称、密码不能为空哦~");
+			return;
+		}
+		if(!CoreUtil.isMobileNumber(phone)) {
+			register.registerFail("手机格式不对哦~");
+			return;
+		}
+		String loginPhone = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+		if(phone.equals(loginPhone)) {
+			register.registerFail("该号码已经注册，您可以尝试找回密码~");
+			return;
+		}
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, phone);
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_NICK_NAME, nickName);
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_PASSWORD, DataUtil.md5(password));
+		SharePreferencesUtil.setParam(SharePreferencesUtil.KEY_OF_LOGIN_EMAIL, email);
+		register.registerSuccess();
+	}
+	
+}

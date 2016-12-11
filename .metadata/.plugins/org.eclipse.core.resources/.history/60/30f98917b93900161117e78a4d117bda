@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/layout_title_center"/>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+        
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/theme_background_color"
+            android:textSize="@dimen/text_size"
+            android:text="功能介绍"
+            android:background="#DDDDDD"
+            />
+        
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:textColor="@color/theme_text_color"
+            android:textSize="@dimen/text_size"
+            android:text="X笔记是一款简洁易用的手机记事工具。\n主要功能：\n"
+            />
+        
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,64 @@
+package com.johan.xnote.app.adapter;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Account;
+import com.johan.xnote.api.model.AccountType;
+import com.johan.xnote.core.util.CoreUtil;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class AccountAdapter extends AbstractBaseAdapter<Account> {
+
+	public AccountAdapter(Context context, List<Account> dataList) {
+		super(context, dataList);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder holder = ViewHolder.get(context, convertView, parent, R.layout.item_account);
+		TextView iconView = holder.getView(R.id.item_account_icon);
+		TextView timeView = holder.getView(R.id.item_account_time);
+		TextView moneyView = holder.getView(R.id.item_account_money);
+		TextView typeView = holder.getView(R.id.item_account_type);
+		TextView shopView = holder.getView(R.id.item_account_shop);
+		TextView remarkView = holder.getView(R.id.item_account_remark);
+		Account account = dataList.get(position);
+		AccountType accountType = account.getAccountType();
+		// icon view, 日
+		iconView.setText(String.valueOf(account.getDay()));
+		// 时间
+		timeView.setText(account.getTime());
+		// 金额
+		moneyView.setText(account.getMoney() + "元");
+		if(account.getMoney() > 0) {
+			moneyView.setTextColor(context.getResources().getColor(R.color.account_good_background));
+		} else {
+			moneyView.setTextColor(context.getResources().getColor(R.color.account_bad_background));
+		}
+		// 类型
+		typeView.setText(accountType.getName());
+		// 店名
+		if(CoreUtil.hasEmpty(account.getShop())) {
+			shopView.setVisibility(View.GONE);
+		} else {
+			shopView.setText(account.getShop());
+			shopView.setVisibility(View.VISIBLE);
+		}
+		// 备注
+		if(CoreUtil.hasEmpty(account.getRemark())) {
+			remarkView.setVisibility(View.GONE);
+		} else {
+			remarkView.setText(account.getRemark());
+			remarkView.setVisibility(View.VISIBLE);
+		}
+		return holder.getConvertView();
+	}
+
+}

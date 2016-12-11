@@ -1,0 +1,36 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.dialog;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class NewNoteBookDialog$$ViewInjector<T extends com.johan.xnote.app.dialog.NewNoteBookDialog> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131361966, "field 'nameView'");
+    target.nameView = finder.castView(view, 2131361966, "field 'nameView'");
+    view = finder.findRequiredView(source, 2131361968, "method 'ok'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.ok(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131361967, "method 'cancel'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.cancel(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.nameView = null;
+  }
+}

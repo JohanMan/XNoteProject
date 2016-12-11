@@ -1,0 +1,11 @@
+package com.johan.xnote.app.api;
+
+public interface IWriteSticky {
+
+	public void error(String msg);
+	
+	public void saveStickySuccess();
+	
+	public void saveStickyFail();
+	
+}

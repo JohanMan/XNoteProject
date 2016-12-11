@@ -1,0 +1,25 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.Calendar;
+
+import com.johan.xnote.app.api.IAccount;
+
+public class AccountPresenter extends BasePresenter {
+
+	private IAccount account;
+	
+	public AccountPresenter(IAccount account) {
+		this.account = account;
+	}
+	
+	public void init() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		System.out.println("year:" + year + " | month:" + month);
+		account.setYear(year);
+		account.setMonth(month);
+	}
+	
+}

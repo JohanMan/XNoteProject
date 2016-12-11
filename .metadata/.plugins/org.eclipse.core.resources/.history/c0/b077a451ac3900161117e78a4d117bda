@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/layout_title_center"/>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_color"
+        android:textSize="@dimen/title_size"
+        android:text="最少设置3个点"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        />
+    
+    <com.johan.xnote.app.view.LockView
+        android:id="@+id/lockscreen_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    
+    <Button 
+	    android:id="@+id/lockscreen_but"
+	    android:layout_width="match_parent"
+	    android:layout_height="@dimen/but_height"
+	    android:textColor="@color/theme_background_color"
+	    android:textSize="@dimen/title_size"
+	    android:text="设  置"
+	    android:background="@drawable/corner_theme_5"
+	    android:layout_margin="@dimen/layout_padding"
+	    />
+
+</LinearLayout>

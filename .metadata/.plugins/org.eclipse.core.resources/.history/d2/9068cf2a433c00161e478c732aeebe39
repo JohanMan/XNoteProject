@@ -1,0 +1,75 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.fragment;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class MeFragment$$ViewInjector<T extends com.johan.xnote.app.fragment.MeFragment> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131362019, "field 'lockscreenStateView'");
+    target.lockscreenStateView = finder.castView(view, 2131362019, "field 'lockscreenStateView'");
+    view = finder.findRequiredView(source, 2131362021, "field 'versionInfoView'");
+    target.versionInfoView = finder.castView(view, 2131362021, "field 'versionInfoView'");
+    view = finder.findRequiredView(source, 2131362023, "method 'clickExit'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.clickExit(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362018, "method 'clickLockscreen'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.clickLockscreen(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362017, "method 'clickModifyPassword'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.clickModifyPassword(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362016, "method 'clickPersonalInfo'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.clickPersonalInfo(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362022, "method 'clickAbout'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.clickAbout(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362020, "method 'clickupdateVersion'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.clickupdateVersion(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.lockscreenStateView = null;
+    target.versionInfoView = null;
+  }
+}

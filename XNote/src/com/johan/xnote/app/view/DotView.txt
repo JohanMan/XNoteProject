@@ -1,0 +1,46 @@
+package com.johan.xnote.app.view;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.view.View;
+
+public class DotView extends View {
+	
+	private String color = "#ffffff";
+	
+	private Paint paint;
+
+	public DotView(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+		paint = new Paint();
+		paint.setAntiAlias(true);
+	}
+
+	public DotView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+		paint = new Paint();
+		paint.setAntiAlias(true);
+	}
+	
+	@Override
+	protected void onDraw(Canvas canvas) {
+		// TODO Auto-generated method stub
+		super.onDraw(canvas);
+		int width = getWidth();
+		int height = getHeight();
+		int raduis = Math.min(width, height) / 2;
+		paint.setColor(Color.parseColor(color));
+		canvas.drawCircle(width / 2, height / 2, raduis, paint);
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
+		invalidate();
+	}
+
+}

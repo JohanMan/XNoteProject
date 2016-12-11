@@ -1,0 +1,177 @@
+package com.johan.xnote.app.adapter;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Note;
+import com.johan.xnote.api.model.NoteBook;
+import com.johan.xnote.app.view.PinnedHeaderExpandableListView;
+import com.johan.xnote.app.view.PinnedHeaderExpandableListView.HeaderAdapter;
+
+import android.content.Context;
+import android.util.SparseIntArray;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+public class PinnedHeaderExpandableAdapter extends  BaseExpandableListAdapter implements HeaderAdapter {
+	
+	private List<NoteBook> noteBookList;
+	private List<List<Note>> noteList;
+	private Context context;
+	private PinnedHeaderExpandableListView listView;
+	private LayoutInflater inflater;
+	
+	public PinnedHeaderExpandableAdapter(List<NoteBook> noteBookList, List<List<Note>> noteList, Context context, PinnedHeaderExpandableListView listView){
+		this.noteBookList = noteBookList; 
+		this.noteList = noteList;
+		this.context = context;
+		this.listView = listView;
+		inflater = LayoutInflater.from(this.context);
+	}
+
+	@Override
+	public Object getChild(int groupPosition, int childPosition) {
+		return noteList.get(groupPosition).get(childPosition);
+	}
+
+	@Override
+	public long getChildId(int groupPosition, int childPosition) {
+		return 0;
+	}
+
+	@Override
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+		ChildViewHolder holder;
+		if(null == convertView) {
+			convertView = inflater.inflate(R.layout.item_note_child, null);
+			holder = new ChildViewHolder(convertView);
+			convertView.setTag(holder);
+		} else {
+			holder = (ChildViewHolder) convertView.getTag();
+		}
+		Note note = noteList.get(groupPosition).get(childPosition);
+		holder.title.setText(note.getTitle());
+		holder.time.setText(note.getTime());
+		convertView.setId(Integer.parseInt(String.valueOf(note.getNoteId())));
+        return convertView;    
+	}
+	
+	class ChildViewHolder {
+		@InjectView(R.id.item_note_child_title)
+		public TextView title;
+		@InjectView(R.id.item_note_child_time)
+		public TextView time;
+		public ChildViewHolder(View view) {
+			ButterKnife.inject(this, view);
+		}
+	}
+
+	@Override
+	public int getChildrenCount(int groupPosition) {
+		return noteList.get(groupPosition).size();
+	}
+
+	@Override
+	public Object getGroup(int groupPosition) {
+		return noteBookList.get(groupPosition);
+	}
+
+	@Override
+	public int getGroupCount() {
+		return noteBookList.size();
+	}
+
+	@Override
+	public long getGroupId(int groupPosition) {
+		return 0;
+	}
+
+	@Override
+	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		GroupViewHolder holder;
+		if(null == convertView) {
+			convertView = inflater.inflate(R.layout.item_note_group, null);
+			holder = new GroupViewHolder(convertView);
+			convertView.setTag(holder);
+		} else {
+			holder = (GroupViewHolder) convertView.getTag();
+		}
+		if (isExpanded) {
+			holder.icon.setImageResource(R.drawable.open);
+		} else {
+			holder.icon.setImageResource(R.drawable.close);
+		}
+        NoteBook noteBook = noteBookList.get(groupPosition);
+        holder.title.setText(noteBook.getName());
+        return convertView;  
+	}
+	
+	public class GroupViewHolder {
+		@InjectView(R.id.item_note_group_icon)
+		public ImageView icon;
+		@InjectView(R.id.item_note_group_title)
+		public TextView title;
+		public GroupViewHolder(View view) {
+			ButterKnife.inject(this, view);
+		}
+	}
+
+	@Override
+	public boolean hasStableIds() {
+		return true;
+	}
+
+	@Override
+	public boolean isChildSelectable(int groupPosition, int childPosition) {
+		return true;
+	}
+
+	@Override
+	public int getHeaderState(int groupPosition, int childPosition) {
+		if(noteBookList.size() == 0) return PINNED_HEADER_GONE;
+		// ÅÐ¶ÏHeaderµÄ×´Ì¬
+		final int childCount = getChildrenCount(groupPosition);
+		if (childPosition == childCount - 1) {
+			return PINNED_HEADER_PUSHED_UP;
+		} else if (childPosition == -1 && !listView.isGroupExpanded(groupPosition)) {
+			return PINNED_HEADER_GONE;
+		} else {
+			return PINNED_HEADER_VISIBLE;
+		}
+	}
+
+	@Override
+	public void configureHeader(View header, int groupPosition, int childPosition, int alpha) {
+		TextView titleView = (TextView) header.findViewById(R.id.header_note_group_title);
+		ImageView iconView = (ImageView) header.findViewById(R.id.header_note_group_icon);
+		String groupData =  noteBookList.get(groupPosition).getName();
+		titleView.setText(groupData);
+		if(listView.isGroupExpanded(groupPosition)) {
+			iconView.setImageResource(R.drawable.open);
+		} else {
+			iconView.setImageResource(R.drawable.close);
+		}
+	}
+	
+	private SparseIntArray groupStatusMap = new SparseIntArray(); 
+	
+	@Override
+	public void setGroupClickStatus(int groupPosition, int status) {
+		groupStatusMap.put(groupPosition, status);
+	}
+
+	@Override
+	public int getGroupClickStatus(int groupPosition) {
+		if (groupStatusMap.keyAt(groupPosition)>=0) {
+			return groupStatusMap.get(groupPosition);
+		} else {
+			return 0;
+		}
+	}
+}

@@ -1,0 +1,23 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.List;
+
+import com.johan.xnote.app.api.IHome;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.util.CoreUtil;
+
+public class HomePresenter extends BasePresenter {
+
+	private IHome home;
+	
+	public HomePresenter(IHome home) {
+		this.home = home;
+	}
+	
+	public void initToolbar() {
+		String nickName = (String) SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_NICK_NAME, "X");
+		home.setToolbar(nickName);
+	}
+	
+}

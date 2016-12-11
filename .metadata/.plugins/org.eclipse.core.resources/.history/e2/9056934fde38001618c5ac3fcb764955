@@ -1,0 +1,123 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.api.model.Sticky;
+import com.johan.xnote.app.activity.WriteStickyActivity;
+import com.johan.xnote.app.adapter.StickyAdapter;
+import com.johan.xnote.app.api.ISticky;
+import com.johan.xnote.core.presenter.StickyPresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
+import android.widget.ListView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class StickyFragment extends BaseFragment<StickyPresenter> implements ISticky {
+	
+	@InjectView(R.id.sticky_list_view)
+	public ListView listView;
+	
+	@InjectView(R.id.sticky_delete)
+	public ImageView deleteView;
+	
+	@InjectView(R.id.sticky_cancel)
+	public ImageView cancelView;
+	
+	@InjectView(R.id.sticky_color)
+	public ImageView colorView;
+	
+	private StickyAdapter adapter;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		adapter = new StickyAdapter(getActivity(), presenter.getData());
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if(!adapter.isEditable()) {
+					presenter.getData().get(position).setSelected(true);
+					adapter.notifyDataSetChanged();
+					showDelete(true);
+					return true;
+				}
+				return false;
+			}
+		});
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if(adapter.isEditable()) {
+					Sticky sticky = presenter.getData().get(position);
+					sticky.setSelected(!sticky.isSelected());
+					adapter.notifyDataSetChanged();
+					showDelete(adapter.isEditable());
+				}
+			}
+		});
+		listView.setAdapter(adapter);
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		presenter.loadData();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_sitcky;
+	}
+
+	@Override
+	protected StickyPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new StickyPresenter(this);
+	}
+	
+	@OnClick(R.id.sticky_write)
+	public void write(View view) {
+		goActivity(WriteStickyActivity.class);
+	}
+	
+	@OnClick(R.id.sticky_delete)
+	public void delete(View view) {
+		presenter.delete();
+		showDelete(false);
+	}
+	
+	@OnClick(R.id.sticky_cancel)
+	public void cancel(View view) {
+		presenter.cancel();
+		showDelete(false);
+	}
+	
+	@OnClick(R.id.sticky_color)
+	public void color(View view) {
+		
+		showDelete(false);
+	}
+
+	@Override
+	public void refreshListView() {
+		// TODO Auto-generated method stub
+		adapter.notifyDataSetChanged();
+	}
+	
+	private void showDelete(boolean isShow) {
+		int showMode = isShow ? View.VISIBLE : View.GONE;
+		deleteView.setVisibility(showMode);
+		colorView.setVisibility(showMode);
+		cancelView.setVisibility(showMode);
+	}
+
+}

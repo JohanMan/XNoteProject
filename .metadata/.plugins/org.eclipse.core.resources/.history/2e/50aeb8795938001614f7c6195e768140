@@ -1,0 +1,28 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.WriteStickyPresenter;
+
+import android.os.Bundle;
+
+public class WriteStickyActivity extends BaseActivity<WriteStickyPresenter> {
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_write_sticky;
+	}
+
+	@Override
+	protected WriteStickyPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new WriteStickyPresenter();
+	}
+
+}

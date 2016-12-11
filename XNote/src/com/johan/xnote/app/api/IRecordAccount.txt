@@ -1,0 +1,11 @@
+package com.johan.xnote.app.api;
+
+public interface IRecordAccount {
+
+	public void error(String msg);
+	
+	public void saveRecountSuccess();
+	
+	public void saveRecountFail();
+	
+}

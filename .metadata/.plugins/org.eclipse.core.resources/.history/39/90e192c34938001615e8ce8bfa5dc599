@@ -1,0 +1,29 @@
+package com.johan.xnote.app.dialog;
+
+import com.johan.xnote.R;
+
+import android.app.Dialog;
+import android.content.Context;
+
+public class ShowAccountBarDialog {
+
+	private Context context;
+	
+	private Dialog showDialog;
+	
+	public ShowAccountBarDialog(Context context, int year, int month) {
+		this.context = context;
+		showDialog = new Dialog(context, R.style.CustomDialog);
+		showDialog.setContentView(R.layout.dialog_show_account_bar);
+		
+	}
+
+	public void show() {
+		showDialog.show();
+	}
+	
+	public void dismiss() {
+		showDialog.dismiss();
+	}
+	
+}

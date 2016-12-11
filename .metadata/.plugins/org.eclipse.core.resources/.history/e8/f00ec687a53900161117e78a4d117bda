@@ -1,0 +1,39 @@
+// Generated code from Butter Knife. Do not modify!
+package com.johan.xnote.app.fragment;
+
+import android.view.View;
+import butterknife.ButterKnife.Finder;
+import butterknife.ButterKnife.Injector;
+
+public class NoteFragment$$ViewInjector<T extends com.johan.xnote.app.fragment.NoteFragment> implements Injector<T> {
+  @Override public void inject(final Finder finder, final T target, Object source) {
+    View view;
+    view = finder.findRequiredView(source, 2131362022, "field 'noteListView'");
+    target.noteListView = finder.castView(view, 2131362022, "field 'noteListView'");
+    view = finder.findRequiredView(source, 2131362021, "field 'searchView'");
+    target.searchView = finder.castView(view, 2131362021, "field 'searchView'");
+    view = finder.findRequiredView(source, 2131362023, "method 'addNoteBook'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.addNoteBook(p0);
+        }
+      });
+    view = finder.findRequiredView(source, 2131362024, "method 'writeNote'");
+    view.setOnClickListener(
+      new butterknife.internal.DebouncingOnClickListener() {
+        @Override public void doClick(
+          android.view.View p0
+        ) {
+          target.writeNote(p0);
+        }
+      });
+  }
+
+  @Override public void reset(T target) {
+    target.noteListView = null;
+    target.searchView = null;
+  }
+}

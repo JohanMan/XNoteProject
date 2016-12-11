@@ -1,0 +1,13 @@
+package com.johan.xnote.core.presenter;
+
+import com.johan.xnote.app.api.IAccount;
+
+public class AccountPresenter extends BasePresenter {
+
+	private IAccount account;
+	
+	public AccountPresenter(IAccount account) {
+		this.account = account;
+	}
+	
+}

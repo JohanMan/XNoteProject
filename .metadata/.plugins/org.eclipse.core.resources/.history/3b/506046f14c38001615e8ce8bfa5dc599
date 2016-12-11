@@ -1,0 +1,127 @@
+package com.johan.xnote.core.presenter;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+
+import com.johan.xnote.api.model.Account;
+import com.johan.xnote.api.model.AccountDao;
+import com.johan.xnote.app.api.IAccount;
+import com.johan.xnote.app.application.XNoteApplication;
+
+public class AccountPresenter extends BasePresenter {
+
+	private IAccount account;
+	
+	private int year, month;
+	
+	private List<Account> accountList = new ArrayList<Account>();
+	
+	private AccountDao accountDao;
+	
+	public AccountPresenter(IAccount account) {
+		this.account = account;
+		accountDao = XNoteApplication.getInstance().getDaoSession().getAccountDao();
+	}
+	
+	public void init() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		year = calendar.get(Calendar.YEAR);
+		month = calendar.get(Calendar.MONTH) + 1;
+		account.setYear(year);
+		account.setMonth(month);
+	}
+	
+	public void loadData() {
+		accountList.clear();
+		List<Account> findResult = accountDao.queryBuilder().where(AccountDao.Properties.Year.eq(year), AccountDao.Properties.Month.eq(month)).orderDesc(AccountDao.Properties.Day, AccountDao.Properties.Time).list();
+		accountList.addAll(findResult);
+		account.refreshListView();
+		calculator();
+	}
+	
+	public void calculator() {
+		float inMoney = 0, outMoney = 0;
+		for(Account account : accountList) {
+			if(account.getAccountType().getIsOut()) {
+				outMoney += account.getMoney();
+			} else {
+				inMoney += account.getMoney();
+			}
+		}
+		BigDecimal inMoneyBig = new BigDecimal(Float.toString(inMoney));
+		BigDecimal outMoneyBig = new BigDecimal(Float.toString(outMoney));
+		float resumeMoney = inMoneyBig.subtract(outMoneyBig).floatValue();
+		account.setInMoney("+" + String.valueOf(inMoney) + "元");
+		account.setOutMoney("-" + String.valueOf(outMoney) + "元");
+		account.setResumeMoney(String.valueOf(resumeMoney) + "元");
+	}
+	
+	public List<Account> getData() {
+		return accountList;
+	}
+	
+	public void selectLastYear() {
+		if(year <= 2010) {
+			account.error("选的年代太久远了");
+			return;
+		}
+		year -= 1;
+		month = 1;
+		account.setYear(year);
+		account.setMonth(month);
+		loadData();
+	}
+	
+	public void selectNextYear() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		int currentYear = calendar.get(Calendar.YEAR);
+		if(year == currentYear) {
+			account.error("选的年代太超前了");
+			return;
+		}
+		year += 1;
+		month = 1;
+		account.setYear(year);
+		account.setMonth(month);
+		loadData();
+	}
+	
+	public void selectMonth(int month) {
+		this.month = month;
+		loadData();
+	}
+	
+	public void delete() {
+		Iterator<Account> iterator = accountList.iterator();
+		while(iterator.hasNext()) {
+			Account account = iterator.next();
+			if(account.isSelected()) {
+				accountDao.delete(account);
+				iterator.remove();
+			}
+		}
+		account.refreshListView();
+		calculator();
+	}
+	
+	public void cancel() {
+		for(Account account : accountList) {
+			account.setSelected(false);
+		}
+		account.refreshListView();
+	}
+	
+	public int getYear() {
+		return year;
+	}
+	
+	public int month() {
+		return month;
+	}
+	
+}

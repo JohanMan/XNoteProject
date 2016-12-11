@@ -1,0 +1,84 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.dialog.TimeDialog;
+import com.johan.xnote.app.dialog.TimeDialog.OnSelectedTimeListener;
+import com.johan.xnote.core.presenter.WriteStickyPresenter;
+
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class WriteStickyActivity extends BaseActivity<WriteStickyPresenter> {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectView(R.id.write_sticky_edittime)
+	public TextView editTimeView;
+	
+	@InjectView(R.id.write_sticky_remind_tip)
+	public TextView remindTipView;
+	
+	@InjectView(R.id.write_sticky_remind_date)
+	public TextView remindDateView;
+	
+	@InjectView(R.id.write_sticky_remind_time)
+	public TextView remindTimeView;
+	
+	@InjectView(R.id.write_sticky_content)
+	public EditText contentView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "创建便签", true);
+		editTimeView.setText("编辑时间：" + presenter.getCurrentTime());
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_write_sticky;
+	}
+
+	@Override
+	protected WriteStickyPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new WriteStickyPresenter();
+	}
+	
+	@OnClick(R.id.write_sticky_remind_tip)
+	public void clickRemindTip(View view) {
+		remindTipView.setSelected(!remindTipView.isSelected());
+		if(remindTipView.isSelected()) {
+			remindDateView.setVisibility(View.VISIBLE);
+			remindTimeView.setVisibility(View.VISIBLE);
+		} else {
+			remindDateView.setVisibility(View.GONE);
+			remindTimeView.setVisibility(View.GONE);
+		}
+	}
+	
+	@OnClick(R.id.write_sticky_remind_date)
+	public void selectRemindDate(View view) {
+		TimeDialog dateDialog = new TimeDialog(this, TimeDialog.SHOW_MODE_DATE);
+		String remindDate = remindDateView.getText().toString();
+		dateDialog.setDate(remindDate);
+		dateDialog.setOnSelectedTimeListener(new OnSelectedTimeListener() {
+			@Override
+			public void onSelectedTime(String date, String time) {
+				remindDateView.setText(date);
+			}
+		});
+		dateDialog.show();
+	}
+	
+	@OnClick(R.id.write_sticky_remind_time)
+	
+
+}

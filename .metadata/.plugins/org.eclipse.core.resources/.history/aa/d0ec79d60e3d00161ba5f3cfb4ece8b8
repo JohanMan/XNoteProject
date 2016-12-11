@@ -1,0 +1,104 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.api.ILogin;
+import com.johan.xnote.app.dialog.TipDialog;
+import com.johan.xnote.app.util.AppUtil;
+import com.johan.xnote.app.util.SharePreferencesUtil;
+import com.johan.xnote.core.presenter.LoginPresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogin {
+	
+	@InjectView(R.id.login_phone)
+	public EditText phoneView;
+	
+	@InjectView(R.id.login_pd)
+	public EditText passwordView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub                                                            
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		String loginPhone = (String)SharePreferencesUtil.getParam(SharePreferencesUtil.KEY_OF_LOGIN_PHONE, "");
+		if(!"".equals(loginPhone)) {
+			phoneView.setText(loginPhone);
+			passwordView.requestFocus();
+		}
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_login;
+	}
+
+	@Override
+	protected LoginPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new LoginPresenter(this);
+	}
+	
+	@OnClick(R.id.login_register)
+	public void goRegister(View view) {
+		if(presenter.hadRegister()) {
+			final TipDialog dialog = new TipDialog(this);
+			dialog.setTitle("系统提示").setContent("该手机已经存在用户，不支持重复注册！")
+			.setOkButtonListener("知道了", new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			}).show();
+			return;
+		}
+		goActivity(RegisterActivity.class);
+	}
+	
+	@OnClick(R.id.login_forget_pd)
+	public void goFogetPD(View view) {
+		goActivity(ForgetPDActivity.class);
+	}
+	
+	@OnClick(R.id.login_but)
+	public void login(View view) {
+		presenter.login(phoneView.getText().toString(), passwordView.getText().toString());
+	}
+
+	@Override
+	public void loginFail(String msg) {
+		// TODO Auto-generated method stub
+		AppUtil.toast(this, msg);
+	}
+
+	@Override
+	public void loginSuccess() {
+		// TODO Auto-generated method stub
+		goActivity(HomeActivity.class);
+		finish();
+		int version = Integer.valueOf(android.os.Build.VERSION.SDK); 
+		if (version > 5) { 
+			overridePendingTransition(R.anim.fade_in, R.anim.fade_out); 
+		} 
+	}
+	
+	@Override
+	protected int getStatuBarColor() {
+		// TODO Auto-generated method stub
+		return getResources().getColor(R.color.black_color);
+	}
+
+}

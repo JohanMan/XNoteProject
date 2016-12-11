@@ -1,0 +1,83 @@
+package com.johan.xnote.app.fragment;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.activity.AboutActivity;
+import com.johan.xnote.app.activity.LockScreenActivity;
+import com.johan.xnote.app.activity.ModifyPasswordActivity;
+import com.johan.xnote.app.activity.PersonalInfoActivity;
+import com.johan.xnote.app.api.IMe;
+import com.johan.xnote.core.presenter.MePresenter;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+public class MeFragment extends BaseFragment<MePresenter> implements IMe {
+	
+	@InjectView(R.id.me_lockscreen_state)
+	public TextView lockscreenStateView;
+	
+	@InjectView(R.id.me_version_info)
+	public TextView versionInfoView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		versionInfoView.setText(presenter.getVersionInfo(getActivity()));
+	}
+	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		presenter.refreshLockScreenState();
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.fragment_me;
+	}
+
+	@Override
+	protected MePresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new MePresenter(this);
+	}
+	
+	@OnClick(R.id.me_personal_info)
+	public void clickPersonalInfo(View view) {
+		goActivity(PersonalInfoActivity.class);
+	}
+	
+	@OnClick(R.id.me_modify_passwrod)
+	public void clickModifyPassword(View view) {
+		goActivity(ModifyPasswordActivity.class);
+	}
+	
+	@OnClick(R.id.me_lockscreen)
+	public void clickLockscreen(View view) {
+		presenter.clickLockScreen();
+	}
+	
+	@OnClick(R.id.me_about)
+	public void clickAbout(View view) {
+		goActivity(AboutActivity.class);
+	}
+
+	@Override
+	public void updateLockScreenState(boolean hasLockPassword) {
+		// TODO Auto-generated method stub
+		String lockScreenStateTip = hasLockPassword ? "¿ª" : "¹Ø";
+		lockscreenStateView.setText(lockScreenStateTip);
+	}
+
+	@Override
+	public void goSetLockscreen() {
+		// TODO Auto-generated method stub
+		goActivity(LockScreenActivity.class);
+	}
+
+}

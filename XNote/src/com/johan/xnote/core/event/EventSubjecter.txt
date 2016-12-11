@@ -1,0 +1,41 @@
+package com.johan.xnote.core.event;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.SparseArray;
+
+public class EventSubjecter {
+	
+	private Handler handler;
+	
+	private SparseArray<Event> eventMap;
+	
+	public EventSubjecter() {
+		this.eventMap = new SparseArray<Event>();
+		this.handler = new Handler();
+	}
+	
+	public EventSubjecter addEvent(int id, Event event) {
+		eventMap.put(id, event);
+		return this;
+	}
+	
+	public void clearEvent() {
+		eventMap.clear();
+		eventMap = null;
+	}
+	
+	public void doEvent(final int id, final Bundle data) {
+		handler.post(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Event event = eventMap.get(id);
+				if(null != event) {
+					event.action(data);
+				}
+			}
+		});
+	}
+	
+}

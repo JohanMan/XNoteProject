@@ -1,0 +1,51 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.R;
+import com.johan.xnote.core.presenter.WriteStickyPresenter;
+
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.widget.EditText;
+import android.widget.TextView;
+import butterknife.InjectView;
+
+public class WriteStickyActivity extends BaseActivity<WriteStickyPresenter> {
+	
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectView(R.id.write_sticky_edittime)
+	public TextView editTimeView;
+	
+	@InjectView(R.id.write_sticky_remind_tip)
+	public TextView remindTipView;
+	
+	@InjectView(R.id.write_sticky_remind_date)
+	public TextView remindDateView;
+	
+	@InjectView(R.id.write_sticky_remind_time)
+	public TextView remindTimeView;
+	
+	@InjectView(R.id.write_sticky_content)
+	public EditText contentView;
+
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, "创建便签", true);
+		editTimeView.setText("编辑时间：" + presenter.getCurrentTime());
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_write_sticky;
+	}
+
+	@Override
+	protected WriteStickyPresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new WriteStickyPresenter();
+	}
+
+}

@@ -1,0 +1,121 @@
+package com.johan.xnote.app.activity;
+
+import java.util.List;
+
+import com.johan.xnote.R;
+import com.johan.xnote.app.api.IHome;
+import com.johan.xnote.app.fragment.AccountFragment;
+import com.johan.xnote.app.fragment.NoteFragment;
+import com.johan.xnote.app.fragment.StickyFragment;
+import com.johan.xnote.core.presenter.HomePresenter;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.LinearLayout;
+import butterknife.InjectView;
+import butterknife.InjectViews;
+import butterknife.OnClick;
+
+public class HomeActivity extends BaseActivity<HomePresenter> implements IHome {
+
+	@InjectView(R.id.title_bar)
+	public Toolbar toolbar;
+	
+	@InjectViews({R.id.home_tab_note, R.id.home_tab_account, R.id.home_tab_sticky, R.id.home_tab_me})
+	public List<LinearLayout> tabList;
+	
+	private Fragment[] fragments = new Fragment[4];
+	
+	private int currentIndex = 0;
+	
+	@Override
+	protected void init(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		presenter.initToolbar();
+		initFragment();
+		initPage();
+		testGoPage();
+	}
+	
+	private void testGoPage() {
+		Intent intent = getIntent();
+		if(null != intent) {
+			int page = intent.getIntExtra("page", 0);
+			updatePage(page);
+		}
+	}
+
+	@Override
+	protected int getContentView() {
+		// TODO Auto-generated method stub
+		return R.layout.activity_home;
+	}
+
+	@Override
+	protected HomePresenter getPresent() {
+		// TODO Auto-generated method stub
+		return new HomePresenter(this);
+	}
+
+	@Override
+	public void setToolbar(String nickName) {
+		// TODO Auto-generated method stub
+		setActionBar(toolbar, nickName + " ±Ê¼Ç", false);
+	}
+	
+	@OnClick(R.id.home_tab_note)
+	public void selectNote(View view) {
+		updatePage(0);
+	}
+	
+	@OnClick(R.id.home_tab_account)
+	public void selectAccount(View view) {
+		updatePage(1);
+	}
+	
+	@OnClick(R.id.home_tab_sticky)
+	public void selectSticky(View view) {
+		updatePage(2);
+	}
+	
+	@OnClick(R.id.home_tab_me)
+	public void selectMe(View view) {
+		updatePage(3);
+	}
+	
+	private void initPage() {
+		tabList.get(currentIndex).setSelected(true);
+	}
+	
+	public void updatePage(int index) {
+		if(currentIndex == index) return;
+		tabList.get(currentIndex).setSelected(false);
+		tabList.get(index).setSelected(true);
+		updateFragment(index);
+		currentIndex = index;
+	}
+	
+	private void initFragment() {
+		fragments[0] = new NoteFragment();
+		fragments[1] = new AccountFragment();
+		fragments[2] = new StickyFragment();
+		fragments[3] = new NoteFragment();
+		getSupportFragmentManager().beginTransaction().add(R.id.home_container, fragments[0]).commit();
+	}
+	
+	private void updateFragment(int index) {
+		if(fragments[index].isAdded()) {
+			getSupportFragmentManager().beginTransaction().hide(fragments[currentIndex]).show(fragments[index]).commit();
+		} else {
+			getSupportFragmentManager().beginTransaction().hide(fragments[currentIndex]).add(R.id.home_container, fragments[index]).commit();
+		}
+	}
+	
+	public View getLayout() {
+		return findViewById(R.id.home_layout);
+	}
+
+}

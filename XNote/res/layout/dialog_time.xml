@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#eeeeee" >
+    
+    <TextView 
+        android:id="@+id/time_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/theme_color"
+        android:textSize="@dimen/text_size"
+        android:textStyle="bold"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:gravity="center_horizontal"
+        />
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/theme_driver_color"
+        />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        >
+        <com.johan.xnote.app.view.WheelView 
+            android:id="@+id/time_wheelview_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></com.johan.xnote.app.view.WheelView>
+        <com.johan.xnote.app.view.WheelView 
+            android:id="@+id/time_wheelview_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></com.johan.xnote.app.view.WheelView>
+        <com.johan.xnote.app.view.WheelView 
+            android:id="@+id/time_wheelview_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></com.johan.xnote.app.view.WheelView>
+    </LinearLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/theme_driver_color"
+        />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button 
+	        android:id="@+id/time_cancel_but"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:textColor="@color/theme_color"
+	        android:textSize="@dimen/text_size"
+	        android:text="取 消"
+	        android:paddingTop="15dp"
+	        android:paddingBottom="15dp"
+	        android:background="#eeeeee"
+	        />
+        <View 
+	        android:layout_width="0.5dp"
+	        android:layout_height="match_parent"
+	        android:background="@color/theme_driver_color"
+	        />
+        <Button 
+	        android:id="@+id/time_ok_but"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:textColor="@color/theme_color"
+	        android:textSize="@dimen/text_size"
+	        android:text="确 定"
+	        android:paddingTop="15dp"
+	        android:paddingBottom="15dp"
+	        android:background="#eeeeee"
+	        />
+    </LinearLayout>
+    
+
+</LinearLayout>

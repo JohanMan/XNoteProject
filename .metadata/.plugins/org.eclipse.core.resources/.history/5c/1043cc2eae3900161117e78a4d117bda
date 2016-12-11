@@ -1,0 +1,20 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.List;
+
+public class LockScreenPresenter extends BasePresenter {
+
+	private StringBuffer lockPassword;
+	
+	public LockScreenPresenter() {
+		this.lockPassword = new StringBuffer();
+	}
+	
+	public void setLockPassword(List<Integer> lockPasswordList) {
+		lockPassword.delete(0, lockPassword.length());
+		for(Integer number : lockPasswordList) {
+			this.lockPassword.append(String.valueOf(number));
+		}
+	}
+	
+}

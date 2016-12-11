@@ -1,0 +1,11 @@
+package com.johan.xnote.app.api;
+
+public interface INote {
+	
+	public void error(String msg);
+
+	public void refreshData();
+
+	public void showRenameDialog(String name, int position);
+	
+}

@@ -1,0 +1,7 @@
+package com.johan.xnote.app.activity;
+
+import com.johan.xnote.core.presenter.CheckLockScreenPresenter;
+
+public class CheckLockScreenActivity extends BaseActivity<CheckLockScreenPresenter> {
+
+}

@@ -1,0 +1,17 @@
+package com.johan.xnote.app.api;
+
+import com.johan.xnote.core.util.FileUtil.SaveImage;
+
+import android.graphics.Bitmap;
+
+public interface ICrop {
+
+	public void setBitmapSuccess(Bitmap bitmap);
+	
+	public void setBitmapFail(String msg);
+	
+	public void saveBitmapSuccess(SaveImage image);
+	
+	public void saveBitmapFail(String msg);
+	
+}

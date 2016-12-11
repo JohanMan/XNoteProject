@@ -1,0 +1,5 @@
+package com.johan.xnote.app.fragment;
+
+public class StickyFragment {
+
+}

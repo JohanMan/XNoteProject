@@ -1,0 +1,86 @@
+package com.johan.xnote.core.presenter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.johan.xnote.api.model.Account;
+import com.johan.xnote.api.model.AccountDao;
+import com.johan.xnote.api.model.AccountType;
+import com.johan.xnote.api.model.AccountTypeDao;
+import com.johan.xnote.app.api.IRecordAccount;
+import com.johan.xnote.app.application.XNoteApplication;
+import com.johan.xnote.core.action.ActionExecutor;
+import com.johan.xnote.core.action.ActionExecutor.BackgroundAction;
+import com.johan.xnote.core.action.ActionExecutor.UIAction;
+import com.johan.xnote.core.action.ActionFactory;
+import com.johan.xnote.core.util.CoreUtil;
+
+public class RecordAccountPresenter extends BasePresenter {
+
+	private IRecordAccount recordAccount;
+	
+	public RecordAccountPresenter(IRecordAccount recordAccount) {
+		this.recordAccount = recordAccount;
+	}
+	
+	public List<String> getTypeList(boolean isOut) {
+		AccountTypeDao accountTypeDao = XNoteApplication.getInstance().getDaoSession().getAccountTypeDao();
+		List<AccountType> accountTypeList = accountTypeDao.queryBuilder().where(AccountTypeDao.Properties.IsOut.eq(isOut)).list();
+		List<String> typeList = new ArrayList<String>();
+		for(AccountType accountType : accountTypeList) {
+			typeList.add(accountType.getName());
+		}
+		return typeList;
+	}
+	
+	public void saveAccount(final String money, final boolean isOut, final String type, final String date, final String time, final String shop, final String remark) {
+		if(CoreUtil.hasEmpty(money, type, date, time)) {
+			recordAccount.error("金额、类别、日期、时间都不能为空~");
+			return;
+		}
+		ActionExecutor<Boolean> executor = new ActionFactory<Boolean>().doInBackground(new BackgroundAction<Boolean>() {
+			@Override
+			public Boolean action() {
+				// TODO Auto-generated method stub
+				long typeId = 0;
+				AccountTypeDao accountTypeDao = XNoteApplication.getInstance().getDaoSession().getAccountTypeDao();
+				List<AccountType> accountTypeList = accountTypeDao.queryBuilder().where(AccountTypeDao.Properties.IsOut.eq(isOut)).list();
+				for(AccountType accountType : accountTypeList) {
+					if(type.equals(accountType.getName())) {
+						typeId = accountType.getTypeId();
+					}
+				}
+				String[] dateArr = date.split("-");
+				if(dateArr.length != 3) {
+					recordAccount.error("解析日期出错~");
+					return false;
+				}
+				int year = Integer.parseInt(dateArr[0]);
+				int month = Integer.parseInt(dateArr[1]);
+				int day = Integer.parseInt(dateArr[2]);
+				AccountDao accountDao = XNoteApplication.getInstance().getDaoSession().getAccountDao();
+				Account account = new Account(null, year, month, day, time, shop, Float.parseFloat(money), remark, typeId);
+				accountDao.insert(account);
+				return true;
+			}
+		}).doInUI(new UIAction<Boolean>() {
+			@Override
+			public void action(Boolean data) {
+				// TODO Auto-generated method stub
+				if(data) {
+					recordAccount.saveRecountSuccess();
+				} else {
+					recordAccount.saveRecountFail();
+				}
+			}
+		}).build();
+		executor.execute();
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+	}
+	
+}
